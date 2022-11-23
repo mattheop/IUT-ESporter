@@ -6,7 +6,17 @@ create table joueur
     nom          varchar(50) not null,
     pseudo       varchar(50) not null,
     nationnalite varchar(75) not null,
-    entree_pro   date
+    entree_pro   date,
+    ecurie       int,
+    
+    foreign key (ecurie) references ecurie(id)
+);
+
+-- Ecurie
+create table ecurie
+(
+    id         int auto_increment primary key,
+    nom_ecurie varchar(50) not null
 );
 
 -- AppUser

@@ -1,6 +1,7 @@
 package com.example.sae.models;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.jdbc.core.mapping.AggregateReference;
 
 import java.time.LocalDate;
 
@@ -13,6 +14,11 @@ public class Joueur {
     private String pseudo;
     private String nationnalite;
     private LocalDate entree_pro;
+
+    private AggregateReference<Ecurie, Integer> ecurie;
+
+    public Joueur() {
+    }
 
     public Joueur(String prenom, String nom, String pseudo, String nationnalite) {
         this(prenom, nom, pseudo, nationnalite, LocalDate.now());
