@@ -39,4 +39,9 @@ public class Jeu {
     public Integer getNbJoueurParEquipe() {
         return nbJoueurParEquipe;
     }
+
+    @Override
+    public String toString() {
+        return "Jeu{" + "id=" + id + ", nom='" + nom + '\'' + ", nbJoueurParEquipe=" + nbJoueurParEquipe + '}';
+    }
 }

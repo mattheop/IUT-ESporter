@@ -87,13 +87,6 @@ public class Joueur {
     }
 
     public String toString() {
-        return "Player{" +
-                "id=" + id +
-                ", prenom='" + prenom + '\'' +
-                ", nom='" + nom + '\'' +
-                ", pseudo='" + pseudo + '\'' +
-                ", nationnalite='" + nationnalite + '\'' +
-                ", entree_pro=" + entree_pro +
-                '}';
+        return "Player{" + "id=" + id + ", prenom='" + prenom + '\'' + ", nom='" + nom + '\'' + ", pseudo='" + pseudo + '\'' + ", nationnalite='" + nationnalite + '\'' + ", entree_pro=" + entree_pro + '}';
     }
 }

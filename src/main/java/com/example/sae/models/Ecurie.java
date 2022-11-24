@@ -33,4 +33,9 @@ public class Ecurie {
     public Set<Equipe> getEquipes() {
         return equipes;
     }
+
+    @Override
+    public String toString() {
+        return "Ecurie{" + "id=" + id + ", nom_ecurie='" + nom_ecurie + '\'' + ", equipes=" + equipes + '}';
+    }
 }

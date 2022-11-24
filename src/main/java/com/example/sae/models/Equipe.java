@@ -54,4 +54,9 @@ public class Equipe {
     public Set<JoueurRef> getJoueursIds() {
         return joueurs;
     }
+
+    @Override
+    public String toString() {
+        return "Equipe{" + "id=" + id + ", nom='" + nom + '\'' + ", jeuSpe='" + jeuSpe + '\'' + ", joueurs=" + joueurs + '}';
+    }
 }
