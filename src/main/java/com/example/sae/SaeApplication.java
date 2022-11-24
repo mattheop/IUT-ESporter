@@ -1,10 +1,8 @@
 package com.example.sae;
 
-import com.example.sae.models.AppUser;
-import com.example.sae.models.AppUserRole;
-import com.example.sae.models.Equipe;
-import com.example.sae.models.Joueur;
+import com.example.sae.models.*;
 import com.example.sae.repository.AppUserRepository;
+import com.example.sae.repository.EcurieRepository;
 import com.example.sae.repository.EquipeRepository;
 import com.example.sae.repository.JoueurRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -20,7 +18,7 @@ public class SaeApplication {
     }
 
     @Bean
-    CommandLineRunner commandLineRunner(JoueurRepository joueurRepository, AppUserRepository appUserRepository, EquipeRepository equipeRepository) {
+    CommandLineRunner commandLineRunner(JoueurRepository joueurRepository, AppUserRepository appUserRepository, EquipeRepository equipeRepository, EcurieRepository ecurieRepository) {
         return args -> {
         };
     }
