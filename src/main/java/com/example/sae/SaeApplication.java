@@ -21,7 +21,7 @@ public class SaeApplication {
     CommandLineRunner commandLineRunner(JoueurRepository joueurRepository, AppUserRepository appUserRepository) {
         return args -> {
 
-            // joueurRepository.save(new Joueur("Jean", "Pierre", "Jp78", "Francaise"));
+            //joueurRepository.save(new Joueur("Jean", "Pierre", "Jp78", "Francaise"));
         };
     }
 }
