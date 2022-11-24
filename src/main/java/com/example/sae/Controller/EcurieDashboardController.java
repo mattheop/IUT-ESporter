@@ -51,7 +51,7 @@ public class EcurieDashboardController {
         Joueur j = new Joueur();
         model.addAttribute("joueur", j);
 
-        return "ecurie/joueurs/add.html";
+        return "ecurie/joueurs/ajout.html";
     }
 
     @PostMapping("/joueurs/ajout")
