@@ -9,5 +9,24 @@
 <h1>Test</h1>
 <p th:if="${appuser != null}" th:text="${'Bonjour ' + appuser.getUsername()}"></p>
 <p th:if="${ecurie != null}" th:text="${'Vous géré lecurie ' + ecurie.getNom()}"></p>
+<table>
+    <thead>
+    <tr>
+        <th>Nom</th>
+        <th>Prenom</th>
+        <th>Pseudo</th>
+        <th>Nationalite</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="j : ${joueurs}">
+        <td th:text="${j.getNom()}"></td>
+        <td th:text="${j.getPrenom()}"></td>
+        <td th:text="${j.getPseudo()}"></td>
+        <td th:text="${j.getNationnalite()}"></td>
+    </tr>
+    </tbody>
+</table>
+
 </body>
 </html>
