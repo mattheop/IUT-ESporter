@@ -12,6 +12,25 @@ create table joueur
     foreign key (ecurie) references ecurie (id)
 );
 
+create table equipe
+(
+    id      int auto_increment primary key,
+    nom     varchar(50) not null,
+    jeu_spe int         not null,
+
+    foreign key (jeu_spe) references jeu (id)
+);
+
+create table joueur_equipe
+(
+    joueur_id int not null,
+    equipe_id int not null,
+
+    primary key (joueur_id, equipe_id),
+    foreign key (joueur_id) references joueur (id),
+    foreign key (equipe_id) references equipe (id)
+);s
+
 -- Ecurie
 create table ecurie
 (

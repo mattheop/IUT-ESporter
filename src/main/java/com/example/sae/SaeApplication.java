@@ -2,8 +2,10 @@ package com.example.sae;
 
 import com.example.sae.models.AppUser;
 import com.example.sae.models.AppUserRole;
+import com.example.sae.models.Equipe;
 import com.example.sae.models.Joueur;
 import com.example.sae.repository.AppUserRepository;
+import com.example.sae.repository.EquipeRepository;
 import com.example.sae.repository.JoueurRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -18,10 +20,8 @@ public class SaeApplication {
     }
 
     @Bean
-    CommandLineRunner commandLineRunner(JoueurRepository joueurRepository, AppUserRepository appUserRepository) {
+    CommandLineRunner commandLineRunner(JoueurRepository joueurRepository, AppUserRepository appUserRepository, EquipeRepository equipeRepository) {
         return args -> {
-
-            //joueurRepository.save(new Joueur("Jean", "Pierre", "Jp78", "Francaise"));
         };
     }
 }
