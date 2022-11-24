@@ -2,6 +2,7 @@ package com.example.sae.models;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -13,6 +14,7 @@ public class Joueur {
     private String nom;
     private String pseudo;
     private String nationnalite;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate entree_pro;
 
     private AggregateReference<Ecurie, Integer> ecurie;
@@ -78,6 +80,10 @@ public class Joueur {
 
     public void setEntree_pro(LocalDate entree_pro) {
         this.entree_pro = entree_pro;
+    }
+
+    public void setEcurie(AggregateReference<Ecurie, Integer> ecurie) {
+        this.ecurie = ecurie;
     }
 
     @Override
