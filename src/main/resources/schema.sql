@@ -28,7 +28,10 @@ create table app_user
     nom      varchar(50) not null,
     password varchar(90) not null,
     locked   boolean default false,
-    role     varchar(50) not null
+    role     varchar(50) not null,
+    managed_ecurie int,
+
+    foreign key (managed_ecurie) references ecurie(id)
 );
 
 create table users
