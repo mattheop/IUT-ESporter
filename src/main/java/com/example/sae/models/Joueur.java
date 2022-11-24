@@ -86,7 +86,6 @@ public class Joueur {
         this.ecurie = ecurie;
     }
 
-    @Override
     public String toString() {
         return "Player{" +
                 "id=" + id +
