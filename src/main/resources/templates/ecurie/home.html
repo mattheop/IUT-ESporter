@@ -7,6 +7,7 @@
 <body>
 
 <h1>Test</h1>
-<p th:if="${appuser != null}" th:text="${appuser.username}"></p>
+<p th:if="${appuser != null}" th:text="${'Bonjour ' + appuser.getUsername()}"></p>
+<p th:if="${ecurie != null}" th:text="${'Vous géré lecurie ' + ecurie.getNom()}"></p>
 </body>
 </html>

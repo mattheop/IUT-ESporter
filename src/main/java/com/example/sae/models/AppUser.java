@@ -84,6 +84,10 @@ public class AppUser implements UserDetails {
         return true;
     }
 
+    public int getManagedEcurieId() {
+        return this.managed_ecurie.getId();
+    }
+
     @Override
     public String toString() {
         return "AppUser{" +

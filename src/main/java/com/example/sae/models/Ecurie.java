@@ -10,4 +10,12 @@ public class Ecurie {
 
     public Ecurie() {
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getNom() {
+        return nom_ecurie;
+    }
 }
