@@ -55,6 +55,10 @@ public class Equipe {
         return joueurs;
     }
 
+    public Integer getNbJoueurs(){
+        return this.joueurs.size();
+    }
+
     @Override
     public String toString() {
         return "Equipe{" + "id=" + id + ", nom='" + nom + '\'' + ", jeuSpe='" + jeuSpe + '\'' + ", joueurs=" + joueurs + '}';

@@ -2,8 +2,10 @@ package com.example.sae.controller;
 
 import com.example.sae.models.AppUser;
 import com.example.sae.models.Ecurie;
+import com.example.sae.models.Equipe;
 import com.example.sae.models.Joueur;
 import com.example.sae.repository.EcurieRepository;
+import com.example.sae.repository.EquipeRepository;
 import com.example.sae.repository.JoueurRepository;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.security.core.Authentication;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Collection;
+import java.util.Set;
 
 @Controller
 @RequestMapping("ecurie")
@@ -37,9 +40,14 @@ public class EcurieDashboardController {
         assert managedEcurie != null;
         Collection<Joueur> joueurs = this.ecurieRepository.getJoueurs(managedEcurie.getId());
 
+        Set<Equipe> managedEquipes = managedEcurie.getEquipes();
+
 
         model.addAttribute("appuser", appUser);
         model.addAttribute("ecurie", managedEcurie);
+
+        model.addAttribute("equipes", managedEquipes);
+        System.out.println(managedEquipes);
         model.addAttribute("joueurs", joueurs);
 
         return "ecurie/home";

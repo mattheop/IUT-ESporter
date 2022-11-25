@@ -11,24 +11,46 @@
     <p th:if="${ecurie != null}" th:text="${'Vous géré lecurie ' + ecurie.getNom()}"></p>
     <table border="1">
         <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>Pseudo</th>
-                <th>Nationalite</th>
-            </tr>
+        <tr>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Pseudo</th>
+            <th>Nationalite</th>
+        </tr>
         </thead>
 
         <tbody>
-            <tr th:each="j : ${joueurs}">
-                <td th:text="${j.getNom()}"></td>
-                <td th:text="${j.getPrenom()}"></td>
-                <td th:text="${j.getPseudo()}"></td>
-                <td th:text="${j.getNationnalite()}"></td>
-            </tr>
+        <tr th:each="j : ${joueurs}">
+            <!--@thymesVar id="j" type="com.example.sae.models.Joueur:"-->
+            <td th:text="${j.getNom()}"></td>
+            <td th:text="${j.getPrenom()}"></td>
+            <td th:text="${j.getPseudo()}"></td>
+            <td th:text="${j.getNationnalite()}"></td>
+        </tr>
         </tbody>
 
         <a th:href="@{/ecurie/joueurs/ajout}">Ajouter un joueur a mon ecurie</a>
+    </table>
+
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Jeu</th>
+            <th>Nombre joueurs</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="e : ${equipes}">
+            <!--@thymesVar id="e" type="com.example.sae.models.Equipe"-->
+            <td th:text="${e.getNom()}"></td>
+            <td th:text="${e.getJeuSpe()}"></td>
+            <td th:text="${e.getNbJoueurs()}"></td>
+        </tr>
+        </tbody>
+
+        <!--<a th:href="@{/ecurie/joueurs/ajout}">Ajouter un joueur a mon ecurie</a>-->
     </table>
 
 </body>
