@@ -2,6 +2,7 @@ package com.example.sae.models;
 
 import com.example.sae.models.ref.JoueurRef;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 
@@ -15,6 +16,9 @@ public class Equipe {
 
     @Column("jeu_spe")
     private String jeuSpe;
+
+    @Column("ecurie_id")
+    private AggregateReference<Ecurie, Integer> ecurie;
 
     @MappedCollection(idColumn = "equipe_id")
     private Set<JoueurRef> joueurs = new HashSet<>();
@@ -55,8 +59,16 @@ public class Equipe {
         return joueurs;
     }
 
-    public Integer getNbJoueurs(){
+    public Integer getNbJoueurs() {
         return this.joueurs.size();
+    }
+
+    public AggregateReference<Ecurie, Integer> getEcurie() {
+        return ecurie;
+    }
+
+    public void setEcurie(AggregateReference<Ecurie, Integer> ecurie) {
+        this.ecurie = ecurie;
     }
 
     @Override

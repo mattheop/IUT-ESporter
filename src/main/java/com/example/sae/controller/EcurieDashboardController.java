@@ -1,11 +1,9 @@
 package com.example.sae.controller;
 
-import com.example.sae.models.AppUser;
-import com.example.sae.models.Ecurie;
-import com.example.sae.models.Equipe;
-import com.example.sae.models.Joueur;
+import com.example.sae.models.*;
 import com.example.sae.repository.EcurieRepository;
 import com.example.sae.repository.EquipeRepository;
+import com.example.sae.repository.JeuRepository;
 import com.example.sae.repository.JoueurRepository;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.security.core.Authentication;
@@ -17,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -25,10 +24,14 @@ public class EcurieDashboardController {
 
     final private EcurieRepository ecurieRepository;
     final private JoueurRepository joueurRepository;
+    private JeuRepository jeuRepository;
+    private EquipeRepository equipeRepository;
 
-    public EcurieDashboardController(EcurieRepository ecurieRepository, JoueurRepository joueurRepository) {
+    public EcurieDashboardController(EcurieRepository ecurieRepository, JoueurRepository joueurRepository, JeuRepository jeuRepository, EquipeRepository equipeRepository) {
         this.ecurieRepository = ecurieRepository;
         this.joueurRepository = joueurRepository;
+        this.jeuRepository = jeuRepository;
+        this.equipeRepository = equipeRepository;
     }
 
     @GetMapping()
@@ -54,7 +57,7 @@ public class EcurieDashboardController {
     }
 
     @GetMapping("/joueurs/ajout")
-    public String addPlayer(Model model){
+    public String addPlayer(Model model) {
         Joueur j = new Joueur();
         model.addAttribute("joueur", j);
 
@@ -62,13 +65,39 @@ public class EcurieDashboardController {
     }
 
     @PostMapping("/joueurs/ajout")
-    public String savePlayer(@ModelAttribute("joueur") Joueur joueur, Authentication authentication){
+    public String savePlayer(@ModelAttribute("joueur") Joueur joueur, Authentication authentication) {
         assert authentication != null;
         AppUser appUser = (AppUser) authentication.getPrincipal();
 
         joueur.setEcurie(AggregateReference.to(appUser.getManagedEcurieId()));
 
         this.joueurRepository.save(joueur);
+        return "redirect:/ecurie";
+    }
+
+    @GetMapping("/equipes/ajout")
+    public String addEquipe(Model model, Authentication authentication) {
+        assert authentication != null;
+        AppUser appUser = (AppUser) authentication.getPrincipal();
+
+        Equipe e = new Equipe();
+
+        List<Jeu> jeux = this.jeuRepository.findAll();
+
+        model.addAttribute("equipe", e);
+        model.addAttribute("jeux", jeux);
+
+        return "ecurie/equipes/ajout";
+    }
+
+    @PostMapping("/equipes/ajout")
+    public String saveEquipe(@ModelAttribute("equipe") Equipe equipe, Authentication authentication) {
+        assert authentication != null;
+        AppUser appUser = (AppUser) authentication.getPrincipal();
+
+        equipe.setEcurie(AggregateReference.to(appUser.getManagedEcurieId()));
+
+        this.equipeRepository.save(equipe);
         return "redirect:/ecurie";
     }
 }

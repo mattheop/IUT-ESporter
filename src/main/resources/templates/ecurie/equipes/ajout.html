@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form action="#" th:action="@{/ecurie/equipes/ajout}" th:object="${equipe}" method="POST">
+    <!--@thymesVar id="equipe" type="com.example.sae.models.Equipe"-->
+    <input type="text" th:field="*{nom}" placeholder="Nom de l'equipe">
+
+    <select th:field="*{jeuSpe}">
+        <!--@thymesVar id="j" type="com.example.sae.models.Jeu"-->
+        <option th:each="j : ${jeux}" th:value="${j.getId()}" th:text="${j.getNom()}">
+        </option>
+    </select>
+
+    <button type="submit" class="btn btn-info col-2"> Save</button>
+
+</body>
+</html>
