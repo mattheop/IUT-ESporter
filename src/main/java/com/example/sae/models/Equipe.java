@@ -8,6 +8,7 @@ import org.springframework.data.relational.core.mapping.MappedCollection;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Equipe {
     @Id
@@ -61,6 +62,10 @@ public class Equipe {
 
     public Set<JoueurRef> getJoueursIds() {
         return joueurs;
+    }
+
+    public void removeJoueur(Integer joueurId) {
+        this.joueurs = this.joueurs.stream().filter(joueurRef -> joueurRef.getJoueurId() != joueurId).collect(Collectors.toSet());
     }
 
     public Integer getNbJoueurs() {

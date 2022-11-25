@@ -19,16 +19,24 @@
             <th>Prenom</th>
             <th>Pseudo</th>
             <th>Nationalite</th>
+            <th>Actions</th>
         </tr>
         </thead>
 
         <tbody>
         <tr th:each="j : ${joueurs}">
-            <!--@thymesVar id="j" type="com.example.sae.models.Joueur:"-->
+            <!--@thymesVar id="j" type="com.example.sae.models.Joueur"-->
             <td th:text="${j.getNom()}"></td>
             <td th:text="${j.getPrenom()}"></td>
             <td th:text="${j.getPseudo()}"></td>
             <td th:text="${j.getNationnalite()}"></td>
+            <td>
+                <form th:action="@{/ecurie/equipes/{id}/supprimerJoueur(id=${equipe.getId()})}" method="post">
+                    <input type="hidden" th:value="${j.getId()}" name="id_joueur">
+                    <button style="color: white; background-color: #f84646; border-color: white; cursor: pointer" type="submit" class="btn btn-info col-2"> Supprimer</button>
+                </form>
+                <a href=""></a>
+            </td>
         </tr>
         </tbody>
     </table>

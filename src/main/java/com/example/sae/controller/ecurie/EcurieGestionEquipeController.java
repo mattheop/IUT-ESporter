@@ -58,7 +58,18 @@ public class EcurieGestionEquipeController {
         e.addJoueur(new JoueurRef(id_joueur));
 
         this.equipeRepository.save(e);
-        return "redirect:/ecurie/equipes/details/" + e.getId();
+        return "redirect:/ecurie/equipes/" + e.getId() + "/details";
+    }
+
+    @PostMapping("/{id}/supprimerJoueur")
+    public String supprimerJoueur(@PathVariable Integer id, @RequestParam(value = "id_joueur") Integer id_joueur) {
+
+        Equipe e = equipeRepository.findById(id).orElse(null);
+        assert e != null;
+        e.removeJoueur(id_joueur);
+
+        this.equipeRepository.save(e);
+        return "redirect:/ecurie/equipes/" + e.getId() + "/details";
     }
 
 
