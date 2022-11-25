@@ -9,4 +9,8 @@ public class JoueurRef {
     public JoueurRef(int joueurId) {
         this.joueurId = joueurId;
     }
+
+    public int getJoueurId() {
+        return joueurId;
+    }
 }

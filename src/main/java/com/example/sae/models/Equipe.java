@@ -55,6 +55,10 @@ public class Equipe {
         this.joueurs.add(new JoueurRef(joueur.getId()));
     }
 
+    public void addJoueur(JoueurRef joueurRef) {
+        this.joueurs.add(joueurRef);
+    }
+
     public Set<JoueurRef> getJoueursIds() {
         return joueurs;
     }

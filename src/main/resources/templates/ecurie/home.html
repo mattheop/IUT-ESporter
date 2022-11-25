@@ -38,6 +38,7 @@
             <th>Nom</th>
             <th>Jeu</th>
             <th>Nombre joueurs</th>
+            <th>Actions</th>
         </tr>
         </thead>
 
@@ -47,6 +48,9 @@
             <td th:text="${e.getNom()}"></td>
             <td th:text="${e.getJeuSpe()}"></td>
             <td th:text="${e.getNbJoueurs()}"></td>
+            <td>
+                <a th:href="@{/ecurie/equipes/{id}/details/(id=${e.getId()})}">Details</a>
+            </td>
         </tr>
         </tbody>
 

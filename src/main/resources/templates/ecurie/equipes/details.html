@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <h1>Details de l'equipe <span th:text="${equipe.getNom()}"></span></h1>
+
+    <p>Nombre de joueur: <span th:text="${equipe.getNbJoueurs()}"></span> / <span th:text="${jeuspe.getNbJoueurParEquipe()}"></span></p>
+    <p style="color:red" th:if="${equipe.getNbJoueurs()} != ${jeuspe.getNbJoueurParEquipe()}">Votre equipe n'est pas conforme, les equipes du jeu <span th:text="${jeuspe.getNom()}"></span> doivent contenir <span th:text="${jeuspe.getNbJoueurParEquipe()}"></span> joueurs</p>
+    <p>Jeu joué: <span th:text="${jeuspe.getNom()}"></span></p>
+
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Pseudo</th>
+            <th>Nationalite</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="j : ${joueurs}">
+            <!--@thymesVar id="j" type="com.example.sae.models.Joueur:"-->
+            <td th:text="${j.getNom()}"></td>
+            <td th:text="${j.getPrenom()}"></td>
+            <td th:text="${j.getPseudo()}"></td>
+            <td th:text="${j.getNationnalite()}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <form action="#" th:action="@{/ecurie/equipes/{id}/ajouterJoueur(id=${equipe.getId()})}" method="POST">
+        <!--@thymesVar id="equipe" type="com.example.sae.models.Equipe"-->
+
+        <select name="id_joueur">
+            <!--@thymesVar id="j" type="com.example.sae.models.Joueur"-->
+            <option th:each="j : ${allAvailableJoueurs}" th:value="${j.getId()}" th:text="${j.getPseudo()}">
+            </option>
+        </select>
+
+        <button type="submit" class="btn btn-info col-2"> Ajouter joueur</button>
+    </form>
+
+</body>
+</html>
