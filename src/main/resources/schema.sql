@@ -31,7 +31,7 @@ create table joueur_equipe
     foreign key (joueur_id) references joueur (id),
     foreign key (equipe_id) references equipe (id)
 );
-s
+
 
 -- Ecurie
 create table ecurie
