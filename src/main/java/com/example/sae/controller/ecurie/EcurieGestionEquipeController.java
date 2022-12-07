@@ -1,9 +1,6 @@
 package com.example.sae.controller.ecurie;
 
-import com.example.sae.models.AppUser;
-import com.example.sae.models.Equipe;
-import com.example.sae.models.Jeu;
-import com.example.sae.models.Joueur;
+import com.example.sae.models.*;
 import com.example.sae.models.ref.JoueurRef;
 import com.example.sae.repository.EquipeRepository;
 import com.example.sae.repository.JeuRepository;
@@ -14,13 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("ecurie/equipes")
-public class EcurieGestionEquipeController {
+public class EcurieGestionEquipeController extends EcurieDashboard {
     private EquipeRepository equipeRepository;
     private JeuRepository jeuRepository;
     private JoueurRepository joueurRepository;
@@ -29,6 +27,15 @@ public class EcurieGestionEquipeController {
         this.equipeRepository = equipeRepository;
         this.jeuRepository = jeuRepository;
         this.joueurRepository = joueurRepository;
+    }
+
+    @GetMapping()
+    public String index(@ModelAttribute("ecurie") Ecurie ecurie, Model model, Authentication authentication) {
+        Set<Equipe> managedEquipes = ecurie.getEquipes();
+
+        model.addAttribute("equipes", managedEquipes);
+
+        return "ecurie/equipes/list";
     }
 
     @GetMapping("/{id}/details")
@@ -75,9 +82,6 @@ public class EcurieGestionEquipeController {
 
     @GetMapping("/ajout")
     public String addEquipe(Model model, Authentication authentication) {
-        assert authentication != null;
-        AppUser appUser = (AppUser) authentication.getPrincipal();
-
         Equipe e = new Equipe();
 
         List<Jeu> jeux = this.jeuRepository.findAll();
@@ -89,11 +93,8 @@ public class EcurieGestionEquipeController {
     }
 
     @PostMapping("/ajout")
-    public String saveEquipe(@ModelAttribute("equipe") Equipe equipe, Authentication authentication) {
-        assert authentication != null;
-        AppUser appUser = (AppUser) authentication.getPrincipal();
-
-        equipe.setEcurie(AggregateReference.to(appUser.getManagedEcurieId()));
+    public String saveEquipe(@ModelAttribute("equipe") Equipe equipe, @ModelAttribute("ecurie") Ecurie ecurie, Authentication authentication) {
+        equipe.setEcurie(AggregateReference.to(ecurie.getId()));
 
         this.equipeRepository.save(equipe);
         return "redirect:/ecurie";

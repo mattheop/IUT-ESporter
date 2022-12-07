@@ -20,32 +20,10 @@ import java.util.Set;
 
 @Controller
 @RequestMapping("ecurie")
-public class EcurieDashboardController {
-
-    final private EcurieRepository ecurieRepository;
-    public EcurieDashboardController(EcurieRepository ecurieRepository) {
-        this.ecurieRepository = ecurieRepository;
-    }
+public class EcurieDashboardController extends EcurieDashboard {
 
     @GetMapping()
-    public String home(Authentication authentication, Model model) {
-        assert authentication != null;
-        AppUser appUser = (AppUser) authentication.getPrincipal();
-
-        Ecurie managedEcurie = this.ecurieRepository.findById(appUser.getManagedEcurieId()).orElse(null);
-        assert managedEcurie != null;
-        Collection<Joueur> joueurs = this.ecurieRepository.getJoueurs(managedEcurie.getId());
-
-        Set<Equipe> managedEquipes = managedEcurie.getEquipes();
-
-
-        model.addAttribute("appuser", appUser);
-        model.addAttribute("ecurie", managedEcurie);
-
-        model.addAttribute("equipes", managedEquipes);
-        System.out.println(managedEquipes);
-        model.addAttribute("joueurs", joueurs);
-
+    public String home() {
         return "ecurie/home";
     }
 

@@ -1,61 +1,24 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" xmlns xmlns:th>
 <head>
-    <meta charset="UTF-8">
-    <title>Une page</title>
+    <th:block th:include="fragments/header :: head" />
+    <title>Dashboard Ecurie</title>
 </head>
 <body>
 
-    <h1>Dashbord Ecurie</h1>
-    <p th:if="${appuser != null}" th:text="${'Bonjour ' + appuser.getUsername()}"></p>
-    <p th:if="${ecurie != null}" th:text="${'Vous géré lecurie ' + ecurie.getNom()}"></p>
-    <table border="1">
-        <thead>
-        <tr>
-            <th>Nom</th>
-            <th>Prenom</th>
-            <th>Pseudo</th>
-            <th>Nationalite</th>
-        </tr>
-        </thead>
+    <div th:replace="fragments/dashboard/sidebar :: sidebar">
 
-        <tbody>
-        <tr th:each="j : ${joueurs}">
-            <!--@thymesVar id="j" type="com.example.sae.models.Joueur:"-->
-            <td th:text="${j.getNom()}"></td>
-            <td th:text="${j.getPrenom()}"></td>
-            <td th:text="${j.getPseudo()}"></td>
-            <td th:text="${j.getNationnalite()}"></td>
-        </tr>
-        </tbody>
+        ok
+    </div>
 
-        <a th:href="@{/ecurie/joueurs/ajout}">Ajouter un joueur a mon ecurie</a>
-    </table>
+    <div class="main-content">
 
-    <table border="1">
-        <thead>
-        <tr>
-            <th>Nom</th>
-            <th>Jeu</th>
-            <th>Nombre joueurs</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
+        <header th:replace="fragments/dashboard/sidebar :: header"></header>
 
-        <tbody>
-        <tr th:each="e : ${equipes}">
-            <!--@thymesVar id="e" type="com.example.sae.models.Equipe"-->
-            <td th:text="${e.getNom()}"></td>
-            <td th:text="${e.getJeuSpe()}"></td>
-            <td th:text="${e.getNbJoueurs()}"></td>
-            <td>
-                <a th:href="@{/ecurie/equipes/{id}/details/(id=${e.getId()})}">Details</a>
-            </td>
-        </tr>
-        </tbody>
+        <main>
 
-        <a th:href="@{/ecurie/equipes/ajout}">Ajouter une equipe a mon ecurie</a>
-    </table>
+        </main>
+    </div>
 
 </body>
 </html>

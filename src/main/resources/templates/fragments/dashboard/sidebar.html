@@ -1,0 +1,32 @@
+<div class="sidebar" th:fragment="sidebar">
+    <input type="checkbox" id="nav-toggle">
+    <div class="sidebar-brand">
+        <h1><span class="las la-gamepad"></span><span>Esporter</span></h1>
+    </div>
+    <div class="sidebar-menu">
+        <ul>
+            <li>
+                <a th:href="@{/ecurie}" class="active"><span class="las la-eye"></span><span>Vue générale</span></a>
+            </li>
+            <li>
+                <a th:href="@{/ecurie/joueurs}"><span class="las la-user"></span><span>Joueurs</span></a>
+            </li>
+            <li>
+                <a th:href="@{/ecurie/equipes}"><span class="las la-users"></span><span>Equipes</span></a>
+            </li>
+            <li>
+                <a href="#"><span class="las la-calendar"></span><span>Planning</span></a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<header th:fragment="header">
+    <h2>Vous gérez l'écurie <span th:text="${ecurie.getNom()}"></span></h2>
+    <div class="user-wrapper">
+        <div>
+            <!--@thymesVar id="appuser" type="com.example.sae.models.AppUser"-->
+            <h4 th:text="${appuser.getFullName()}"></h4>
+        </div>
+    </div>
+</header>

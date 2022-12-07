@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns xmlns:th>
+<head>
+    <th:block th:include="fragments/header :: head" />
+    <title>Dashboard Ecurie</title>
+</head>
+<body>
+
+    <div th:replace="fragments/dashboard/sidebar :: sidebar">
+
+        ok
+    </div>
+
+    <div class="main-content">
+
+        <header th:replace="fragments/dashboard/sidebar :: header"></header>
+
+        <main>
+            <table border="1">
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prenom</th>
+                    <th>Pseudo</th>
+                    <th>Nationalite</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="j : ${joueurs}">
+                    <!--@thymesVar id="j" type="com.example.sae.models.Joueur:"-->
+                    <td th:text="${j.getNom()}"></td>
+                    <td th:text="${j.getPrenom()}"></td>
+                    <td th:text="${j.getPseudo()}"></td>
+                    <td th:text="${j.getNationnalite()}"></td>
+                </tr>
+                </tbody>
+
+                <a th:href="@{/ecurie/joueurs/ajout}">Ajouter un joueur a mon ecurie</a>
+            </table>
+        </main>
+    </div>
+
+</body>
+</html>
