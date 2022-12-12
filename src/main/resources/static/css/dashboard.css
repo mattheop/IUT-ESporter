@@ -28,13 +28,15 @@
 
 .sidebar-brand {
     height: 90px;
-    padding: 1rem 1rem 0rem 2rem;
     color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
-.sidebar-brand span {
-    display: inline-block;
-    padding-right: 1rem;
+.sidebar-brand span:first-child {
+    margin-right: 8px;
 }
 
 .sidebar-menu {
@@ -43,27 +45,28 @@
 
 .sidebar-menu li {
     width: 100%;
-    margin-bottom: 1.7rem;
     padding-left: 1rem;
+    margin-bottom: .85rem;
 }
 
 .sidebar-menu a {
     padding-left: 1rem;
     display: block;
     color: #fff;
-    font-size: 1.1rem;
-}
-
-.sidebar-menu a.active {
-    background: var(--color-dark);
+    font-size: 1.3rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
-    border-radius: 30px 0px 0px 30px;
+    transition: all 200ms;
 }
 
 .sidebar-menu a span:first-child {
-    font-size: 1.5rem;
-    padding-right: 1rem;
+    font-size: 1.3rem;
+    margin-right: 8px;
+}
+
+.sidebar-menu a.active, .sidebar-menu a:hover {
+    background: var(--color-dark);
+    border-radius: 30px 0px 0px 30px;
 }
 
 .main-content {
@@ -208,9 +211,17 @@ main {
         width: 70px;
     }
 
+    .sidebar-menu ul {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: nowrap;
+        flex-direction: column;
+    }
+
     .sidebar .sidebar-brand,
     .sidebar li {
-        padding-left: 1rem;
+        padding-left: 0;
         text-align: center;
     }
 
@@ -228,7 +239,7 @@ main {
     }
 
     .sidebar li a span {
-        padding-right: 1rem;
+        padding-right: 0;
     }
 
     .sidebar .sidebar-brand h1 span:last-child,

@@ -6,19 +6,29 @@
     <div class="sidebar-menu">
         <ul>
             <li>
-                <a th:href="@{/ecurie}" class="active"><span class="las la-eye"></span><span>Vue générale</span></a>
+                <a th:href="@{/ecurie}"
+                   th:classappend="${#httpServletRequest.getRequestURI() == '/ecurie' ? 'active':''}"><span
+                        class="las la-eye"></span><span>Vue générale</span></a>
             </li>
             <li>
-                <a th:href="@{/ecurie/joueurs}"><span class="las la-user"></span><span>Joueurs</span></a>
+                <a th:href="@{/ecurie/joueurs}"
+                   th:classappend="${#httpServletRequest.getRequestURI().startsWith('/ecurie/joueurs') ? 'active':''}"><span
+                        class="las la-user"></span><span>Joueurs</span></a>
             </li>
             <li>
-                <a th:href="@{/ecurie/equipes}"><span class="las la-users"></span><span>Equipes</span></a>
+                <a th:href="@{/ecurie/equipes}"
+                   th:classappend="${#httpServletRequest.getRequestURI().startsWith('/ecurie/equipes') ? 'active':''}"><span
+                        class="las la-users"></span><span>Equipes</span></a>
             </li>
             <li>
-                <a th:href="@{/ecurie/tournois}"><span class="las la-medal"></span><span>Tournois</span></a>
+                <a th:href="@{/ecurie/tournois}"
+                   th:classappend="${#httpServletRequest.getRequestURI().startsWith('/ecurie/tournois') ? 'active':''}"><span
+                        class="las la-medal"></span><span>Tournois</span></a>
             </li>
             <li>
-                <a href="#"><span class="las la-calendar"></span><span>Planning</span></a>
+                <a href="#"
+                   th:classappend="${#httpServletRequest.getRequestURI().startsWith('/ecurie/planning') ? 'active':''}"><span
+                        class="las la-calendar"></span><span>Planning</span></a>
             </li>
         </ul>
     </div>
