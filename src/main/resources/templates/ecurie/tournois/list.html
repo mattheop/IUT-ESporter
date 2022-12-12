@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns xmlns:th>
+<head>
+    <th:block th:include="fragments/header :: head" />
+    <title>Dashboard Ecurie</title>
+</head>
+<body>
+
+    <div th:replace="fragments/dashboard/sidebar :: sidebar">
+
+        ok
+    </div>
+
+    <div class="main-content">
+
+        <header th:replace="fragments/dashboard/sidebar :: header"></header>
+
+        <main>
+            <table border="1">
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Cash Price</th>
+                    <th>Etendue Tournois</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="t : ${tournois}">
+                    <td th:text="${t.getNom()}"></td>
+                    <td th:text="${t.getCashpricepoints()}"></td>
+                    <td th:text="${t.getEtenduetournois()}"></td>
+                </tr>
+                </tbody>
+
+                <a th:href="@{/ecurie/tournois/create}">Créer un tournois</a>
+            </table>
+        </main>
+    </div>
+
+</body>
+</html>

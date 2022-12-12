@@ -7,16 +7,16 @@ public class Tournois {
     @Id
     private Integer id;
     private String nom;
-    private Integer cashPricePoints;
-    private String etendueTournois;
+    private Integer cashpricepoints;
+    private String etenduetournois;
 
     public Tournois() {
     }
 
     public Tournois(String nom, Integer cashPricePoints, String etendueTournois) {
         this.nom = nom;
-        this.cashPricePoints = cashPricePoints;
-        this.etendueTournois = etendueTournois;
+        this.cashpricepoints = cashPricePoints;
+        this.etenduetournois = etendueTournois;
     }
 
     public Integer getId() {
@@ -35,24 +35,24 @@ public class Tournois {
         this.nom = nom;
     }
 
-    public Integer getCashPricePoints() {
-        return cashPricePoints;
+    public Integer getCashpricepoints() {
+        return cashpricepoints;
     }
 
-    public void setCashPricePoints(Integer cashPricePoints) {
-        this.cashPricePoints = cashPricePoints;
+    public void setCashpricepoints(Integer cashpricepoints) {
+        this.cashpricepoints = cashpricepoints;
     }
 
-    public String getEtendueTournois() {
-        return etendueTournois;
+    public String getEtenduetournois() {
+        return etenduetournois;
     }
 
-    public void setEtendueTournois(String etendueTournois) {
-        this.etendueTournois = etendueTournois;
+    public void setEtenduetournois(String etenduetournois) {
+        this.etenduetournois = etenduetournois;
     }
 
     @Override
     public String toString() {
-        return "Tournois{" + "id=" + id + ", nom='" + nom + '\'' + ", cashPricePoints=" + cashPricePoints + ", etendueTournois='" + etendueTournois + '\'' + '}';
+        return "Tournois{" + "id=" + id + ", nom='" + nom + '\'' + ", cashPricePoints=" + cashpricepoints + ", etendueTournois='" + etenduetournois + '\'' + '}';
     }
 }
