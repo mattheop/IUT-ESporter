@@ -85,3 +85,4 @@ public class Equipe {
         return "Equipe{" + "id=" + id + ", nom='" + nom + '\'' + ", jeuSpe='" + jeuSpe + '\'' + ", joueurs=" + joueurs + '}';
     }
 }
+

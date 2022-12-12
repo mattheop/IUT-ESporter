@@ -1,0 +1,56 @@
+.btn {
+    text-decoration: none;
+    border: 2px var(--main-color) solid;
+    color: var(--main-color);
+    padding: 0.8rem 0.8rem;
+    border-radius: 35px;
+    font-weight: bold;
+}
+
+.btn i {
+    transition: transform 200ms ease-in-out;
+    margin-right: 6px;
+}
+
+.btn.btn-primary {
+    border: none;
+    background-color: var(--main-color);
+    color: white;
+    font-weight: bold;
+}
+
+.btn:hover i {
+    transform: rotate(180deg);
+}
+
+.table-crud-header {
+    display: flex;
+    justify-content: end;
+    margin: 0 0 1rem 0;
+}
+
+.table-crud {
+    border: none;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table-crud th, td {
+    padding: 0.8rem 0.4rem;
+}
+
+.table-crud th {
+    font-size: 1.2rem;
+    text-align: left;
+    background-color: var(--main-color);
+    color: white;
+}
+
+.table-crud tr {
+    font-size: 1.1rem;
+}
+
+.table-crud tr:nth-child(2n) {
+    padding: 2rem 0;
+    background-color: #fcfcfc;
+}

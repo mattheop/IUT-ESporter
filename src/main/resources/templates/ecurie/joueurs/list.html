@@ -16,7 +16,10 @@
         <header th:replace="fragments/dashboard/sidebar :: header"></header>
 
         <main>
-            <table border="1">
+            <div class="table-crud-header">
+                <a class="btn btn-primary" th:href="@{/ecurie/joueurs/ajout}"><i class="las la-plus"></i>Ajouter un joueur a mon ecurie</a>
+            </div>
+            <table class="table-crud">
                 <thead>
                 <tr>
                     <th>Nom</th>
@@ -35,8 +38,6 @@
                     <td th:text="${j.getNationnalite()}"></td>
                 </tr>
                 </tbody>
-
-                <a th:href="@{/ecurie/joueurs/ajout}">Ajouter un joueur a mon ecurie</a>
             </table>
         </main>
     </div>
