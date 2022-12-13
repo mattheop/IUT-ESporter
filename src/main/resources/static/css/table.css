@@ -1,32 +1,19 @@
-.btn {
-    text-decoration: none;
-    border: 2px var(--main-color) solid;
-    color: var(--main-color);
-    padding: 0.8rem 0.8rem;
-    border-radius: 35px;
-    font-weight: bold;
-}
-
-.btn i {
-    transition: transform 200ms ease-in-out;
-    margin-right: 6px;
-}
-
-.btn.btn-primary {
-    border: none;
-    background-color: var(--main-color);
-    color: white;
-    font-weight: bold;
-}
-
-.btn:hover i {
-    transform: rotate(180deg);
-}
-
 .table-crud-header {
     display: flex;
-    justify-content: end;
     margin: 0 0 1rem 0;
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+}
+
+.table-crud-header .table-crud-header--title {
+    font-size: 1.5rem;
+    color: var(--main-color);
+    font-weight: bold;
+}
+
+.table-crud-header .table-crud-header--action {
+    margin-left: auto;
 }
 
 .table-crud {

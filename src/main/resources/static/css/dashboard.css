@@ -1,20 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
 
-:root {
-    --main-color: #1e5262;
-    --color-dark: #1D2231;
-    --text-color: #8390A2;
-}
-
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    list-style-type: none;
-    text-decoration: none;
-    font-family: 'Roboto Mono', sans-serif;
-}
-
 .sidebar {
     width: 345px;
     position: fixed;

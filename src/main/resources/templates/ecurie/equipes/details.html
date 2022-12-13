@@ -1,57 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <th:block th:include="fragments/header :: head"/>
     <title>Title</title>
 </head>
 <body>
 
-    <h1>Details de l'equipe <span th:text="${equipe.getNom()}"></span></h1>
+    <div th:replace="fragments/dashboard/sidebar :: sidebar">
+    </div>
+    <div class="main-content">
+        <header th:replace="fragments/dashboard/sidebar :: header"></header>
 
-    <p>Nombre de joueur: <span th:text="${equipe.getNbJoueurs()}"></span> / <span th:text="${jeuspe.getNbJoueurParEquipe()}"></span></p>
-    <p style="color:red" th:if="${equipe.getNbJoueurs()} != ${jeuspe.getNbJoueurParEquipe()}">Votre equipe n'est pas conforme, les equipes du jeu <span th:text="${jeuspe.getNom()}"></span> doivent contenir <span th:text="${jeuspe.getNbJoueurParEquipe()}"></span> joueurs</p>
-    <p>Jeu joué: <span th:text="${jeuspe.getNom()}"></span></p>
+        <main>
 
-    <table border="1">
-        <thead>
-        <tr>
-            <th>Nom</th>
-            <th>Prenom</th>
-            <th>Pseudo</th>
-            <th>Nationalite</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
+            <h1 class="title">Details de l'equipe <span th:text="${equipe.getNom()}"></span></h1>
 
-        <tbody>
-        <tr th:each="j : ${joueurs}">
-            <!--@thymesVar id="j" type="com.example.sae.models.Joueur"-->
-            <td th:text="${j.getNom()}"></td>
-            <td th:text="${j.getPrenom()}"></td>
-            <td th:text="${j.getPseudo()}"></td>
-            <td th:text="${j.getNationnalite()}"></td>
-            <td>
-                <form th:action="@{/ecurie/equipes/{id}/supprimerJoueur(id=${equipe.getId()})}" method="post">
-                    <input type="hidden" th:value="${j.getId()}" name="id_joueur">
-                    <button style="color: white; background-color: #f84646; border-color: white; cursor: pointer" type="submit" class="btn btn-info col-2"> Supprimer</button>
-                </form>
-                <a href=""></a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+            <div th:if="${equipe.getNbJoueurs()} != ${jeuspe.getNbJoueurParEquipe()}" class="alert alert-danger">
+                <i class="las la-exclamation-triangle"></i>
+                <p>Votre équipe n'est
+                    pas
+                    conforme, les équipes du jeu <span th:text="${jeuspe.getNom()}"></span> doivent contenir <span
+                            th:text="${jeuspe.getNbJoueurParEquipe()}"></span> joueurs !</p>
+            </div>
 
-    <form action="#" th:action="@{/ecurie/equipes/{id}/ajouterJoueur(id=${equipe.getId()})}" method="POST">
-        <!--@thymesVar id="equipe" type="com.example.sae.models.Equipe"-->
+            <div class="equipes-details">
+                <div class="equipes-details--line">
+                    <i class="las la-user-friends"></i>
+                    <p class="equipes-details--line--title">Nombre de joueurs: </p>
+                    <p class="equipes-details--line--data" th:text="${jeuspe.getNbJoueurParEquipe()}"></p>
+                </div>
 
-        <select name="id_joueur">
-            <!--@thymesVar id="j" type="com.example.sae.models.Joueur"-->
-            <option th:each="j : ${allAvailableJoueurs}" th:value="${j.getId()}" th:text="${j.getPseudo()}">
-            </option>
-        </select>
+                <div class="equipes-details--line">
+                    <i class="las la-gamepad"></i>
+                    <p class="equipes-details--line--title">Jeu joué: </p>
+                    <p class="equipes-details--line--data" th:text="${jeuspe.getNom()}"></p>
+                </div>
+            </div>
 
-        <button type="submit" class="btn btn-info col-2"> Ajouter joueur</button>
-    </form>
+            <div class="table-crud-header">
+                <p class="table-crud-header--title">Composition de l'équipe</p>
+
+                <div class="table-crud-header--action">
+                    <form action="#" th:action="@{/ecurie/equipes/{id}/ajouterJoueur(id=${equipe.getId()})}"
+                          method="POST">
+                        <!--@thymesVar id="equipe" type="com.example.sae.models.Equipe"-->
+
+                        <select name="id_joueur">
+                            <!--@thymesVar id="j" type="com.example.sae.models.Joueur"-->
+                            <option th:each="j : ${allAvailableJoueurs}" th:value="${j.getId()}"
+                                    th:text="${j.getPseudo()}">
+                            </option>
+                        </select>
+
+                        <button type="submit" class="btn btn-primary col-2"> Ajouter le joueur</button>
+                    </form>
+                </div>
+            </div>
+
+            <table class="table-crud">
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prenom</th>
+                    <th>Pseudo</th>
+                    <th>Nationalite</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="j : ${joueurs}">
+                    <!--@thymesVar id="j" type="com.example.sae.models.Joueur"-->
+                    <td th:text="${j.getNom()}"></td>
+                    <td th:text="${j.getPrenom()}"></td>
+                    <td th:text="${j.getPseudo()}"></td>
+                    <td th:text="${j.getNationnalite()}"></td>
+                    <td>
+                        <form th:action="@{/ecurie/equipes/{id}/supprimerJoueur(id=${equipe.getId()})}" method="post">
+                            <input type="hidden" th:value="${j.getId()}" name="id_joueur">
+                            <button style="color: white; background-color: #f84646; border-color: white; cursor: pointer"
+                                    type="submit" class="btn btn-info col-2"> Supprimer
+                            </button>
+                        </form>
+                        <a href=""></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </main>
+
+    </div>
 
 </body>
 </html>

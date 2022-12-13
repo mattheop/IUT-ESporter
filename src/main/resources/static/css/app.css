@@ -1,0 +1,110 @@
+:root {
+    --main-color: #1e5262;
+    --color-dark: #1D2231;
+    --color-danger: #de4242;
+    --text-color: #8390A2;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    list-style-type: none;
+    text-decoration: none;
+    font-family: 'Roboto Mono', sans-serif;
+}
+
+.alert {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: var(--color-danger);
+    padding: 1.5rem 1rem;
+    border-radius: 15px;
+    margin-bottom: 1rem;
+}
+
+.alert p {
+    margin-left: 1rem;
+    font-size: 1.1rem;
+    color: white;
+}
+
+.alert i {
+    color: white;
+    font-size: 3rem;
+}
+
+.title {
+    position: relative;
+    color: var(--main-color);
+
+    width: fit-content;
+
+    margin-bottom: 1.2rem;
+}
+
+.title::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 25%;
+    height: 4px;
+    border-radius: 35px;
+    background-color: var(--main-color);
+}
+
+.btn {
+    text-decoration: none;
+    border: 2px var(--main-color) solid;
+    color: var(--main-color);
+    padding: 0.8rem 0.8rem;
+    border-radius: 35px;
+    font-weight: bold;
+}
+
+.btn i {
+    transition: transform 200ms ease-in-out;
+    margin-right: 6px;
+}
+
+.btn.btn-primary {
+    border: none;
+    background-color: var(--main-color);
+    color: white;
+    font-weight: bold;
+}
+
+.btn:hover i {
+    transform: rotate(180deg);
+}
+
+select {
+    border: none;
+    padding: 0.8rem 0.8rem;
+    border-radius: 35px;
+}
+
+.equipes-details {
+    margin: 1.5rem 0;
+}
+
+.equipes-details .equipes-details--line {
+    display: flex;
+    align-items: center;
+}
+
+.equipes-details .equipes-details--line i {
+    font-size: 2.2rem;
+    margin-right: .5rem;
+}
+
+.equipes-details .equipes-details--line p {
+    font-size: 1.1rem;
+}
+
+.equipes-details .equipes-details--line .equipes-details--line--title {
+    font-weight: bolder;
+    margin-right: .5rem;
+}
