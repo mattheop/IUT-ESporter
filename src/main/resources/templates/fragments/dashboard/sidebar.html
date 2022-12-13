@@ -39,7 +39,7 @@
     <div class="user-wrapper">
         <div>
             <!--@thymesVar id="appuser" type="com.example.sae.models.AppUser"-->
-            <h4 th:text="${appuser.getFullName()}"></h4>
+            <h4>Bonjour <span th:text="${appuser.getFullName()}"></span><a style="text-decoration: none; color: gray; font-size: .80rem" th:href="@{/logout}">, Se déconnecter</a></h4>
         </div>
     </div>
 </header>
