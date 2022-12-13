@@ -8,7 +8,7 @@
 
 <h1>Créer un tournois</h1>
 
-<form action="#" th:action="@{/ecurie/tournois/create}" th:object="${tournois}" method="POST">
+<form action="#" th:action="@{/templates/organisateur/tournois/create}" th:object="${tournois}" method="POST">
 
     <input type="text" th:field="*{nom}" placeholder="Nom">
     <input type="text" th:field="*{cashpricepoints}" placeholder="Cash Price">

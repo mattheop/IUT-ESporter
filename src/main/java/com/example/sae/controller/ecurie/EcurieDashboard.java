@@ -1,5 +1,6 @@
 package com.example.sae.controller.ecurie;
 
+import com.example.sae.controller.ESporterDashboard;
 import com.example.sae.models.AppUser;
 import com.example.sae.models.Ecurie;
 import com.example.sae.repository.EcurieRepository;
@@ -8,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-public class EcurieDashboard {
+public class EcurieDashboard extends ESporterDashboard {
 
     @Autowired
     private EcurieRepository ecurieRepository;

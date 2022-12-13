@@ -1,5 +1,6 @@
-package com.example.sae.controller.ecurie;
+package com.example.sae.controller.organisateur;
 
+import com.example.sae.controller.ecurie.EcurieDashboard;
 import com.example.sae.models.Ecurie;
 import com.example.sae.models.Joueur;
 import com.example.sae.models.Tournois;
@@ -16,12 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.Collection;
 
 @Controller
-@RequestMapping("ecurie/tournois")
-public class EcurieGestionTournoisController extends EcurieDashboard {
+@RequestMapping("organisateur/tournois")
+public class OrganisateurGestionTournoisController extends OrganisateurDashboard {
 
     private TournoisRepository tournoisRepository;
 
-    public EcurieGestionTournoisController(TournoisRepository tournoisRepository) {
+    public OrganisateurGestionTournoisController(TournoisRepository tournoisRepository) {
         this.tournoisRepository = tournoisRepository;
     }
 
@@ -31,7 +32,7 @@ public class EcurieGestionTournoisController extends EcurieDashboard {
 
         model.addAttribute("tournois", tournois);
 
-        return "ecurie/tournois/list";
+        return "organisateur/tournois/list";
     }
 
     @GetMapping("/create")
@@ -40,13 +41,13 @@ public class EcurieGestionTournoisController extends EcurieDashboard {
 
         model.addAttribute("tournois", tournois);
 
-        return "ecurie/tournois/create";
+        return "organisateur/tournois/create";
     }
 
     @PostMapping("/create")
     public String savePlayer(@ModelAttribute("tournois") Tournois tournois, Authentication authentication) {
 
         this.tournoisRepository.save(tournois);
-        return "redirect:/ecurie/tournois";
+        return "redirect:/organisateur/tournois";
     }
 }

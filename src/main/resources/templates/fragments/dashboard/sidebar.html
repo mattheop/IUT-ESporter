@@ -4,42 +4,27 @@
         <h1><span class="las la-gamepad"></span><span>E-Sporter</span></h1>
     </div>
     <div class="sidebar-menu">
+
         <ul>
-            <li>
-                <a th:href="@{/ecurie}"
-                   th:classappend="${#httpServletRequest.getRequestURI() == '/ecurie' ? 'active':''}"><span
-                        class="las la-eye"></span><span>Vue générale</span></a>
-            </li>
-            <li>
-                <a th:href="@{/ecurie/joueurs}"
-                   th:classappend="${#httpServletRequest.getRequestURI().startsWith('/ecurie/joueurs') ? 'active':''}"><span
-                        class="las la-user"></span><span>Joueurs</span></a>
-            </li>
-            <li>
-                <a th:href="@{/ecurie/equipes}"
-                   th:classappend="${#httpServletRequest.getRequestURI().startsWith('/ecurie/equipes') ? 'active':''}"><span
-                        class="las la-users"></span><span>Equipes</span></a>
-            </li>
-            <li>
-                <a th:href="@{/ecurie/tournois}"
-                   th:classappend="${#httpServletRequest.getRequestURI().startsWith('/ecurie/tournois') ? 'active':''}"><span
-                        class="las la-medal"></span><span>Tournois</span></a>
-            </li>
-            <li>
-                <a href="#"
-                   th:classappend="${#httpServletRequest.getRequestURI().startsWith('/ecurie/planning') ? 'active':''}"><span
-                        class="las la-calendar"></span><span>Planning</span></a>
+            <li th:each="f : ${dashboardFunctions}">
+                <!--@thymesVar id="f" type="com.example.sae.models.DashboardFunction"-->
+                <a th:href="${f.getRoute()}"
+                   th:classappend="${#httpServletRequest.getRequestURI() == f.getRoute() ? 'active':''}"><span
+                        class="las" th:classappend="${f.getIcon()}"></span><span th:text="${f.getNom()}"></span></a>
             </li>
         </ul>
     </div>
 </div>
 
 <header th:fragment="header">
-    <h2>Vous gérez l'écurie <span th:text="${ecurie.getNom()}"></span></h2>
+    <h2 th:if="${ecurie != null}">Vous gérez l'écurie <span th:text="${ecurie.getNom()}"></span></h2>
+    <h2 th:if="${ecurie == null}">Compte Organisateur</h2>
     <div class="user-wrapper">
         <div>
             <!--@thymesVar id="appuser" type="com.example.sae.models.AppUser"-->
-            <h4>Bonjour <span th:text="${appuser.getFullName()}"></span><a style="text-decoration: none; color: gray; font-size: .80rem" th:href="@{/logout}">, Se déconnecter</a></h4>
+            <h4>Bonjour <span th:text="${appuser.getFullName()}"></span><a
+                    style="text-decoration: none; color: gray; font-size: .80rem" th:href="@{/logout}">, Se
+                déconnecter</a></h4>
         </div>
     </div>
 </header>
