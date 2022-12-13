@@ -68,3 +68,26 @@ create table users
     password varchar(500) not null,
     enabled  boolean      not null
 );
+
+create table competition
+(
+    competition_id       int auto_increment primary key,
+    date_debut           datetime not null,
+    date_fin_inscription datetime not null,
+    jeu_id               int,
+    tournois_id          int,
+
+    foreign key (jeu_id) references jeu (jeu_id),
+    foreign key (tournois_id) references tournois (tournois_id)
+);
+
+create table inscription
+(
+    inscription_id int auto_increment primary key,
+    competition_id int,
+    equipe_id      int,
+
+
+    foreign key (competition_id) references competition (competition_id),
+    foreign key (equipe_id) references equipe (id)
+)

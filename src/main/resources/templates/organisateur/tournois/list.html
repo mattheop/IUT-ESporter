@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns xmlns:th>
 <head>
-    <th:block th:include="fragments/header :: head" />
+    <th:block th:include="fragments/header :: head"/>
     <title>Dashboard Ecurie</title>
 </head>
 <body>
@@ -16,24 +16,37 @@
         <header th:replace="fragments/dashboard/sidebar :: header"></header>
 
         <main>
-            <table border="1">
+            <div class="table-crud-header">
+                <p class="table-crud-header--title">Les tournois</p>
+
+                <div class="table-crud-header--action">
+                    <a class="btn btn-primary" th:href="@{/tournois/create}"><i class="las la-plus"></i>Créer un
+                        tournois</a>
+                </div>
+            </div>
+            <table class="table-crud">
                 <thead>
                 <tr>
                     <th>Nom</th>
                     <th>Cash Price</th>
                     <th>Etendue Tournois</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
 
                 <tbody>
                 <tr th:each="t : ${tournois}">
+                    <!--@thymesVar id="t" type="com.example.sae.models.Tournois"-->
                     <td th:text="${t.getNom()}"></td>
                     <td th:text="${t.getCashpricepoints()}"></td>
                     <td th:text="${t.getEtenduetournois()}"></td>
+                    <td>
+                        <a th:href="@{/organisateur/tournois/{id}/details/(id=${t.getId()})}">Details</a>
+                    </td>
                 </tr>
                 </tbody>
 
-                <a th:href="@{/templates/organisateur/tournois/create}">Créer un tournois</a>
+
             </table>
         </main>
     </div>

@@ -1,10 +1,12 @@
 package com.example.sae.models;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 
 public class Tournois {
 
     @Id
+    @Column("tournois_id")
     private Integer id;
     private String nom;
     private Integer cashpricepoints;

@@ -11,6 +11,7 @@ import java.util.Set;
 public class Ecurie {
 
     @Id
+    @Column("ecurie_id")
     private int id;
     private String nom_ecurie;
 

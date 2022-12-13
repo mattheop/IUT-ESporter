@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 public class Equipe {
     @Id
+    @Column("equipe_id")
     private int id;
     private String nom;
 

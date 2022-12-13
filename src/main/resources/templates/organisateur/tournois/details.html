@@ -1,0 +1,93 @@
+<!--@thymesVar id="tournois" type="com.example.sae.models.Tournois"-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <th:block th:include="fragments/header :: head"/>
+    <title>Title</title>
+</head>
+<body>
+
+    <div th:replace="fragments/dashboard/sidebar :: sidebar">
+    </div>
+    <div class="main-content">
+        <header th:replace="fragments/dashboard/sidebar :: header"></header>
+
+        <main>
+            <h1 class="title">Details du tournoi</h1>
+
+            <div class="equipes-details">
+                <div class="equipes-details--line">
+                    <i class="las la-globe"></i>
+                    <p class="equipes-details--line--title">Étendu du tournoi: </p>
+                    <p class="equipes-details--line--data" th:text="${tournois.getEtenduetournois()}"></p>
+                </div>
+
+                <div class="equipes-details--line">
+                    <i class="las la-wallet"></i>
+                    <p class="equipes-details--line--title">Cash-price de point: </p>
+                    <p class="equipes-details--line--data" th:text="${tournois.getCashpricepoints()}"></p>
+                </div>
+            </div>
+
+            <div class="table-crud-header">
+                <p class="table-crud-header--title">Liste des compétitions du tournois</p>
+
+                <div class="table-crud-header--action">
+                    <a class="btn btn-primary"
+                       th:href="@{/organisateur/tournois/{id}/addCompetion/(id=${tournois.getId()})}">
+                        <i class="las la-plus"></i>Ajouter une competition</a>
+                </div>
+            </div>
+            <table class="table-crud">
+                <thead>
+                <tr>
+                    <th>Jeu joué</th>
+                    <th>Date fin d'inscription</th>
+                    <th>Date debut des matchs</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="c : ${competitions}">
+                    <!--@thymesVar id="c" type="com.example.sae.models.Competition"-->
+                    <td th:text="${c.getJeu().getNom()}"></td>
+                    <td th:text="${c.getDateFinInscription()}"></td>
+                    <td th:text="${c.getDateDebutCompetition()}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <hr style="margin: 1rem 0">
+
+            <th:block th:each="c : ${competitions}">
+                <!--@thymesVar id="c" type="com.example.sae.models.Competition"-->
+                <div class="table-crud-header">
+                    <p class="table-crud-header--title">Liste des équipes inscrites pour <span
+                            th:text="${c.getJeu().getNom()}"></span>
+                    </p>
+                </div>
+
+                <table class="table-crud">
+                    <thead>
+                    <tr>
+                        <th>Ecurie</th>
+                        <th>Nom de l'equipe</th>
+                    </tr>
+                    </thead>
+
+                    <tr th:each="i : ${inscriptions}">
+                        <!--@thymesVar id="i" type="com.example.sae.models.Inscription"-->
+                        <td th:text="${i.getLazyEcurie()?.getNom()}"></td>
+                        <td th:text="${i.getEquipe().getNom()}"></td>
+                    </tr>
+
+                    <tbody>
+                    </tbody>
+                </table>
+            </th:block>
+        </main>
+    </div>
+
+</body>
+</html>

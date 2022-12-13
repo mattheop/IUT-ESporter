@@ -6,6 +6,7 @@ import org.springframework.data.relational.core.mapping.Column;
 public class Jeu {
 
     @Id
+    @Column("jeu_id")
     private Integer id;
     private String nom;
 

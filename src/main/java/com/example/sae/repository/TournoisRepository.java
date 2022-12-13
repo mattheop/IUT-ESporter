@@ -9,7 +9,7 @@ import java.util.Collection;
 
 public interface TournoisRepository extends CrudRepository<Tournois, Integer> {
 
-    @Query("SELECT * FROM tournois WHERE id = :id")
+    @Query("SELECT * FROM tournois WHERE tournois_id = :id")
     Tournois getTournoisById(@Param("id") Integer id);
 
     @Query("SELECT * FROM tournois")
