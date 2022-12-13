@@ -2,6 +2,7 @@ package com.example.sae.models;
 
 import com.example.sae.models.ref.JoueurRef;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.MappedCollection;
@@ -16,7 +17,10 @@ public class Equipe {
     private String nom;
 
     @Column("jeu_spe")
-    private String jeuSpe;
+    private int jeuSpe;
+
+    @Transient
+    private Jeu jeuSpeModel;
 
     @Column("ecurie_id")
     private AggregateReference<Ecurie, Integer> ecurie;
@@ -27,7 +31,7 @@ public class Equipe {
     public Equipe() {
     }
 
-    public Equipe(String nom, String jeuSpe) {
+    public Equipe(String nom, int jeuSpe) {
         this.nom = nom;
         this.jeuSpe = jeuSpe;
     }
@@ -44,11 +48,11 @@ public class Equipe {
         this.nom = nom;
     }
 
-    public String getJeuSpe() {
+    public int getJeuSpe() {
         return jeuSpe;
     }
 
-    public void setJeuSpe(String jeuSpe) {
+    public void setJeuSpe(Integer jeuSpe) {
         this.jeuSpe = jeuSpe;
     }
 
@@ -83,6 +87,14 @@ public class Equipe {
     @Override
     public String toString() {
         return "Equipe{" + "id=" + id + ", nom='" + nom + '\'' + ", jeuSpe='" + jeuSpe + '\'' + ", joueurs=" + joueurs + '}';
+    }
+
+    public Jeu getJeuSpeModel() {
+        return jeuSpeModel;
+    }
+
+    public void setJeuSpeModel(Jeu jeuSpeModel) {
+        this.jeuSpeModel = jeuSpeModel;
     }
 }
 

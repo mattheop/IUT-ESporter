@@ -1,6 +1,9 @@
 package com.example.sae.controller.ecurie;
 
-import com.example.sae.models.*;
+import com.example.sae.models.Ecurie;
+import com.example.sae.models.Equipe;
+import com.example.sae.models.Jeu;
+import com.example.sae.models.Joueur;
 import com.example.sae.models.ref.JoueurRef;
 import com.example.sae.repository.EquipeRepository;
 import com.example.sae.repository.JeuRepository;
@@ -11,9 +14,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Controller
@@ -32,6 +37,14 @@ public class EcurieGestionEquipeController extends EcurieDashboard {
     @GetMapping()
     public String index(@ModelAttribute("ecurie") Ecurie ecurie, Model model, Authentication authentication) {
         Set<Equipe> managedEquipes = ecurie.getEquipes();
+
+        System.out.println(this.jeuRepository.findAll());
+
+        Map<Integer, Jeu> all = jeuRepository.findAll().stream().collect(Collectors.toMap(
+                Jeu::getId,
+                Function.identity()
+        ));
+        managedEquipes.forEach(equipe -> equipe.setJeuSpeModel(all.get(equipe.getJeuSpe())));
 
         model.addAttribute("equipes", managedEquipes);
 
