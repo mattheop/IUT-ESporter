@@ -47,10 +47,7 @@ public class OrganisateurGestionTournoisController extends OrganisateurDashboard
             return "redirect:/organisateur";
 
 
-        Collection<Competition> competitions = competitionRepository.findAll().stream()
-                .filter(competition -> competition.getTournois() != null)
-                .filter(competition -> competition.getTournois().getId().equals(id))
-                .toList();
+        Collection<Competition> competitions = competitionRepository.findByTournoisId(tournois.getId());
 
         System.out.println(competitionRepository.findAll().get(0));
 
