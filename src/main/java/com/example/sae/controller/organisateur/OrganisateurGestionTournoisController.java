@@ -48,13 +48,7 @@ public class OrganisateurGestionTournoisController extends OrganisateurDashboard
 
 
         Collection<Competition> competitions = competitionRepository.findByTournoisId(tournois.getId());
-
-        System.out.println(competitionRepository.findAll().get(0));
-
-        Collection<Inscription> inscriptions = inscriptionRepository.findAll().stream()
-                .filter(inscription -> inscription.getCompetition().getTournois().getId().equals(id))
-                .toList();
-
+        Collection<Inscription> inscriptions = inscriptionRepository.findAllByTournoisId(tournois.getId());
         Collection<Ecurie> ecuries = ecurieRepository.findAll();
 
         inscriptions.forEach(inscription -> inscription.setLazyEcurie(
