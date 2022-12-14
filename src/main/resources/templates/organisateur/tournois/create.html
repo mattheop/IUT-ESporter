@@ -1,20 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr" xmlns xmlns:th>
 <head>
-    <meta charset="UTF-8">
-    <title>Ajouter un Joueur</title>
+    <th:block th:include="fragments/header :: head"/>
+    <title>Dashboard Ecurie</title>
 </head>
 <body>
 
-    <h1>Créer un tournois</h1>
-    <!--@thymesVar id="tournois" type="com.example.sae.models.Tournois"-->
-    <form action="#" th:action="@{/organisateur/tournois/create}" th:object="${tournois}" method="POST">
-        <input type="text" th:field="*{nom}" placeholder="Nom">
-        <input type="text" th:field="*{cashpricepoints}" placeholder="Cash Price">
-        <input type="text" th:field="*{etenduetournois}" placeholder="Etendue Tournois">
+    <div th:replace="fragments/dashboard/sidebar :: sidebar">
 
-        <button type="submit" class="btn btn-info col-2"> Sauvegarder</button>
-    </form>
+        ok
+    </div>
+
+    <div class="main-content">
+
+        <header th:replace="fragments/dashboard/sidebar :: header"></header>
+
+        <main>
+            <h1 class="title">Ajouter un tournois</h1>
+
+            <div class="form-crud">
+
+                <form action="#" th:action="@{/organisateur/tournois/create}" th:object="${tournois}" method="POST">
+
+                    <div class="form-input">
+                        <label for="nom">Nom du tournois</label>
+                        <input required type="text" id="nom" th:field="*{nom}">
+                    </div>
+
+                    <div class="form-input">
+                        <label for="cashpricepoints">Cashprice Point</label>
+                        <input required type="number" id="cashpricepoints" th:field="*{cashpricepoints}">
+                    </div>
+
+                    <div class="form-input">
+                        <label for="etenduetournois">Jeu joué lors de cette compétition</label>
+                        <select required id="etenduetournois" th:field="*{etenduetournois}">
+                            <!--@thymesVar id="j" type="com.example.sae.models.Jeu"-->
+
+                            <option value="Regional">Regional</option>
+                            <option value="Nationnal">Nationnal</option>
+                            <option value="Mondial">Mondial</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-info col-2"> Sauvegarder</button>
+                </form>
+            </div>
+        </main>
+    </div>
 
 </body>
 </html>
