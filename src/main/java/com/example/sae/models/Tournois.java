@@ -3,6 +3,8 @@ package com.example.sae.models;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 
+import java.util.Objects;
+
 public class Tournois {
 
     @Id
@@ -56,5 +58,18 @@ public class Tournois {
     @Override
     public String toString() {
         return "Tournois{" + "id=" + id + ", nom='" + nom + '\'' + ", cashPricePoints=" + cashpricepoints + ", etendueTournois='" + etenduetournois + '\'' + '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Tournois tournois = (Tournois) o;
+        return Objects.equals(id, tournois.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

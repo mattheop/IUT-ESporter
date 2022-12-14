@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns xmlns:th>
+<head>
+    <th:block th:include="fragments/header :: head"/>
+    <title>Dashboard Ecurie</title>
+</head>
+<body>
+
+    <div th:replace="fragments/dashboard/sidebar :: sidebar">
+    </div>
+
+    <div class="main-content">
+
+        <header th:replace="fragments/dashboard/sidebar :: header"></header>
+
+        <main>
+            <div th:each="tournois : ${competitionsByTournois}" style="margin-bottom: 2rem">
+                <!--@thymesVar id="tournois.key" type="com.example.sae.models.Tournois"-->
+                <h1 class="title">Tournois <span th:text="${tournois.key.getNom()}"></span></h1>
+
+                <div class="equipes-details">
+                    <div class="equipes-details--line">
+                        <i class="las la-globe"></i>
+                        <p class="equipes-details--line--title">Étendu du tournoi: </p>
+                        <p class="equipes-details--line--data" th:text="${tournois.key.getEtenduetournois()}"></p>
+                    </div>
+
+                    <div class="equipes-details--line">
+                        <i class="las la-wallet"></i>
+                        <p class="equipes-details--line--title">Cash-price de point: </p>
+                        <p class="equipes-details--line--data" th:text="${tournois.key.getCashpricepoints()}"></p>
+                    </div>
+                </div>
+
+                <th:block th:each="compet : ${tournois.value}">
+                    <div class="table-crud-header">
+                        <p class="table-crud-header--title">Equipes inscrites à la compétition de <span
+                                th:text="${compet.getJeu().getNom()}"></span></p>
+
+                        <form class="table-crud-header--action" th:action="@{/ecurie/inscriptions}"
+                              th:object="${inscription}" method="POST">
+
+                            <input type="hidden" th:value="${compet.getId()}" th:attr="name='competition'"/>
+
+                            <select th:field="*{equipe}">
+                                <!--@thymesVar id="j" type="com.example.sae.models.Joueur"-->
+                                <option th:each="e : ${equipesByJeuSpeID.get(compet.getJeu().getId())}"
+                                        th:value="${e.getId()}"
+                                        th:text="${e.getNom()}">
+                                </option>
+                            </select>
+
+                            <button type="submit" class="btn btn-primary col-2"> Inscrire cette équipe</button>
+                        </form>
+
+                    </div>
+
+                    <table class="table-crud">
+                        <!--@thymesVar id="competitions" type="com.example.sae.models.Competition"-->
+                        <thead>
+                        <tr>
+                            <th>Nom Equipe</th>
+                            <th>Nombre de points</th>
+                        </tr>
+                        </thead>
+
+                        <tr th:each="inscriptions : ${inscriptionByCompetition.get(compet)}">
+                            <td th:text="${inscriptions.getEquipe().getNom()}"></td>
+                            <td>0</td>
+                        </tr>
+
+                        <tbody>
+                        </tbody>
+                    </table>
+                </th:block>
+
+            </div>
+
+        </main>
+    </div>
+
+</body>
+</html>
