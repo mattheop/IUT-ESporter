@@ -6,16 +6,15 @@
 </head>
 <body>
 
-<h1>Créer un tournois</h1>
+    <h1>Créer un tournois</h1>
+    <!--@thymesVar id="tournois" type="com.example.sae.models.Tournois"-->
+    <form action="#" th:action="@{/organisateur/tournois/create}" th:object="${tournois}" method="POST">
+        <input type="text" th:field="*{nom}" placeholder="Nom">
+        <input type="text" th:field="*{cashpricepoints}" placeholder="Cash Price">
+        <input type="text" th:field="*{etenduetournois}" placeholder="Etendue Tournois">
 
-<form action="#" th:action="@{/templates/organisateur/tournois/create}" th:object="${tournois}" method="POST">
-
-    <input type="text" th:field="*{nom}" placeholder="Nom">
-    <input type="text" th:field="*{cashpricepoints}" placeholder="Cash Price">
-    <input type="text" th:field="*{etenduetournois}" placeholder="Etendue Tournois">
-
-    <button type="submit" class="btn btn-info col-2"> Sauvegarder</button>
-</form>
+        <button type="submit" class="btn btn-info col-2"> Sauvegarder</button>
+    </form>
 
 </body>
 </html>
