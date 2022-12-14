@@ -1,0 +1,39 @@
+select, input {
+    border: none;
+    padding: 0.8rem 0.8rem;
+    border-radius: 35px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    padding-left: 75%;
+}
+
+.form-crud {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-crud form {
+    width: 50%;
+}
+
+.form-input {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0;
+}
+
+.form-footer {
+    display: flex;
+    justify-content: center;
+}
+
+.form-footer button {
+    cursor: pointer;
+}
+
+.form-input label {
+    margin-bottom: .5rem;
+}

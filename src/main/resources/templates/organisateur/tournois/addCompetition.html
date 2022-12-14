@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns xmlns:th>
+<head>
+    <th:block th:include="fragments/header :: head"/>
+    <title>Dashboard Ecurie</title>
+</head>
+<body>
+
+<div th:replace="fragments/dashboard/sidebar :: sidebar">
+
+    ok
+</div>
+
+<div class="main-content">
+
+    <header th:replace="fragments/dashboard/sidebar :: header"></header>
+
+    <main>
+        <h1 class="title">Ajouter une compétition</h1>
+
+        <div class="form-crud">
+            <form method="post" th:action="@{/organisateur/tournois/{id}/ajouterCompetition/(id=${tournois.getId()})}" th:object="${competition}">
+                <div class="form-input">
+                    <label for="jeu">Jeu joué lors de cette compétition</label>
+                    <select required id="jeu" th:field="*{jeu}">
+                        <!--@thymesVar id="j" type="com.example.sae.models.Jeu"-->
+                        <option th:each="j : ${jeux}" th:value="${j.getId()}" th:text="${j.getNom()}">
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-input">
+                    <label for="dateDebutCompetition">Date fin des inscriptions</label>
+                    <input required type="datetime-local" id="dateFinInscription" th:field="*{dateFinInscription}">
+                </div>
+
+                <div class="form-input">
+                    <label for="dateDebutCompetition">Date debut des premiers matchs</label>
+                    <input required type="datetime-local" id="dateDebutCompetition" th:field="*{dateDebutCompetition}">
+                </div>
+                <div class="form-footer">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="las la-plus"></i>
+                        Ajouter la compétition
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </main>
+</div>
+
+</body>
+</html>

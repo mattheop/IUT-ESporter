@@ -1,10 +1,10 @@
 package com.example.sae.models;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.domain.Persistable;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Competition {
@@ -13,11 +13,11 @@ public class Competition {
     @Column("competition_id")
     private int id;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @Column("date_debut")
     private LocalDateTime dateFinInscription;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @Column("date_fin_inscription")
     private LocalDateTime dateDebutCompetition;
 
@@ -30,11 +30,11 @@ public class Competition {
     public Competition() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

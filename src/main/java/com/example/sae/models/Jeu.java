@@ -3,7 +3,7 @@ package com.example.sae.models;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 
-public class Jeu {
+public class Jeu{
 
     @Id
     @Column("jeu_id")

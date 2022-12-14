@@ -1,19 +1,16 @@
 package com.example.sae.controller.organisateur;
 
-import com.example.sae.models.*;
-import com.example.sae.repository.CompetitionRepository;
-import com.example.sae.repository.EcurieRepository;
-import com.example.sae.repository.InscriptionRepository;
-import com.example.sae.repository.TournoisRepository;
+import com.example.sae.models.Competition;
+import com.example.sae.models.Ecurie;
+import com.example.sae.models.Inscription;
+import com.example.sae.models.Tournois;
+import com.example.sae.repository.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
 @Controller
 @RequestMapping("organisateur/tournois")
@@ -23,12 +20,14 @@ public class OrganisateurGestionTournoisController extends OrganisateurDashboard
     private EcurieRepository ecurieRepository;
     private CompetitionRepository competitionRepository;
     private InscriptionRepository inscriptionRepository;
+    private JeuRepository jeuRepository;
 
-    public OrganisateurGestionTournoisController(TournoisRepository tournoisRepository, EcurieRepository ecurieRepository, CompetitionRepository competitionRepository, InscriptionRepository inscriptionRepository) {
+    public OrganisateurGestionTournoisController(TournoisRepository tournoisRepository, EcurieRepository ecurieRepository, CompetitionRepository competitionRepository, InscriptionRepository inscriptionRepository, JeuRepository jeuRepository) {
         this.tournoisRepository = tournoisRepository;
         this.ecurieRepository = ecurieRepository;
         this.competitionRepository = competitionRepository;
         this.inscriptionRepository = inscriptionRepository;
+        this.jeuRepository = jeuRepository;
     }
 
     @GetMapping()
@@ -47,9 +46,13 @@ public class OrganisateurGestionTournoisController extends OrganisateurDashboard
         if (tournois == null)
             return "redirect:/organisateur";
 
+
         Collection<Competition> competitions = competitionRepository.findAll().stream()
+                .filter(competition -> competition.getTournois() != null)
                 .filter(competition -> competition.getTournois().getId().equals(id))
                 .toList();
+
+        System.out.println(competitionRepository.findAll().get(0));
 
         Collection<Inscription> inscriptions = inscriptionRepository.findAll().stream()
                 .filter(inscription -> inscription.getCompetition().getTournois().getId().equals(id))
@@ -88,5 +91,27 @@ public class OrganisateurGestionTournoisController extends OrganisateurDashboard
 
         this.tournoisRepository.save(tournois);
         return "redirect:/organisateur/tournois";
+    }
+
+    @GetMapping("/{id}/ajouterCompetition")
+    public String addCompetitionForm(@PathVariable int id, Model model) {
+        Tournois tournois = tournoisRepository.getTournoisById(id);
+        Competition competition = new Competition();
+
+        model.addAttribute("tournois", tournois);
+        model.addAttribute("competition", competition);
+        model.addAttribute("competition", competition);
+        model.addAttribute("jeux", this.jeuRepository.findAll());
+
+        return "organisateur/tournois/addCompetition";
+    }
+
+    @PostMapping("/{id}/ajouterCompetition")
+    public String addCompetition(@PathVariable int id, @ModelAttribute("competition") Competition competition) {
+        competitionRepository.insertDirect(competition.getDateDebutCompetition(),
+                competition.getDateFinInscription(),
+                competition.getJeu().getId(),
+                id);
+        return "redirect:/organisateur/tournois/" + id + "/details";
     }
 }

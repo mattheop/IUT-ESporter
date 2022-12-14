@@ -80,12 +80,6 @@
     transform: rotate(180deg);
 }
 
-select {
-    border: none;
-    padding: 0.8rem 0.8rem;
-    border-radius: 35px;
-}
-
 .equipes-details {
     margin: 1.5rem 0;
 }

@@ -70,6 +70,7 @@ public class SecurityConfig {
         });
         return http.authorizeRequests()
                 .antMatchers("/ecurie/**").hasAnyRole("ECURIE")
+                .antMatchers("/organisateur/**").hasAnyRole("ORGANISATEUR")
                 .antMatchers("/").permitAll().and().build();
     }
 
