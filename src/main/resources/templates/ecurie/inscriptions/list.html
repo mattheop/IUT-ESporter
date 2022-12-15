@@ -34,7 +34,7 @@
 
                 <th:block th:each="compet : ${tournois.value}">
                     <div class="table-crud-header">
-                        <p class="table-crud-header--title">Equipes inscrites à la compétition de <span
+                        <p class="table-crud-header--title black">Equipes inscrites à la compétition de <span
                                 th:text="${compet.getJeu().getNom()}"></span></p>
 
                         <form class="table-crud-header--action" th:action="@{/ecurie/inscriptions}"
@@ -59,19 +59,33 @@
                         <!--@thymesVar id="competitions" type="com.example.sae.models.Competition"-->
                         <thead>
                         <tr>
-                            <th>Nom Equipe</th>
+                            <th style="width: 40%">Nom Equipe</th>
                             <th>Nombre de points</th>
+                            <th>Actions</th>
                         </tr>
                         </thead>
 
                         <tr th:each="inscriptions : ${inscriptionByCompetition.get(compet)}">
                             <td th:text="${inscriptions.getEquipe().getNom()}"></td>
                             <td>0</td>
+
+                            <td style="display: flex; align-items: center; gap: 16px"
+                                th:if="${ecurie.getId() == inscriptions.getEquipe().getEcurie().getId()}">
+                                <form method="post" class="form-need-confirm"
+                                      th:action="@{/ecurie/inscriptions/desinscrire}" th:object="${inscription}"
+                                      th:data-confirm-message="${'Voulez désinscrire l''équipe ' + inscriptions.getEquipe().getNom() + ' de la compétition de ' + inscriptions.getCompetition().getJeu().getNom() + ' du tournois ' + inscriptions.getCompetition().getTournois().getNom() + ' ?'}">
+                                    <input type="hidden" th:value="${inscriptions.getInscriptionId()}" name="inscriptionId"/>
+
+                                    <input type="submit" class="btn btn-danger" value="Se désinscrire"></input>
+                                </form>
+                            </td>
                         </tr>
 
                         <tbody>
                         </tbody>
                     </table>
+
+                    <hr style="border: 1px solid black; margin: 1.5rem 0">
                 </th:block>
 
             </div>

@@ -68,4 +68,11 @@ public class EcurieGestionInscriptions extends EcurieDashboard {
                 inscription.getEquipe().getId());
         return "redirect:/ecurie/inscriptions";
     }
+
+    @PostMapping("/desinscrire")
+    public String desinscrire(@RequestParam("inscriptionId") Integer id) {
+        inscriptionRepository.deleteById(id);
+
+        return "redirect:/ecurie/inscriptions";
+    }
 }

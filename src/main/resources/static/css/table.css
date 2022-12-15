@@ -12,6 +12,10 @@
     font-weight: bold;
 }
 
+.table-crud-header--title.black {
+    color: var(--color-dark);
+}
+
 .table-crud-header .table-crud-header--action {
     margin-left: auto;
 }
