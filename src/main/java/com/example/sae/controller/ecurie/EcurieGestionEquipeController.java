@@ -112,4 +112,10 @@ public class EcurieGestionEquipeController extends EcurieDashboard {
         this.equipeRepository.save(equipe);
         return "redirect:/ecurie";
     }
+
+    @PostMapping("/{id}/supprimer")
+    public String saveEquipe(@PathVariable("id") Integer id) {
+        this.equipeRepository.deleteById(id);
+        return "redirect:/ecurie/equipes";
+    }
 }
