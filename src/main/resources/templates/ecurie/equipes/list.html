@@ -33,7 +33,7 @@
                     <td th:text="${e.getNom()}"></td>
                     <td th:text="${e.getJeuSpeModel()?.getNom()}"></td>
                     <td th:text="${e.getNbJoueurs()}"></td>
-                    <td style="display: flex">
+                    <td style="display: flex; align-items: center; gap: 16px">
                         <a class="btn" th:href="@{/ecurie/equipes/{id}/details/(id=${e.getId()})}">Details</a>
 
                         <form action="">
