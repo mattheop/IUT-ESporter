@@ -67,4 +67,8 @@ public interface InscriptionRepository extends CrudRepository<Inscription, Integ
     @Modifying
     @Query("insert into inscription (competition_id, equipe_id) values (:cid, :eid);")
     void insertDirect(@Param("cid") Integer cid, @Param("eid") Integer eid);
+
+    @Modifying
+    @Query("delete from inscription where inscription_id = :id")
+    void deleteById(@Param("id") Integer id);
 }
