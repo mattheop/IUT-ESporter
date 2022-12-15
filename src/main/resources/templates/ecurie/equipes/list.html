@@ -37,7 +37,7 @@
                         <a class="btn" th:href="@{/ecurie/equipes/{id}/details/(id=${e.getId()})}">Details</a>
 
                         <form method="post" th:action="@{/ecurie/equipes/{id}/supprimer/(id=${e.getId()})}" class="form-need-confirm" th:data-confirm-message="${'Voulez vous vraiment supprimer l''équipe ' + e.getNom() + ' ?'}">
-                            <input type="submit" class="btn btn-primary" value="Supprimé"></input>
+                            <input type="submit" class="btn btn-danger" value="Supprimé"></input>
                         </form>
                     </td>
                 </tr>

@@ -76,6 +76,14 @@
     font-weight: bold;
 }
 
+.btn.btn-danger {
+    border: none;
+    background-color: var(--color-danger);
+    color: white;
+    font-weight: bold;
+}
+
+
 .btn:hover i {
     transform: rotate(180deg);
 }
