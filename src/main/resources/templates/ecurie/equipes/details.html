@@ -40,7 +40,7 @@
             <div class="table-crud-header">
                 <p class="table-crud-header--title">Composition de l'équipe</p>
 
-                <div class="table-crud-header--action">
+                <div class="table-crud-header--action" th:if="${equipe.getNbJoueurs()} != ${jeuspe.getNbJoueurParEquipe()}">
                     <form action="#" th:action="@{/ecurie/equipes/{id}/ajouterJoueur(id=${equipe.getId()})}"
                           method="POST">
                         <!--@thymesVar id="equipe" type="com.example.sae.models.Equipe"-->
