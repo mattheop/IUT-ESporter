@@ -2,7 +2,7 @@
 <html lang="fr" xmlns xmlns:th>
 <head>
     <th:block th:include="fragments/header :: head"/>
-    <title>Dashboard Ecurie</title>
+    <title>Dashboard Écurie</title>
 </head>
 <body>
 
@@ -14,7 +14,7 @@
         <header th:replace="fragments/dashboard/sidebar :: header"></header>
         <main>
             <div class="table-crud-header">
-                <a class="btn btn-primary" th:href="@{/ecurie/equipes/ajout}"><i class="las la-plus"></i>Ajouter une equipe a mon ecurie</a>
+                <a class="btn btn-primary" th:href="@{/ecurie/equipes/ajout}"><i class="las la-plus"></i>Ajouter une équipe à mon écurie</a>
             </div>
 
             <table class="table-crud">
@@ -34,7 +34,7 @@
                     <td th:text="${e.getJeuSpeModel()?.getNom()}"></td>
                     <td th:text="${e.getNbJoueurs()}"></td>
                     <td style="display: flex; align-items: center; gap: 16px">
-                        <a class="btn" th:href="@{/ecurie/equipes/{id}/details/(id=${e.getId()})}">Details</a>
+                        <a class="btn" th:href="@{/ecurie/equipes/{id}/details/(id=${e.getId()})}">Détails</a>
 
                         <form method="post" th:action="@{/ecurie/equipes/{id}/supprimer/(id=${e.getId()})}" class="form-need-confirm" th:data-confirm-message="${'Voulez vous vraiment supprimer l''équipe ' + e.getNom() + ' ?'}">
                             <input type="submit" class="btn btn-danger" value="Supprimé"></input>

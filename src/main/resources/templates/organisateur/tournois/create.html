@@ -2,7 +2,7 @@
 <html lang="fr" xmlns xmlns:th>
 <head>
     <th:block th:include="fragments/header :: head"/>
-    <title>Dashboard Ecurie</title>
+    <title>Dashboard Écurie</title>
 </head>
 <body>
 
@@ -16,19 +16,19 @@
         <header th:replace="fragments/dashboard/sidebar :: header"></header>
 
         <main>
-            <h1 class="title">Ajouter un tournois</h1>
+            <h1 class="title">Ajouter un tournoi</h1>
 
             <div class="form-crud">
 
                 <form action="#" th:action="@{/organisateur/tournois/create}" th:object="${tournois}" method="POST">
 
                     <div class="form-input">
-                        <label for="nom">Nom du tournois</label>
+                        <label for="nom">Nom du tournoi</label>
                         <input required type="text" id="nom" th:field="*{nom}">
                     </div>
 
                     <div class="form-input">
-                        <label for="cashpricepoints">Cashprice Point</label>
+                        <label for="cashpricepoints">Cashprize Point</label>
                         <input required type="number" id="cashpricepoints" th:field="*{cashpricepoints}">
                     </div>
 
@@ -37,9 +37,9 @@
                         <select required id="etenduetournois" th:field="*{etenduetournois}">
                             <!--@thymesVar id="j" type="com.example.sae.models.Jeu"-->
 
-                            <option value="Regional">Regional</option>
-                            <option value="Nationnal">Nationnal</option>
-                            <option value="Mondial">Mondial</option>
+                            <option value="Regional">Régional</option>
+                            <option value="National">National</option>
+                            <option value="Mondial">Mondiale</option>
                         </select>
                     </div>
 

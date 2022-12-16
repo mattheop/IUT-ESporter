@@ -2,7 +2,7 @@
 <html lang="fr" xmlns xmlns:th>
 <head>
     <th:block th:include="fragments/header :: head"/>
-    <title>Dashboard Ecurie</title>
+    <title>Dashboard Écurie</title>
 </head>
 <body>
 
@@ -16,7 +16,7 @@
         <main>
             <div th:each="tournois : ${competitionsByTournois}" style="margin-bottom: 2rem">
                 <!--@thymesVar id="tournois.key" type="com.example.sae.models.Tournois"-->
-                <h1 class="title">Tournois <span th:text="${tournois.key.getNom()}"></span></h1>
+                <h1 class="title">Tournoi <span th:text="${tournois.key.getNom()}"></span></h1>
 
                 <div class="equipes-details">
                     <div class="equipes-details--line">
@@ -27,14 +27,14 @@
 
                     <div class="equipes-details--line">
                         <i class="las la-wallet"></i>
-                        <p class="equipes-details--line--title">Cash-price de point: </p>
+                        <p class="equipes-details--line--title">Cash-prize de point: </p>
                         <p class="equipes-details--line--data" th:text="${tournois.key.getCashpricepoints()}"></p>
                     </div>
                 </div>
 
                 <th:block th:each="compet : ${tournois.value}">
                     <div class="table-crud-header">
-                        <p class="table-crud-header--title black">Equipes inscrites à la compétition de <span
+                        <p class="table-crud-header--title black">Équipes inscrites à la compétition de <span
                                 th:text="${compet.getJeu().getNom()}"></span></p>
 
                         <form class="table-crud-header--action" th:action="@{/ecurie/inscriptions}"
@@ -59,7 +59,7 @@
                         <!--@thymesVar id="competitions" type="com.example.sae.models.Competition"-->
                         <thead>
                         <tr>
-                            <th style="width: 40%">Nom Equipe</th>
+                            <th style="width: 40%">Nom Équipe</th>
                             <th>Nombre de points</th>
                             <th>Actions</th>
                         </tr>
@@ -73,7 +73,7 @@
                                 th:if="${ecurie.getId() == inscriptions.getEquipe().getEcurie().getId()}">
                                 <form method="post" class="form-need-confirm"
                                       th:action="@{/ecurie/inscriptions/desinscrire}" th:object="${inscription}"
-                                      th:data-confirm-message="${'Voulez désinscrire l''équipe ' + inscriptions.getEquipe().getNom() + ' de la compétition de ' + inscriptions.getCompetition().getJeu().getNom() + ' du tournois ' + inscriptions.getCompetition().getTournois().getNom() + ' ?'}">
+                                      th:data-confirm-message="${'Voulez-vous désinscrire l''équipe ' + inscriptions.getEquipe().getNom() + ' de la compétition de ' + inscriptions.getCompetition().getJeu().getNom() + ' du tournoi ' + inscriptions.getCompetition().getTournois().getNom() + ' ?'}">
                                     <input type="hidden" th:value="${inscriptions.getInscriptionId()}" name="inscriptionId"/>
 
                                     <input type="submit" class="btn btn-danger" value="Se désinscrire"></input>

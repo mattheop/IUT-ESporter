@@ -2,7 +2,7 @@
 <html lang="fr" xmlns xmlns:th>
 <head>
     <th:block th:include="fragments/header :: head"/>
-    <title>Dashboard Ecurie</title>
+    <title>Dashboard Écurie</title>
 </head>
 <body>
 
@@ -21,15 +21,15 @@
 
                 <div class="table-crud-header--action">
                     <a class="btn btn-primary" th:href="@{/organisateur/tournois/create}"><i class="las la-plus"></i>Créer un
-                        tournois</a>
+                        tournoi</a>
                 </div>
             </div>
             <table class="table-crud">
                 <thead>
                 <tr>
                     <th>Nom</th>
-                    <th>Cash Price</th>
-                    <th>Etendue Tournois</th>
+                    <th>Cash Prize</th>
+                    <th>Étendue Tournoi</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -41,7 +41,7 @@
                     <td th:text="${t.getCashpricepoints()}"></td>
                     <td th:text="${t.getEtenduetournois()}"></td>
                     <td>
-                        <a th:href="@{/organisateur/tournois/{id}/details/(id=${t.getId()})}">Details</a>
+                        <a th:href="@{/organisateur/tournois/{id}/details/(id=${t.getId()})}">Détails</a>
                     </td>
                 </tr>
                 </tbody>

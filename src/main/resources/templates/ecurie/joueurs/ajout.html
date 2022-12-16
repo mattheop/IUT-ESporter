@@ -6,14 +6,14 @@
 </head>
 <body>
 
-<h1>Ajouter un joueur a l'écurie</h1>
+<h1>Ajouter un joueur à l'écurie</h1>
 
 <form action="#" th:action="@{/ecurie/joueurs/ajout}" th:object="${joueur}" method="POST">
-    <input type="text" th:field="*{prenom}" placeholder="Prenom">
+    <input type="text" th:field="*{prenom}" placeholder="Prénom">
     <input type="text" th:field="*{nom}" placeholder="Nom">
     <input type="text" th:field="*{pseudo}" placeholder="Pseudo">
-    <input type="text" th:field="*{nationnalite}" placeholder="Nationnalite">
-    <input type="date" th:field="*{entree_pro}" placeholder="Entree">
+    <input type="text" th:field="*{nationnalite}" placeholder="Nationnalité">
+    <input type="date" th:field="*{entree_pro}" placeholder="Entrée">
 
     <button type="submit" class="btn btn-info col-2"> Save</button>
 </form>
