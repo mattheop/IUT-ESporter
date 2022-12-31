@@ -12,18 +12,23 @@ import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("ecurie/equipes")
 public class EcurieGestionEquipeController extends EcurieDashboard {
+
+    private static final String UPLOAD_EQUIPE_LOGO_FOLDER = System.getProperty("user.dir") + "/uploads/equipes_logo/";
+
     private EquipeRepository equipeRepository;
     private JeuRepository jeuRepository;
     private JoueurRepository joueurRepository;
@@ -92,6 +97,22 @@ public class EcurieGestionEquipeController extends EcurieDashboard {
         return "redirect:/ecurie/equipes/" + e.getId() + "/details";
     }
 
+    @PostMapping("/{id}/ajouterLogo")
+    public String ajouterLogo(@PathVariable Integer id, @RequestParam("image") MultipartFile multipartFile) throws IOException {
+        Equipe e = equipeRepository.findById(id).orElse(null);
+        assert e != null;
+
+        String fileName = e.getId() + "-eid@" + e.getEcurie().getId() + "_" + e.getNom() + "." + Objects.requireNonNull(multipartFile.getOriginalFilename()).substring(multipartFile.getOriginalFilename().lastIndexOf(".") + 1);
+
+        e.setLogoFileName(fileName);
+
+        byte[] bytes = new byte[0];
+        bytes = multipartFile.getBytes();
+        Files.write(Paths.get(UPLOAD_EQUIPE_LOGO_FOLDER + fileName), bytes);
+
+        this.equipeRepository.save(e);
+        return "redirect:/ecurie/equipes/" + e.getId() + "/details";
+    }
 
     @GetMapping("/ajout")
     public String addEquipe(Model model, Authentication authentication) {

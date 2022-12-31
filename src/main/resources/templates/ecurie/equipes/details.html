@@ -37,10 +37,22 @@
                 </div>
             </div>
 
+            <div class="">
+                <h1 class="title">Changer le logo de l'équipe</h1>
+                <img th:src="@{${equipe.getLogoPath()}}"  alt="Logo de l'équipe"/>
+                <form th:action="@{/ecurie/equipes/{id}/ajouterLogo(id=${equipe.getId()})}"
+                      method="post" enctype="multipart/form-data">
+                    <label>Photos: </label>
+                    <input type="file" name="image" accept="image/png, image/jpeg"/>
+                    <button type="submit" class="btn btn-primary col-2">Changer le logo</button>
+                </form>
+            </div>
+
             <div class="table-crud-header">
                 <p class="table-crud-header--title">Composition de l'équipe</p>
 
-                <div class="table-crud-header--action" th:if="${equipe.getNbJoueurs()} != ${jeuspe.getNbJoueurParEquipe()}">
+                <div class="table-crud-header--action"
+                     th:if="${equipe.getNbJoueurs()} != ${jeuspe.getNbJoueurParEquipe()}">
                     <form action="#" th:action="@{/ecurie/equipes/{id}/ajouterJoueur(id=${equipe.getId()})}"
                           method="POST">
                         <!--@thymesVar id="equipe" type="com.example.sae.models.Equipe"-->

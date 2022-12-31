@@ -17,6 +17,9 @@ public class Equipe {
     private int id;
     private String nom;
 
+    @Column("logo_file_name")
+    private String logoFileName;
+
     @Column("jeu_spe")
     private int jeuSpe;
 
@@ -35,6 +38,14 @@ public class Equipe {
     public Equipe(String nom, int jeuSpe) {
         this.nom = nom;
         this.jeuSpe = jeuSpe;
+    }
+
+    public String getLogoPath() {
+        return "/uploads/equipes_logo/" + logoFileName;
+    }
+
+    public void setLogoFileName(String logoFileName) {
+        this.logoFileName = logoFileName;
     }
 
     public int getId() {
