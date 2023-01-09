@@ -21,7 +21,8 @@ public interface CompetitionRepository extends CrudRepository<Competition, Integ
                    `tournois`.`tournois_id` AS `tournois_tournois_id`,
                    `tournois`.`nom` AS `tournois_nom`,
                    `tournois`.`etenduetournois` AS `tournois_etenduetournois`,
-                   `tournois`.`cashpricepoints` AS `tournois_cashpricepoints`
+                   `tournois`.`cashpricepoints` AS `tournois_cashpricepoints`,
+                   is_competition_full(competition_id)as 'is_full'
             FROM `competition`
             LEFT OUTER JOIN `jeu` `jeu` ON `jeu`.`jeu_id` = `competition`.`jeu_id`
             LEFT OUTER JOIN `tournois` `tournois` ON `tournois`.`tournois_id` = `competition`.`tournois_id`;

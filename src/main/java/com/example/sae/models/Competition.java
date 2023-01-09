@@ -1,7 +1,6 @@
 package com.example.sae.models;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.domain.Persistable;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -24,6 +23,9 @@ public class Competition {
 
     @Column("jeu_id")
     private Jeu jeu;
+
+    @Column("is_full")
+    private int isFull;
 
     @Column("tournois_id")
     private Tournois tournois;
@@ -93,5 +95,13 @@ public class Competition {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public boolean isFull() {
+        return this.isFull == 1;
+    }
+
+    public void setFull(boolean full) {
+        this.isFull = full ? 1 : 0;
     }
 }
