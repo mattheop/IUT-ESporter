@@ -5,6 +5,7 @@ import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class Competition {
@@ -51,6 +52,10 @@ public class Competition {
 
     public LocalDateTime getDateDebutCompetition() {
         return dateDebutCompetition;
+    }
+
+    public String getFormattedDateDebutCompetition(){
+        return dateDebutCompetition.format(DateTimeFormatter.ofPattern("dd/dd/yyyy"));
     }
 
     public void setDateDebutCompetition(LocalDateTime dateDebutCompetition) {

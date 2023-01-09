@@ -233,6 +233,47 @@ main {
     }
 }
 
+.composition-poules {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 25px;
+}
+
+.poule-card {
+    min-width: 300px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.poule-card--title {
+    padding: 1rem 4rem;
+    color: white;
+    font-weight: bold;
+    background-color: var(--main-color);
+    text-align: center;
+}
+
+.poule-card--composition {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 2rem;
+}
+
+.poule-card--line {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    margin: .8rem 0;
+}
+
+.poule-card--line--team {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+
 @media only screen and (max-width: 960px) {
     .cards {
         grid-template-columns: repeat(2, 2fr);

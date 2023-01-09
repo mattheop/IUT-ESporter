@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 public interface CompetitionRepository extends CrudRepository<Competition, Integer> {
 
@@ -22,7 +23,7 @@ public interface CompetitionRepository extends CrudRepository<Competition, Integ
                    `tournois`.`nom` AS `tournois_nom`,
                    `tournois`.`etenduetournois` AS `tournois_etenduetournois`,
                    `tournois`.`cashpricepoints` AS `tournois_cashpricepoints`,
-                   is_competition_full(competition_id)as 'is_full'
+                   is_competition_full(competition_id) as 'is_full'
             FROM `competition`
             LEFT OUTER JOIN `jeu` `jeu` ON `jeu`.`jeu_id` = `competition`.`jeu_id`
             LEFT OUTER JOIN `tournois` `tournois` ON `tournois`.`tournois_id` = `competition`.`tournois_id`;
@@ -39,7 +40,27 @@ public interface CompetitionRepository extends CrudRepository<Competition, Integ
                    `tournois`.`tournois_id` AS `tournois_tournois_id`,
                    `tournois`.`nom` AS `tournois_nom`,
                    `tournois`.`etenduetournois` AS `tournois_etenduetournois`,
+                   `tournois`.`cashpricepoints` AS `tournois_cashpricepoints`,
+                   is_competition_full(competition_id) as 'is_full'
+            FROM `competition`
+            LEFT OUTER JOIN `jeu` `jeu` ON `jeu`.`jeu_id` = `competition`.`jeu_id`
+            LEFT OUTER JOIN `tournois` `tournois` ON `tournois`.`tournois_id` = `competition`.`tournois_id`
+            WHERE competition_id = :searched_id;
+            """)
+    Optional<Competition> findById(@Param("searched_id") Integer searched_id);
+
+    @Query("""
+            SELECT `competition`.`competition_id` AS `competition_id`,
+                   `competition`.`date_debut` AS `date_debut`,
+                   `competition`.`date_fin_inscription` AS `date_fin_inscription`,
+                   `jeu`.`jeu_id` AS `jeu_jeu_id`,
+                   `jeu`.`nom` AS `jeu_nom`,
+                   `jeu`.`nb_joueur` AS `jeu_nb_joueur`,
+                   `tournois`.`tournois_id` AS `tournois_tournois_id`,
+                   `tournois`.`nom` AS `tournois_nom`,
+                   `tournois`.`etenduetournois` AS `tournois_etenduetournois`,
                    `tournois`.`cashpricepoints` AS `tournois_cashpricepoints`
+                   is_competition_full(competition_id) as 'is_full'
             FROM `competition`
             LEFT OUTER JOIN `jeu` `jeu` ON `jeu`.`jeu_id` = `competition`.`jeu_id`
             LEFT OUTER JOIN `tournois` `tournois` ON `tournois`.`tournois_id` = `competition`.`tournois_id`

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <th:block th:include="fragments/header :: head"/>
+    <title>Title</title>
+</head>
+<body>
+
+    <div th:replace="fragments/dashboard/sidebar :: sidebar">
+    </div>
+    <div class="main-content">
+        <header th:replace="fragments/dashboard/sidebar :: header"></header>
+
+        <main>
+
+            <h1 class="title">Details de la compétition <span th:text="${competition.getJeu().getNom()}"></span></h1>
+
+            <div class="equipes-details">
+                <div class="equipes-details--line">
+                    <i class="las la-medal"></i>
+                    <p class="equipes-details--line--title">Tournoi: </p>
+                    <p class="equipes-details--line--data" th:text="${competition.getTournois().getNom()}"></p>
+                </div>
+                <div class="equipes-details--line">
+                    <i class="las la-globe"></i>
+                    <p class="equipes-details--line--title">Étendu du tournoi: </p>
+                    <p class="equipes-details--line--data"
+                       th:text="${competition.getTournois().getEtenduetournois()}"></p>
+                </div>
+
+                <div class="equipes-details--line">
+                    <i class="las la-calendar"></i>
+                    <p class="equipes-details--line--title">Date début des matchs: </p>
+                    <p class="equipes-details--line--data"
+                       th:text="${competition.getFormattedDateDebutCompetition()}"></p>
+                </div>
+
+                <div class="equipes-details--line">
+                    <i class="las la-wallet"></i>
+                    <p class="equipes-details--line--title">Cash-price de point: </p>
+                    <p class="equipes-details--line--data"
+                       th:text="${competition.getTournois().getCashpricepoints()}"></p>
+                </div>
+            </div>
+
+            <h1 class="title">Composition des poules</h1>
+
+            <div class="composition-poules">
+                <div class="poule-card" th:each="pouleCat : ${poules}">
+                    <p class="poule-card--title">Poules n°<span th:text="${pouleCat.key}"></span></p>
+
+                    <div class="poule-card--composition">
+                        <div class="poule-card--line" th:each="pouleLine : ${pouleCat.value}">
+                            <!--@thymesVar id="pouleLine" type="com.example.sae.models.Poule"-->
+                            <p class="poule-card--line--team" th:text="${pouleLine.getEquipe().getNom()}"></p>
+                            <p class="poule-card--line--points"><span th:text="${pouleLine.getEcuriePoints()}"> Points</span>
+                                points</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</body>
+</html>
