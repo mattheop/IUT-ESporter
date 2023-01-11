@@ -43,6 +43,63 @@
                 </div>
             </div>
 
+            <h1 class="title">Inscriptions</h1>
+
+            <div>
+                <div class="table-crud-header">
+                    <p class="table-crud-header--title black">Équipes inscrites à la compétition de <span
+                            th:text="${competition.getJeu().getNom()}"></span></p>
+
+                    <form th:if="${!competition.isFull()}" class="table-crud-header--action"
+                          th:action="@{/ecurie/inscriptions}"
+                          th:object="${newInscriptionModel}" method="POST">
+
+                        <input type="hidden" th:value="${competition.getId()}" th:attr="name='competition'"/>
+
+                        <select th:field="*{equipe}">
+                            <!--@thymesVar id="j" type="com.example.sae.models.Joueur"-->
+                            <option th:each="e : ${equipesByJeuSpeID.get(competition.getJeu().getId())}"
+                                    th:value="${e.getId()}"
+                                    th:text="${e.getNom()}">
+                            </option>
+                        </select>
+
+                        <button type="submit" class="btn btn-primary col-2"> Inscrire cette équipe</button>
+                    </form>
+                </div>
+
+                <table class="table-crud">
+                    <thead>
+                    <tr>
+                        <th style="width: 40%">Nom Équipe</th>
+                        <th>Nombre de points</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+
+                    <tr th:each="inscription : ${inscriptions}">
+                        <td th:text="${inscription.getEquipe().getNom()}"></td>
+                        <td>0</td>
+
+                        <td style="display: flex; align-items: center; gap: 16px">
+                            <form method="post" class="form-need-confirm"
+                                  th:if="${ecurie.getId() == inscription.getEquipe().getEcurie().getId()}"
+                                  th:action="@{/ecurie/inscriptions/desinscrire}" th:object="${inscription}"
+                                  th:data-confirm-message="${'Voulez-vous désinscrire l''équipe ' + inscription.getEquipe().getNom() + ' de la compétition de ' + inscription.getCompetition().getJeu().getNom() + ' du tournoi ' + inscription.getCompetition().getTournois().getNom() + ' ?'}">
+                                <input type="hidden" th:value="${inscription.getInscriptionId()}"
+                                       name="inscriptionId"/>
+
+                                <input type="submit" class="btn btn-danger" value="Se désinscrire">
+                            </form>
+                        </td>
+                    </tr>
+
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+
+
             <h1 class="title">Composition des poules</h1>
 
             <div class="composition-poules">
@@ -53,7 +110,8 @@
                         <div class="poule-card--line" th:each="pouleLine : ${pouleCat.value}">
                             <!--@thymesVar id="pouleLine" type="com.example.sae.models.Poule"-->
                             <p class="poule-card--line--team" th:text="${pouleLine.getEquipe().getNom()}"></p>
-                            <p class="poule-card--line--points"><span th:text="${pouleLine.getEcuriePoints()}"> Points</span>
+                            <p class="poule-card--line--points"><span
+                                    th:text="${pouleLine.getEcuriePoints()}"> Points</span>
                                 points</p>
                         </div>
                     </div>

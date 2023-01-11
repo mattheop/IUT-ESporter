@@ -273,6 +273,67 @@ main {
     font-size: 1.2rem;
 }
 
+.competition-card {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.competition-card--unrolled {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--main-color);
+    padding: 1.5rem 2rem;
+    color: white;
+    gap: .8rem;
+}
+
+.competition-card--right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1.5rem 2rem;
+    width: 100%;
+}
+
+.competition-card--name {
+    color: black;
+}
+
+.competition-card--action {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+}
+
+.competition-card--name:after {
+    background-color: black;
+}
+
+.competition-card--right .equipes-details {
+    margin: 0rem 0 0 0 !important;
+}
+
+.competition-card--info .equipes-details--line p {
+    font-size: 1rem !important;
+}
+
+.competition-card--unrolled .competition-card--title {
+    text-align: center;
+}
+
+.competition-card--unrolled .competition-card--count {
+    font-weight: bolder;
+    font-size: 3rem;
+}
+
+.competition-card--unrolled .competition-card--count .over {
+    font-weight: normal;
+    font-size: 2rem;
+}
 
 @media only screen and (max-width: 960px) {
     .cards {

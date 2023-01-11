@@ -46,6 +46,10 @@ public class Competition {
         return dateFinInscription;
     }
 
+    public String getFormattedDateFinInscription() {
+        return dateFinInscription.format(DateTimeFormatter.ofPattern("dd/dd/yyyy"));
+    }
+
     public void setDateFinInscription(LocalDateTime dateFinInscription) {
         this.dateFinInscription = dateFinInscription;
     }
@@ -54,9 +58,10 @@ public class Competition {
         return dateDebutCompetition;
     }
 
-    public String getFormattedDateDebutCompetition(){
+    public String getFormattedDateDebutCompetition() {
         return dateDebutCompetition.format(DateTimeFormatter.ofPattern("dd/dd/yyyy"));
     }
+
 
     public void setDateDebutCompetition(LocalDateTime dateDebutCompetition) {
         this.dateDebutCompetition = dateDebutCompetition;

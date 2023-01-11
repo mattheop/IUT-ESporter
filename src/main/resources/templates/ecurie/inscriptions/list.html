@@ -14,6 +14,8 @@
     <header th:replace="fragments/dashboard/sidebar :: header"></header>
 
     <main>
+
+
         <div th:each="tournois : ${competitionsByTournois}" style="margin-bottom: 2rem">
             <!--@thymesVar id="tournois.key" type="com.example.sae.models.Tournois"-->
             <h1 class="title">Tournoi <span th:text="${tournois.key.getNom()}"></span></h1>
@@ -32,66 +34,33 @@
                 </div>
             </div>
 
-            <th:block th:each="compet : ${tournois.value}">
-                <div class="table-crud-header">
-                    <p class="table-crud-header--title black">Équipes inscrites à la compétition de <span
-                            th:text="${compet.getJeu().getNom()}"></span></p>
-
-                    <form th:if="${!compet.isFull()}" class="table-crud-header--action"
-                          th:action="@{/ecurie/inscriptions}"
-                          th:object="${inscription}" method="POST">
-
-                        <input type="hidden" th:value="${compet.getId()}" th:attr="name='competition'"/>
-
-                        <select th:field="*{equipe}">
-                            <!--@thymesVar id="j" type="com.example.sae.models.Joueur"-->
-                            <option th:each="e : ${equipesByJeuSpeID.get(compet.getJeu().getId())}"
-                                    th:value="${e.getId()}"
-                                    th:text="${e.getNom()}">
-                            </option>
-                        </select>
-
-                        <button type="submit" class="btn btn-primary col-2"> Inscrire cette équipe</button>
-                    </form>
-
-                    <a th:if="${compet.isFull()}" class="btn btn-primary table-crud-header--action" th:href="@{/ecurie/competition/{id}(id=${compet.getId()})}">Détails du tournois</a>
-
+            <div class="competition-card" th:each="competition : ${tournois.value}" style="margin-bottom: 2rem">
+                <!--@thymesVar id="competition" type="com.example.sae.models.Competition"-->
+                <div class="competition-card--unrolled">
+                    <p class="competition-card--title">Nombre d'équipe</p>
+                    <p class="competition-card--count"><span>5</span><span class="over">/16</span></p>
                 </div>
+                <div class="competition-card--right">
+                    <h1 class="competition-card--name title">Compétition de <span th:text="${competition.getJeu().getNom()}"></span><h1>
+                    <div class="competition-card--info equipes-details">
+                        <div class="equipes-details--line">
+                            <i class="las la-hourglass-start"></i>
+                            <p class="equipes-details--line--title">Date fin d'inscription: </p>
+                            <p class="equipes-details--line--data" th:text="${competition.getFormattedDateFinInscription()}"></p>
+                        </div>
 
-                <table class="table-crud">
-                    <!--@thymesVar id="competitions" type="com.example.sae.models.Competition"-->
-                    <thead>
-                    <tr>
-                        <th style="width: 40%">Nom Équipe</th>
-                        <th>Nombre de points</th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead>
+                        <div class="equipes-details--line">
+                            <i class="las la-headset"></i>
+                            <p class="equipes-details--line--title">Début des matchs: </p>
+                            <p class="equipes-details--line--data" th:text="${competition.getFormattedDateDebutCompetition()}"></p>
+                        </div>
+                    </div>
 
-                    <tr th:each="inscriptions : ${inscriptionByCompetition.get(compet)}">
-                        <td th:text="${inscriptions.getEquipe().getNom()}"></td>
-                        <td>0</td>
-
-                        <td style="display: flex; align-items: center; gap: 16px"
-                            th:if="${ecurie.getId() == inscriptions.getEquipe().getEcurie().getId()}">
-                            <form method="post" class="form-need-confirm"
-                                  th:action="@{/ecurie/inscriptions/desinscrire}" th:object="${inscription}"
-                                  th:data-confirm-message="${'Voulez-vous désinscrire l''équipe ' + inscriptions.getEquipe().getNom() + ' de la compétition de ' + inscriptions.getCompetition().getJeu().getNom() + ' du tournoi ' + inscriptions.getCompetition().getTournois().getNom() + ' ?'}">
-                                <input type="hidden" th:value="${inscriptions.getInscriptionId()}"
-                                       name="inscriptionId"/>
-
-                                <input type="submit" class="btn btn-danger" value="Se désinscrire"></input>
-                            </form>
-                        </td>
-                    </tr>
-
-                    <tbody>
-                    </tbody>
-                </table>
-
-                <hr style="border: 1px solid black; margin: 1.5rem 0">
-            </th:block>
-
+                   <div class="competition-card--action">
+                       <a class="btn btn-primary table-crud-header--action" th:href="@{/ecurie/competition/{id}(id=${competition.getId()})}">Details sur cette compétition</a>
+                   </div>
+                </div>
+            </div>
         </div>
 
     </main>
