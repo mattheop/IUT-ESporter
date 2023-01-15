@@ -335,9 +335,89 @@ main {
     font-size: 2rem;
 }
 
+.rencontre-poule {
+    display: none;
+    flex-direction: column;
+}
+
+.rencontre-poule.active {
+    display: flex;
+}
+
+.rencontre-line {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border: 2px solid var(--main-color);
+    border-radius: 15px;
+    padding: 0.5rem 2rem;
+    margin-bottom: .8rem;
+}
+
+.rencontre-line--date {
+    color: gray;
+}
+
+.rencontre-line--details {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 65%;
+}
+
+.rencontre-line--team {
+    width: 35%;
+}
+
+.rencontre-line--team:last-child {
+    text-align: right;
+}
+
+.rencontre-line--score {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.rencontre-line--score {
+    background-color: var(--main-color);
+    color: white;
+    border-radius: 15px;
+    padding: .5rem .95rem;
+    font-size: 1.2rem;
+}
+
+.rencontre-line--score p {
+    margin: 0 .5rem;
+}
+
+.rencontre-line--team {
+    font-size: 1.2rem;
+}
+
+.rencontre-poule-choice {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: .5rem;
+    margin: 1.5rem 0;
+}
+
 @media only screen and (max-width: 960px) {
     .cards {
         grid-template-columns: repeat(2, 2fr);
+    }
+
+    .rencontre-line, .rencontre-line--details {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .rencontre-line--team {
+        text-align: center !important;
     }
 }
 

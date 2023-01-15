@@ -1,13 +1,7 @@
 package com.example.sae.controller.ecurie;
 
-import com.example.sae.models.Competition;
-import com.example.sae.models.Equipe;
-import com.example.sae.models.Inscription;
-import com.example.sae.models.Poule;
-import com.example.sae.repository.CompetitionRepository;
-import com.example.sae.repository.EquipeRepository;
-import com.example.sae.repository.InscriptionRepository;
-import com.example.sae.repository.PouleRepository;
+import com.example.sae.models.*;
+import com.example.sae.repository.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,12 +19,18 @@ public class CompetitionController extends EcurieDashboard {
     private PouleRepository pouleRepository;
     private EquipeRepository equipeRepository;
     private InscriptionRepository inscriptionRepository;
+    private RencontreRepository rencontreRepository;
 
-    public CompetitionController(CompetitionRepository competitionRepository, PouleRepository pouleRepository, EquipeRepository equipeRepository, InscriptionRepository inscriptionRepository) {
+    public CompetitionController(CompetitionRepository competitionRepository,
+                                 PouleRepository pouleRepository,
+                                 EquipeRepository equipeRepository,
+                                 InscriptionRepository inscriptionRepository,
+                                 RencontreRepository rencontreRepository) {
         this.competitionRepository = competitionRepository;
         this.pouleRepository = pouleRepository;
         this.equipeRepository = equipeRepository;
         this.inscriptionRepository = inscriptionRepository;
+        this.rencontreRepository = rencontreRepository;
     }
 
     @GetMapping("/{id}")
@@ -54,6 +54,12 @@ public class CompetitionController extends EcurieDashboard {
         // On recupere les poules deja inscrire sur cette compétion
         List<Inscription> inscriptionList = this.inscriptionRepository.findAllByCompetitionId(c.getId());
 
+        Map<Integer, List<Rencontre>> rencontreByPoule = this.rencontreRepository.findAllByCompetitonId(20)
+                .stream()
+                .collect(Collectors.groupingBy(
+                        Rencontre::getPouleNumero
+                ));
+
         // On crée un model vierge pour une eventulle inscription
         Inscription newInscription = new Inscription();
 
@@ -64,6 +70,7 @@ public class CompetitionController extends EcurieDashboard {
         model.addAttribute("competition", c);
         model.addAttribute("inscriptions", inscriptionList);
         model.addAttribute("poules", equipesBasedOnPoule);
+        model.addAttribute("rencontreByPoule", rencontreByPoule);
 
         return "ecurie/competition/details";
     }

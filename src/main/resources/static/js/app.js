@@ -23,3 +23,12 @@ $('.form-need-confirm').on("submit", (e) => {
     })
 })
 
+$(".poule-toggle").click((e) => {
+    const target = e.currentTarget.getAttribute("data-target")
+
+    $(".poule-toggle").removeClass("btn-primary")
+    $(".rencontre-poule").removeClass("active")
+
+    $(e.currentTarget).addClass("btn-primary")
+    $(`#${target}`).addClass("active")
+})

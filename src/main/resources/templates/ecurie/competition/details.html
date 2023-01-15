@@ -3,6 +3,7 @@
 <head>
     <th:block th:include="fragments/header :: head"/>
     <title>Title</title>
+    <link rel="stylesheet" href="../../../static/css/dashboard.css">
 </head>
 <body>
 
@@ -114,6 +115,40 @@
                                     th:text="${pouleLine.getEcuriePoints()}"> Points</span>
                                 points</p>
                         </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <h1 class="title">Listes des rencontres</h1>
+
+            <div class="rencontre-list">
+
+                <div class="rencontre-poule-choice">
+                    <p th:each="listeRencontre : ${rencontreByPoule}" class="btn poule-toggle" th:classappend="${listeRencontre.key == 1} ? 'btn-primary'"
+                       th:data-target="${'poule-' + listeRencontre.key}" >Poule <span th:text="${listeRencontre.key}"></span></p>
+                </div>
+
+                <div th:each="listeRencontre : ${rencontreByPoule}" th:id="${'poule-' + listeRencontre.key}" class="rencontre-poule" th:classappend="${listeRencontre.key == 1} ? 'active' ">
+                    <div class="rencontre-line" th:each="rencontre : ${listeRencontre.value}">
+                        <!--@thymesVar id="rencontre" type="com.example.sae.models.Rencontre"-->
+                        <div class="rencontre-line--info">
+                            <p class="rencontre-line--date" th:text="${rencontre.getFormattedDateRencontre()}"></p>
+                        </div>
+                        <div class="rencontre-line--details">
+                            <div class="rencontre-line--team">
+                                <p th:text="${rencontre.getEquipe1().getNom()}"></p>
+                            </div>
+                            <div class="rencontre-line--score">
+                                <p>?</p>
+                                <p>:</p>
+                                <p>?</p>
+                            </div>
+                            <div class="rencontre-line--team">
+                                <p th:text="${rencontre.getEquipe2().getNom()}"></p>
+                            </div>
+                        </div>
+                        <div class="rencontre-line--action"></div>
                     </div>
                 </div>
 
