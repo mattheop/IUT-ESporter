@@ -20,7 +20,7 @@
 
             <div class="form-crud">
                 <form action="#" th:action="@{/ecurie/equipes/ajout}" th:object="${equipe}" method="POST">
-                    <!--@thymesVar id="equipe" type="com.example.sae.models.Equipe"-->
+                    <!--@thymesVar id="equipe" type="com.example.sae.models.db.Equipe"-->
 
                     <div class="form-input">
                         <label for="nom">Nom de l'équipe</label>
@@ -30,7 +30,7 @@
                     <div class="form-input">
                         <label for="jeu">Jeu joué par cette équipe</label>
                         <select required id="jeu" th:field="*{jeuSpe}">
-                            <!--@thymesVar id="j" type="com.example.sae.models.Jeu"-->
+                            <!--@thymesVar id="j" type="com.example.sae.models.db.Jeu"-->
                             <option th:each="j : ${jeux}" th:value="${j.getId()}" th:text="${j.getNom()}">
                             </option>
                         </select>

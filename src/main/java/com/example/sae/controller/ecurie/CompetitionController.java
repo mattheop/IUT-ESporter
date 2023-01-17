@@ -1,6 +1,6 @@
 package com.example.sae.controller.ecurie;
 
-import com.example.sae.models.*;
+import com.example.sae.models.db.*;
 import com.example.sae.repository.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

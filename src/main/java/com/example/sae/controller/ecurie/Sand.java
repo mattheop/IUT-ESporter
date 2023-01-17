@@ -1,6 +1,6 @@
 package com.example.sae.controller.ecurie;
 
-import com.example.sae.models.Rencontre;
+import com.example.sae.models.db.Rencontre;
 import com.example.sae.repository.RencontreRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

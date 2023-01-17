@@ -1,7 +1,6 @@
 package com.example.sae.services;
 
-import com.example.sae.models.AppUser;
-import com.example.sae.models.AppUserRole;
+import com.example.sae.models.enums.AppUserRole;
 import com.example.sae.models.DashboardFunction;
 import org.springframework.stereotype.Service;
 

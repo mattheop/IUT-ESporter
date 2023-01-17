@@ -1,7 +1,6 @@
 package com.example.sae.config;
 
-import com.example.sae.models.AppUser;
-import com.example.sae.models.AppUserRole;
+import com.example.sae.models.enums.AppUserRole;
 import com.example.sae.services.AppUserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

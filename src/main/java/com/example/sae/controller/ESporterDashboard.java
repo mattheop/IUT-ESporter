@@ -1,6 +1,6 @@
 package com.example.sae.controller;
 
-import com.example.sae.models.AppUserRole;
+import com.example.sae.models.enums.AppUserRole;
 import com.example.sae.models.DashboardFunction;
 import com.example.sae.services.DashboardFunctionService;
 import org.springframework.security.core.Authentication;

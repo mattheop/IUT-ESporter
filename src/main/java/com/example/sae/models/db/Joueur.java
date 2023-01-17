@@ -1,4 +1,4 @@
-package com.example.sae.models;
+package com.example.sae.models.db;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;

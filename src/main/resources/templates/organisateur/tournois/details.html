@@ -1,4 +1,4 @@
-<!--@thymesVar id="tournois" type="com.example.sae.models.Tournois"-->
+<!--@thymesVar id="tournois" type="com.example.sae.models.db.Tournois"-->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -50,7 +50,7 @@
 
                 <tbody>
                 <tr th:each="c : ${competitions}">
-                    <!--@thymesVar id="c" type="com.example.sae.models.Competition"-->
+                    <!--@thymesVar id="c" type="com.example.sae.models.db.Competition"-->
                     <td th:text="${c.getJeu().getNom()}"></td>
                     <td th:text="${c.getDateFinInscription()}"></td>
                     <td th:text="${c.getDateDebutCompetition()}"></td>
@@ -61,7 +61,7 @@
             <hr style="margin: 1rem 0">
 
             <th:block th:each="c : ${competitions}">
-                <!--@thymesVar id="c" type="com.example.sae.models.Competition"-->
+                <!--@thymesVar id="c" type="com.example.sae.models.db.Competition"-->
                 <div class="table-crud-header">
                     <p class="table-crud-header--title">Liste des équipes inscrites pour <span
                             th:text="${c.getJeu().getNom()}"></span>
@@ -77,7 +77,7 @@
                     </thead>
 
                     <tr th:each="i : ${inscriptions}">
-                        <!--@thymesVar id="i" type="com.example.sae.models.Inscription"-->
+                        <!--@thymesVar id="i" type="com.example.sae.models.db.Inscription"-->
                         <td th:text="${i.getLazyEcurie()?.getNom()}"></td>
                         <td th:text="${i.getEquipe().getNom()}"></td>
                     </tr>

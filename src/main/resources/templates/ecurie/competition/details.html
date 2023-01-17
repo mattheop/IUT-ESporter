@@ -58,7 +58,7 @@
                         <input type="hidden" th:value="${competition.getId()}" th:attr="name='competition'"/>
 
                         <select th:field="*{equipe}">
-                            <!--@thymesVar id="j" type="com.example.sae.models.Joueur"-->
+                            <!--@thymesVar id="j" type="com.example.sae.models.db.Joueur"-->
                             <option th:each="e : ${equipesByJeuSpeID.get(competition.getJeu().getId())}"
                                     th:value="${e.getId()}"
                                     th:text="${e.getNom()}">
@@ -109,7 +109,7 @@
 
                     <div class="poule-card--composition">
                         <div class="poule-card--line" th:each="pouleLine : ${pouleCat.value}">
-                            <!--@thymesVar id="pouleLine" type="com.example.sae.models.Poule"-->
+                            <!--@thymesVar id="pouleLine" type="com.example.sae.models.db.Poule"-->
                             <p class="poule-card--line--team" th:text="${pouleLine.getEquipe().getNom()}"></p>
                             <p class="poule-card--line--points"><span
                                     th:text="${pouleLine.getEcuriePoints()}"> Points</span>
@@ -131,7 +131,7 @@
 
                 <div th:each="listeRencontre : ${rencontreByPoule}" th:id="${'poule-' + listeRencontre.key}" class="rencontre-poule" th:classappend="${listeRencontre.key == 1} ? 'active' ">
                     <div class="rencontre-line" th:each="rencontre : ${listeRencontre.value}">
-                        <!--@thymesVar id="rencontre" type="com.example.sae.models.Rencontre"-->
+                        <!--@thymesVar id="rencontre" type="com.example.sae.models.db.Rencontre"-->
                         <div class="rencontre-line--info">
                             <p class="rencontre-line--date" th:text="${rencontre.getFormattedDateRencontre()}"></p>
                         </div>

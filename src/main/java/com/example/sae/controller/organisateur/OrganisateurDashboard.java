@@ -1,13 +1,9 @@
 package com.example.sae.controller.organisateur;
 
 import com.example.sae.controller.ESporterDashboard;
-import com.example.sae.models.AppUser;
-import com.example.sae.models.AppUserRole;
-import com.example.sae.services.DashboardFunctionService;
+import com.example.sae.models.db.AppUser;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.ModelAttribute;
-
-import java.util.List;
 
 public class OrganisateurDashboard extends ESporterDashboard {
 

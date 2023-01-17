@@ -1,6 +1,6 @@
 package com.example.sae.repository;
 
-import com.example.sae.models.Poule;
+import com.example.sae.models.db.Poule;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

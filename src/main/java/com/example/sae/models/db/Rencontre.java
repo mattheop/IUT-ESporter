@@ -1,9 +1,8 @@
-package com.example.sae.models;
+package com.example.sae.models.db;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.lang.Nullable;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

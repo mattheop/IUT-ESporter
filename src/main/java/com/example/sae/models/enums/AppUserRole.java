@@ -1,4 +1,4 @@
-package com.example.sae.models;
+package com.example.sae.models.enums;
 
 public enum AppUserRole {
     ROLE_ECURIE,

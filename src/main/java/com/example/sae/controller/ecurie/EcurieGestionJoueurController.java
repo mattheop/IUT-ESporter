@@ -1,9 +1,7 @@
 package com.example.sae.controller.ecurie;
 
-import com.example.sae.models.AppUser;
-import com.example.sae.models.Ecurie;
-import com.example.sae.models.Equipe;
-import com.example.sae.models.Joueur;
+import com.example.sae.models.db.Ecurie;
+import com.example.sae.models.db.Joueur;
 import com.example.sae.repository.EcurieRepository;
 import com.example.sae.repository.JoueurRepository;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Collection;
-import java.util.Set;
 
 @Controller
 @RequestMapping("ecurie/joueurs")

@@ -1,5 +1,6 @@
-package com.example.sae.models;
+package com.example.sae.models.db;
 
+import com.example.sae.models.enums.AppUserRole;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.security.core.GrantedAuthority;

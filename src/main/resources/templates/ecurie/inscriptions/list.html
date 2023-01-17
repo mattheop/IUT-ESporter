@@ -17,7 +17,7 @@
 
 
         <div th:each="tournois : ${competitionsByTournois}" style="margin-bottom: 2rem">
-            <!--@thymesVar id="tournois.key" type="com.example.sae.models.Tournois"-->
+            <!--@thymesVar id="tournois.key" type="com.example.sae.models.db.Tournois"-->
             <h1 class="title">Tournoi <span th:text="${tournois.key.getNom()}"></span></h1>
 
             <div class="equipes-details">
@@ -35,10 +35,10 @@
             </div>
 
             <div class="competition-card" th:each="competition : ${tournois.value}" style="margin-bottom: 2rem">
-                <!--@thymesVar id="competition" type="com.example.sae.models.Competition"-->
+                <!--@thymesVar id="competition" type="com.example.sae.models.db.Competition"-->
                 <div class="competition-card--unrolled">
                     <p class="competition-card--title">Nombre d'équipe</p>
-                    <p class="competition-card--count"><span>5</span><span class="over">/16</span></p>
+                    <p class="competition-card--count"><span th:text="${competition.getNbParticipation()}"></span><span class="over">/16</span></p>
                 </div>
                 <div class="competition-card--right">
                     <h1 class="competition-card--name title">Compétition de <span th:text="${competition.getJeu().getNom()}"></span><h1>

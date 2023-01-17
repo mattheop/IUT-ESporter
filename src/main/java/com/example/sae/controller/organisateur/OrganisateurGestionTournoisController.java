@@ -1,9 +1,9 @@
 package com.example.sae.controller.organisateur;
 
-import com.example.sae.models.Competition;
-import com.example.sae.models.Ecurie;
-import com.example.sae.models.Inscription;
-import com.example.sae.models.Tournois;
+import com.example.sae.models.db.Competition;
+import com.example.sae.models.db.Ecurie;
+import com.example.sae.models.db.Inscription;
+import com.example.sae.models.db.Tournois;
 import com.example.sae.repository.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;

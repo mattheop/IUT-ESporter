@@ -55,10 +55,10 @@
                      th:if="${equipe.getNbJoueurs()} != ${jeuspe.getNbJoueurParEquipe()}">
                     <form action="#" th:action="@{/ecurie/equipes/{id}/ajouterJoueur(id=${equipe.getId()})}"
                           method="POST">
-                        <!--@thymesVar id="equipe" type="com.example.sae.models.Equipe"-->
+                        <!--@thymesVar id="equipe" type="com.example.sae.models.db.Equipe"-->
 
                         <select name="id_joueur">
-                            <!--@thymesVar id="j" type="com.example.sae.models.Joueur"-->
+                            <!--@thymesVar id="j" type="com.example.sae.models.db.Joueur"-->
                             <option th:each="j : ${allAvailableJoueurs}" th:value="${j.getId()}"
                                     th:text="${j.getPseudo()}">
                             </option>
@@ -82,7 +82,7 @@
 
                 <tbody>
                 <tr th:each="j : ${joueurs}">
-                    <!--@thymesVar id="j" type="com.example.sae.models.Joueur"-->
+                    <!--@thymesVar id="j" type="com.example.sae.models.db.Joueur"-->
                     <td th:text="${j.getNom()}"></td>
                     <td th:text="${j.getPrenom()}"></td>
                     <td th:text="${j.getPseudo()}"></td>

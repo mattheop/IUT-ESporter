@@ -1,5 +1,6 @@
-package com.example.sae.models;
+package com.example.sae.models.db;
 
+import com.example.sae.models.enums.EtatCompetiton;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -24,6 +25,12 @@ public class Competition {
 
     @Column("jeu_id")
     private Jeu jeu;
+
+    @Column("etat_competition")
+    private EtatCompetiton etatCompetiton;
+
+    @Column("np_participation")
+    private int nbParticipation;
 
     @Column("is_full")
     private int isFull;
@@ -113,5 +120,21 @@ public class Competition {
 
     public void setFull(boolean full) {
         this.isFull = full ? 1 : 0;
+    }
+
+    public int getNbParticipation() {
+        return nbParticipation;
+    }
+
+    public void setNbParticipation(int nbParticipation) {
+        this.nbParticipation = nbParticipation;
+    }
+
+    public EtatCompetiton getEtatCompetiton() {
+        return etatCompetiton;
+    }
+
+    public void setEtatCompetiton(EtatCompetiton etatCompetiton) {
+        this.etatCompetiton = etatCompetiton;
     }
 }

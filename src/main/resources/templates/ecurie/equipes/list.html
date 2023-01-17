@@ -29,7 +29,7 @@
 
                 <tbody>
                 <tr th:each="e : ${equipes}">
-                    <!--@thymesVar id="e" type="com.example.sae.models.Equipe"-->
+                    <!--@thymesVar id="e" type="com.example.sae.models.db.Equipe"-->
                     <td th:text="${e.getNom()}"></td>
                     <td th:text="${e.getJeuSpeModel()?.getNom()}"></td>
                     <td th:text="${e.getNbJoueurs()}"></td>

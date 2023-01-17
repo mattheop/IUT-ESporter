@@ -1,4 +1,4 @@
-package com.example.sae.models;
+package com.example.sae.models.db;
 
 import com.example.sae.models.ref.JoueurRef;
 import org.springframework.data.annotation.Id;

@@ -23,7 +23,7 @@
                 <div class="form-input">
                     <label for="jeu">Jeu joué lors de cette compétition</label>
                     <select required id="jeu" th:field="*{jeu}">
-                        <!--@thymesVar id="j" type="com.example.sae.models.Jeu"-->
+                        <!--@thymesVar id="j" type="com.example.sae.models.db.Jeu"-->
                         <option th:each="j : ${jeux}" th:value="${j.getId()}" th:text="${j.getNom()}">
                         </option>
                     </select>

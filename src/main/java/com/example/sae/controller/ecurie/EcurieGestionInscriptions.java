@@ -1,20 +1,16 @@
 package com.example.sae.controller.ecurie;
 
-import com.example.sae.models.Competition;
-import com.example.sae.models.Equipe;
-import com.example.sae.models.Inscription;
-import com.example.sae.models.Tournois;
+import com.example.sae.models.db.Competition;
+import com.example.sae.models.db.Inscription;
+import com.example.sae.models.db.Tournois;
 import com.example.sae.repository.CompetitionRepository;
 import com.example.sae.repository.EquipeRepository;
 import com.example.sae.repository.InscriptionRepository;
-import com.example.sae.repository.TournoisRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;

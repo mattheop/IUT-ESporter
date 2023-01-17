@@ -1,6 +1,6 @@
 package com.example.sae.repository;
 
-import com.example.sae.models.Jeu;
+import com.example.sae.models.db.Jeu;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

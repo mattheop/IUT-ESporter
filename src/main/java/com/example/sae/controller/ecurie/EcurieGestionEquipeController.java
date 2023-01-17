@@ -1,9 +1,9 @@
 package com.example.sae.controller.ecurie;
 
-import com.example.sae.models.Ecurie;
-import com.example.sae.models.Equipe;
-import com.example.sae.models.Jeu;
-import com.example.sae.models.Joueur;
+import com.example.sae.models.db.Ecurie;
+import com.example.sae.models.db.Equipe;
+import com.example.sae.models.db.Jeu;
+import com.example.sae.models.db.Joueur;
 import com.example.sae.models.ref.JoueurRef;
 import com.example.sae.repository.EquipeRepository;
 import com.example.sae.repository.JeuRepository;
@@ -12,7 +12,6 @@ import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 

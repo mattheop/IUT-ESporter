@@ -1,14 +1,12 @@
 package com.example.sae.repository;
 
-import com.example.sae.models.Inscription;
+import com.example.sae.models.db.Inscription;
 import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 public interface InscriptionRepository extends CrudRepository<Inscription, Integer> {
 
