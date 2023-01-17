@@ -32,6 +32,7 @@ FROM   `rencontre`
        LEFT OUTER JOIN `equipe` `equipe2`
                     ON `equipe2`.`equipe_id` = `rencontre`.`equipe2`
 where `rencontre`.`competition_id` = :pcid
+order by `rencontre`.`date_rencontre`
 """)
     Collection<Rencontre> findAllByCompetitonId(@Param("pcid") Integer pcid);
 
