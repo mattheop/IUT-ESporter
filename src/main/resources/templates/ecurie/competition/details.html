@@ -168,9 +168,9 @@
                                     <p th:text="${rencontre.getEquipe1().getNom()}"></p>
                                 </div>
                                 <div class="rencontre-line--score">
-                                    <p>?</p>
+                                    <p th:text="${rencontre.getScoreEquipe1() != null} ? ${rencontre.getScoreEquipe1()} : '?'"></p>
                                     <p>:</p>
-                                    <p>?</p>
+                                    <p th:text="${rencontre.getScoreEquipe2() != null} ? ${rencontre.getScoreEquipe2()} : '?'"></p>
                                 </div>
                                 <div class="rencontre-line--team">
                                     <p th:text="${rencontre.getEquipe2().getNom()}"></p>

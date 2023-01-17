@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns xmlns:th>
+<head>
+    <th:block th:include="fragments/header :: head"/>
+    <title>Dashboard Écurie</title>
+</head>
+<body>
+
+    <div th:replace="fragments/dashboard/sidebar :: sidebar">
+    </div>
+
+    <div class="main-content">
+
+        <header th:replace="fragments/dashboard/sidebar :: header"></header>
+
+        <main>
+            <div class="competition-card" th:each="competition : ${competitions}" style="margin-bottom: 2rem">
+                <!--@thymesVar id="competition" type="com.example.sae.models.db.Competition"-->
+                <div class="competition-card--unrolled">
+                    <p class="competition-card--title">Nombre d'équipe</p>
+                    <p class="competition-card--count"><span
+                            th:text="${competition.getNbParticipation()}"></span><span class="over">/16</span></p>
+                </div>
+                <div class="competition-card--right">
+                    <h1 class="competition-card--name title">Compétition de <span
+                            th:text="${competition.getJeu().getNom()}"></span></h1>
+                    <div class="competition-card--info equipes-details">
+                        <div class="equipes-details--line">
+                            <i class="las la-hourglass-start"></i>
+                            <p class="equipes-details--line--title">Date fin d'inscription: </p>
+                            <p class="equipes-details--line--data"
+                               th:text="${competition.getFormattedDateFinInscription()}"></p>
+                        </div>
+
+                        <div class="equipes-details--line">
+                            <i class="las la-headset"></i>
+                            <p class="equipes-details--line--title">Début des matchs: </p>
+                            <p class="equipes-details--line--data"
+                               th:text="${competition.getFormattedDateDebutCompetition()}"></p>
+                        </div>
+                    </div>
+
+                    <div class="competition-card--action">
+                        <a class="btn btn-primary table-crud-header--action"
+                           th:href="@{/arbitre/competition/{id}(id=${competition.getId()})}">Arbitrer cette
+                            compétition</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>

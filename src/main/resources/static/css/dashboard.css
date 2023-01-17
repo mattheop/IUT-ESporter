@@ -357,6 +357,25 @@ main {
     margin-bottom: .8rem;
 }
 
+.rencontre-line.arbitre-mode {
+    cursor: pointer;
+    transition: background-color 150ms ease-in-out;
+}
+
+.rencontre-line.arbitre-mode:hover {
+    background-color: var(--main-color);
+    color: white;
+}
+
+.rencontre-line.arbitre-mode:hover .rencontre-line--date {
+    color: white;
+}
+
+.rencontre-line.arbitre-mode:hover .rencontre-line--score {
+    background-color: white;
+    color: var(--main-color);
+}
+
 .rencontre-line--date {
     color: gray;
 }
@@ -367,6 +386,11 @@ main {
     align-items: center;
     justify-content: space-between;
     width: 65%;
+}
+
+.rencontre-line--action i {
+    font-weight: bolder;
+    font-size: 32px;
 }
 
 .rencontre-line--team {

@@ -10,6 +10,9 @@
     <link rel="stylesheet" th:href="@{/css/form.css}">
     <link rel="stylesheet" th:href="@{/css/table.css}">
 
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+
     <script th:src="@{/js/jquery.js}" defer></script>
     <script th:src="@{/js/swal.js}" defer></script>
     <script th:src="@{/js/app.js}" defer></script>

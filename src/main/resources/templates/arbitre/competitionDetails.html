@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <th:block th:include="fragments/header :: head"/>
+    <title>Title</title>
+    <link rel="stylesheet" href="../../../static/css/dashboard.css">
+</head>
+<body>
+
+    <div th:replace="fragments/dashboard/sidebar :: sidebar">
+    </div>
+    <div class="main-content">
+        <header th:replace="fragments/dashboard/sidebar :: header"></header>
+
+        <main>
+
+            <div class="stepper-wrapper">
+                <div class="stepper-item"
+                     th:each="etat : ${T(com.example.sae.models.enums.EtatCompetiton).values()}"
+                     th:classappend="|${competition.getEtatCompetiton().getStep() >= etat.getStep() ? 'completed' : ''} ${competition.getEtatCompetiton().getStep() == etat.getStep() ? 'active' : ''}|">
+
+                    <!--@thymesVar id="etat" type="com.example.sae.models.enums.EtatCompetiton"-->
+                    <div class="step-counter" th:text="${etat.getStep()}"></div>
+                    <div class="step-name" th:text="${etat.getNiceName()}"></div>
+                </div>
+            </div>
+
+            <div class="competition-details-section">
+
+                <h1 class="title">Composition des poules</h1>
+
+                <div class="composition-poules">
+                    <div class="poule-card" th:each="pouleCat : ${poules}">
+                        <p class="poule-card--title">Poules n°<span th:text="${pouleCat.key}"></span></p>
+
+                        <div class="poule-card--composition">
+                            <div class="poule-card--line" th:each="pouleLine : ${pouleCat.value}">
+                                <!--@thymesVar id="pouleLine" type="com.example.sae.models.db.Poule"-->
+                                <p class="poule-card--line--team" th:text="${pouleLine.getEquipe().getNom()}"></p>
+                                <p class="poule-card--line--points"><span
+                                        th:text="${pouleLine.getEcuriePoints()}"> Points</span>
+                                    points</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="competition-details-section">
+
+                <h1 class="title">Listes des rencontres</h1>
+
+                <div class="rencontre-list ">
+
+                    <div class="rencontre-poule-choice">
+                        <p th:each="listeRencontre : ${rencontreByPoule}" class="btn poule-toggle"
+                           th:classappend="${listeRencontre.key == 1} ? 'btn-primary'"
+                           th:data-target="${'poule-' + listeRencontre.key}">Poule <span
+                                th:text="${listeRencontre.key}"></span></p>
+                    </div>
+
+                    <div th:each="listeRencontre : ${rencontreByPoule}" th:id="${'poule-' + listeRencontre.key}"
+                         class="rencontre-poule" th:classappend="${listeRencontre.key == 1} ? 'active'">
+                        <div class="rencontre-line arbitre-mode"
+                             th:each="rencontre : ${listeRencontre.value}"
+                             th:data-equipe1="${rencontre.getEquipe1().getNom()}"
+                             th:data-equipe2="${rencontre.getEquipe2().getNom()}"
+                             th:data-rencontre-id="${rencontre.getId()}">
+                            <!--@thymesVar id="rencontre" type="com.example.sae.models.db.Rencontre"-->
+                            <div class="rencontre-line--info">
+                                <p class="rencontre-line--date" th:text="${rencontre.getFormattedDateRencontre()}"></p>
+                            </div>
+                            <div class="rencontre-line--details">
+                                <div class="rencontre-line--team">
+                                    <p th:text="${rencontre.getEquipe1().getNom()}"></p>
+                                </div>
+                                <div class="rencontre-line--score">
+                                    <p th:text="${rencontre.getScoreEquipe1() != null} ? ${rencontre.getScoreEquipe1()} : '?'"></p>
+                                    <p>:</p>
+                                    <p th:text="${rencontre.getScoreEquipe2() != null} ? ${rencontre.getScoreEquipe2()} : '?'"></p>
+                                </div>
+                                <div class="rencontre-line--team">
+                                    <p th:text="${rencontre.getEquipe2().getNom()}"></p>
+                                </div>
+                            </div>
+                            <div class="rencontre-line--action">
+                                <i class="las la-gavel"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </main>
+
+    </div>
+
+</body>
+</html>

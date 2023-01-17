@@ -19,7 +19,7 @@ public class DashboardFunctionService {
 
     private List<DashboardFunction> getArbitreDashboardFunc() {
         return new ArrayList<>(List.of(
-                new DashboardFunction("Compétitions", "/arbitre/competitions", "la-medal")
+                new DashboardFunction("Compétitions", "/arbitre/competitions-a-arbitrer", "la-medal")
         ));
     }
 

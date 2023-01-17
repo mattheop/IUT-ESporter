@@ -36,6 +36,27 @@ public interface CompetitionRepository extends Repository<Competition, Integer> 
             SELECT `competition`.`competition_id` AS `competition_id`,
                    `competition`.`date_debut` AS `date_debut`,
                    `competition`.`date_fin_inscription` AS `date_fin_inscription`,
+                   `competition`.`etat_competition` AS `etat_competition`,
+                   `jeu`.`jeu_id` AS `jeu_jeu_id`,
+                   `jeu`.`nom` AS `jeu_nom`,
+                   `jeu`.`nb_joueur` AS `jeu_nb_joueur`,
+                   `tournois`.`tournois_id` AS `tournois_tournois_id`,
+                   `tournois`.`nom` AS `tournois_nom`,
+                   `tournois`.`etenduetournois` AS `tournois_etenduetournois`,
+                   `tournois`.`cashpricepoints` AS `tournois_cashpricepoints`,
+                   is_competition_full(competition_id) as 'is_full',
+                   competition_participation(competition_id) as 'np_participation'
+            FROM `competition`
+            LEFT OUTER JOIN `jeu` `jeu` ON `jeu`.`jeu_id` = `competition`.`jeu_id`
+            LEFT OUTER JOIN `tournois` `tournois` ON `tournois`.`tournois_id` = `competition`.`tournois_id`
+            WHERE `competition`.`etat_competition` in ('QUALIFICATION', 'FINALE');
+            """)
+    List<Competition> findAllInProgress();
+
+    @Query("""
+            SELECT `competition`.`competition_id` AS `competition_id`,
+                   `competition`.`date_debut` AS `date_debut`,
+                   `competition`.`date_fin_inscription` AS `date_fin_inscription`,
                 `competition`.`etat_competition` AS `etat_competition`,
                    `jeu`.`jeu_id` AS `jeu_jeu_id`,
                    `jeu`.`nom` AS `jeu_nom`,
