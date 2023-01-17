@@ -65,12 +65,18 @@ public class SecurityConfig {
                     return;
                 }
 
+                if (roles.contains(AppUserRole.ROLE_ARBITRE.toString())) {
+                    response.sendRedirect("/arbitre");
+                    return;
+                }
+
                 response.sendRedirect("/");
             }
         });
         return http.authorizeRequests()
                 .antMatchers("/ecurie/**").hasAnyRole("ECURIE")
                 .antMatchers("/organisateur/**").hasAnyRole("ORGANISATEUR")
+                .antMatchers("/arbitre/**").hasAnyRole("ARBITRE")
                 .antMatchers("/").permitAll().and().build();
     }
 

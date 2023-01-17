@@ -18,6 +18,13 @@ public class DashboardFunctionService {
         ));
     }
 
+    private List<DashboardFunction> getArbitreDashboardFunc() {
+        return new ArrayList<>(List.of(
+                new DashboardFunction("Compétitions", "/arbitre/competitions", "la-medal")
+        ));
+    }
+
+
     private List<DashboardFunction> getEcurieDashboardFunc() {
         return new ArrayList<>(List.of(
                 new DashboardFunction("Vue générale", "/ecurie", "la-eye"),
@@ -32,6 +39,7 @@ public class DashboardFunctionService {
         return switch (role) {
             case ROLE_ORGANISATEUR -> getOrganisateurDashboardFunc();
             case ROLE_ECURIE -> getEcurieDashboardFunc();
+            case ROLE_ARBITRE -> getArbitreDashboardFunc();
             default -> new ArrayList<>();
         };
     }
