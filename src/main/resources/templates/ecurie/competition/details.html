@@ -16,6 +16,17 @@
 
             <h1 class="title">Details de la compétition <span th:text="${competition.getJeu().getNom()}"></span></h1>
 
+            <div class="stepper-wrapper">
+                <div class="stepper-item"
+                     th:each="etat : ${T(com.example.sae.models.enums.EtatCompetiton).values()}"
+                     th:classappend="|${competition.getEtatCompetiton().getStep() >= etat.getStep() ? 'completed' : ''} ${competition.getEtatCompetiton().getStep() == etat.getStep() ? 'active' : ''}|">
+
+                    <!--@thymesVar id="etat" type="com.example.sae.models.enums.EtatCompetiton"-->
+                    <div class="step-counter" th:text="${etat.getStep()}"></div>
+                    <div class="step-name" th:text="${etat.getNiceName()}"></div>
+                </div>
+            </div>
+
             <div class="equipes-details">
                 <div class="equipes-details--line">
                     <i class="las la-medal"></i>
@@ -125,11 +136,14 @@
             <div class="rencontre-list">
 
                 <div class="rencontre-poule-choice">
-                    <p th:each="listeRencontre : ${rencontreByPoule}" class="btn poule-toggle" th:classappend="${listeRencontre.key == 1} ? 'btn-primary'"
-                       th:data-target="${'poule-' + listeRencontre.key}" >Poule <span th:text="${listeRencontre.key}"></span></p>
+                    <p th:each="listeRencontre : ${rencontreByPoule}" class="btn poule-toggle"
+                       th:classappend="${listeRencontre.key == 1} ? 'btn-primary'"
+                       th:data-target="${'poule-' + listeRencontre.key}">Poule <span
+                            th:text="${listeRencontre.key}"></span></p>
                 </div>
 
-                <div th:each="listeRencontre : ${rencontreByPoule}" th:id="${'poule-' + listeRencontre.key}" class="rencontre-poule" th:classappend="${listeRencontre.key == 1} ? 'active' ">
+                <div th:each="listeRencontre : ${rencontreByPoule}" th:id="${'poule-' + listeRencontre.key}"
+                     class="rencontre-poule" th:classappend="${listeRencontre.key == 1} ? 'active' ">
                     <div class="rencontre-line" th:each="rencontre : ${listeRencontre.value}">
                         <!--@thymesVar id="rencontre" type="com.example.sae.models.db.Rencontre"-->
                         <div class="rencontre-line--info">
