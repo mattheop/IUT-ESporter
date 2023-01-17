@@ -39,6 +39,7 @@ public interface InscriptionRepository extends CrudRepository<Inscription, Integ
     @Query("""
             SELECT
               `inscription`.`inscription_id` AS `inscription_id`,
+              `ecurie`.`points` AS `ecurie_points`,
               `equipe`.`equipe_id` AS `equipe_equipe_id`,
               `equipe`.`nom` AS `equipe_nom`,
               `equipe`.`ecurie_id` AS `equipe_ecurie_id`,
@@ -55,6 +56,7 @@ public interface InscriptionRepository extends CrudRepository<Inscription, Integ
               `competition_tournois`.`etenduetournois` AS `competition_tournois_etenduetournois`
             FROM `inscription`
               LEFT OUTER JOIN `equipe` `equipe` ON `equipe`.`equipe_id` = `inscription`.`equipe_id`
+              LEFT OUTER JOIN `ecurie` `ecurie` ON `ecurie`.`ecurie_id` = `equipe`.`ecurie_id`
               LEFT OUTER JOIN `competition` `competition` ON `competition`.`competition_id` = `inscription`.`competition_id`
               LEFT OUTER JOIN `jeu` `competition_jeu` ON `competition_jeu`.`jeu_id` = `competition`.`jeu_id`
               LEFT OUTER JOIN `tournois` `competition_tournois` ON `competition_tournois`.`tournois_id` = `competition`.`tournois_id`
@@ -65,6 +67,7 @@ public interface InscriptionRepository extends CrudRepository<Inscription, Integ
     @Query("""
             SELECT
               `inscription`.`inscription_id` AS `inscription_id`,
+              `ecurie`.`points` AS `ecurie_points`,
               `equipe`.`equipe_id` AS `equipe_equipe_id`,
               `equipe`.`nom` AS `equipe_nom`,
               `equipe`.`ecurie_id` AS `equipe_ecurie_id`,
@@ -81,6 +84,7 @@ public interface InscriptionRepository extends CrudRepository<Inscription, Integ
               `competition_tournois`.`etenduetournois` AS `competition_tournois_etenduetournois`
             FROM `inscription`
               LEFT OUTER JOIN `equipe` `equipe` ON `equipe`.`equipe_id` = `inscription`.`equipe_id`
+              LEFT OUTER JOIN `ecurie` `ecurie` ON `ecurie`.`ecurie_id` = `equipe`.`ecurie_id`
               LEFT OUTER JOIN `competition` `competition` ON `competition`.`competition_id` = `inscription`.`competition_id`
               LEFT OUTER JOIN `jeu` `competition_jeu` ON `competition_jeu`.`jeu_id` = `competition`.`jeu_id`
               LEFT OUTER JOIN `tournois` `competition_tournois` ON `competition_tournois`.`tournois_id` = `competition`.`tournois_id`

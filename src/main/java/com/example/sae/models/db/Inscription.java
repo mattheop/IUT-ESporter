@@ -18,6 +18,9 @@ public class Inscription {
     @Transient
     private Ecurie lazyEcurie;
 
+    @Column("ecurie_points")
+    private int ecuriePoints;
+
     public int getInscriptionId() {
         return inscriptionId;
     }
@@ -57,5 +60,9 @@ public class Inscription {
 
     public void setLazyEcurie(Ecurie lazyEcurie) {
         this.lazyEcurie = lazyEcurie;
+    }
+
+    public int getEcuriePoints() {
+        return ecuriePoints;
     }
 }

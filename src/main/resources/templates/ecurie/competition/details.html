@@ -14,158 +14,173 @@
 
         <main>
 
-            <h1 class="title">Details de la compétition <span th:text="${competition.getJeu().getNom()}"></span></h1>
+            <div class="competition-details-section">
+                <h1 class="title">Details de la compétition <span th:text="${competition.getJeu().getNom()}"></span>
+                </h1>
 
-            <div class="stepper-wrapper">
-                <div class="stepper-item"
-                     th:each="etat : ${T(com.example.sae.models.enums.EtatCompetiton).values()}"
-                     th:classappend="|${competition.getEtatCompetiton().getStep() >= etat.getStep() ? 'completed' : ''} ${competition.getEtatCompetiton().getStep() == etat.getStep() ? 'active' : ''}|">
+                <div class="stepper-wrapper">
+                    <div class="stepper-item"
+                         th:each="etat : ${T(com.example.sae.models.enums.EtatCompetiton).values()}"
+                         th:classappend="|${competition.getEtatCompetiton().getStep() >= etat.getStep() ? 'completed' : ''} ${competition.getEtatCompetiton().getStep() == etat.getStep() ? 'active' : ''}|">
 
-                    <!--@thymesVar id="etat" type="com.example.sae.models.enums.EtatCompetiton"-->
-                    <div class="step-counter" th:text="${etat.getStep()}"></div>
-                    <div class="step-name" th:text="${etat.getNiceName()}"></div>
-                </div>
-            </div>
-
-            <div class="equipes-details">
-                <div class="equipes-details--line">
-                    <i class="las la-medal"></i>
-                    <p class="equipes-details--line--title">Tournoi: </p>
-                    <p class="equipes-details--line--data" th:text="${competition.getTournois().getNom()}"></p>
-                </div>
-                <div class="equipes-details--line">
-                    <i class="las la-globe"></i>
-                    <p class="equipes-details--line--title">Étendu du tournoi: </p>
-                    <p class="equipes-details--line--data"
-                       th:text="${competition.getTournois().getEtenduetournois()}"></p>
+                        <!--@thymesVar id="etat" type="com.example.sae.models.enums.EtatCompetiton"-->
+                        <div class="step-counter" th:text="${etat.getStep()}"></div>
+                        <div class="step-name" th:text="${etat.getNiceName()}"></div>
+                    </div>
                 </div>
 
-                <div class="equipes-details--line">
-                    <i class="las la-calendar"></i>
-                    <p class="equipes-details--line--title">Date début des matchs: </p>
-                    <p class="equipes-details--line--data"
-                       th:text="${competition.getFormattedDateDebutCompetition()}"></p>
-                </div>
 
-                <div class="equipes-details--line">
-                    <i class="las la-wallet"></i>
-                    <p class="equipes-details--line--title">Cash-price de point: </p>
-                    <p class="equipes-details--line--data"
-                       th:text="${competition.getTournois().getCashpricepoints()}"></p>
-                </div>
-            </div>
+                <div class="equipes-details">
+                    <div class="equipes-details--line">
+                        <i class="las la-medal"></i>
+                        <p class="equipes-details--line--title">Tournoi: </p>
+                        <p class="equipes-details--line--data" th:text="${competition.getTournois().getNom()}"></p>
+                    </div>
+                    <div class="equipes-details--line">
+                        <i class="las la-globe"></i>
+                        <p class="equipes-details--line--title">Étendu du tournoi: </p>
+                        <p class="equipes-details--line--data"
+                           th:text="${competition.getTournois().getEtenduetournois()}"></p>
+                    </div>
 
-            <h1 class="title">Inscriptions</h1>
+                    <div class="equipes-details--line">
+                        <i class="las la-calendar"></i>
+                        <p class="equipes-details--line--title">Date début des matchs: </p>
+                        <p class="equipes-details--line--data"
+                           th:text="${competition.getFormattedDateDebutCompetition()}"></p>
+                    </div>
 
-            <div>
-                <div class="table-crud-header">
-                    <p class="table-crud-header--title black">Équipes inscrites à la compétition de <span
-                            th:text="${competition.getJeu().getNom()}"></span></p>
-
-                    <form th:if="${!competition.isFull()}" class="table-crud-header--action"
-                          th:action="@{/ecurie/inscriptions}"
-                          th:object="${newInscriptionModel}" method="POST">
-
-                        <input type="hidden" th:value="${competition.getId()}" th:attr="name='competition'"/>
-
-                        <select th:field="*{equipe}">
-                            <!--@thymesVar id="j" type="com.example.sae.models.db.Joueur"-->
-                            <option th:each="e : ${equipesByJeuSpeID.get(competition.getJeu().getId())}"
-                                    th:value="${e.getId()}"
-                                    th:text="${e.getNom()}">
-                            </option>
-                        </select>
-
-                        <button type="submit" class="btn btn-primary col-2"> Inscrire cette équipe</button>
-                    </form>
-                </div>
-
-                <table class="table-crud">
-                    <thead>
-                    <tr>
-                        <th style="width: 40%">Nom Équipe</th>
-                        <th>Nombre de points</th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead>
-
-                    <tr th:each="inscription : ${inscriptions}">
-                        <td th:text="${inscription.getEquipe().getNom()}"></td>
-                        <td>0</td>
-
-                        <td style="display: flex; align-items: center; gap: 16px">
-                            <form method="post" class="form-need-confirm"
-                                  th:if="${ecurie.getId() == inscription.getEquipe().getEcurie().getId()}"
-                                  th:action="@{/ecurie/inscriptions/desinscrire}" th:object="${inscription}"
-                                  th:data-confirm-message="${'Voulez-vous désinscrire l''équipe ' + inscription.getEquipe().getNom() + ' de la compétition de ' + inscription.getCompetition().getJeu().getNom() + ' du tournoi ' + inscription.getCompetition().getTournois().getNom() + ' ?'}">
-                                <input type="hidden" th:value="${inscription.getInscriptionId()}"
-                                       name="inscriptionId"/>
-
-                                <input type="submit" class="btn btn-danger" value="Se désinscrire">
-                            </form>
-                        </td>
-                    </tr>
-
-                    <tbody>
-                    </tbody>
-                </table>
-            </div>
-
-
-            <h1 class="title">Composition des poules</h1>
-
-            <div class="composition-poules">
-                <div class="poule-card" th:each="pouleCat : ${poules}">
-                    <p class="poule-card--title">Poules n°<span th:text="${pouleCat.key}"></span></p>
-
-                    <div class="poule-card--composition">
-                        <div class="poule-card--line" th:each="pouleLine : ${pouleCat.value}">
-                            <!--@thymesVar id="pouleLine" type="com.example.sae.models.db.Poule"-->
-                            <p class="poule-card--line--team" th:text="${pouleLine.getEquipe().getNom()}"></p>
-                            <p class="poule-card--line--points"><span
-                                    th:text="${pouleLine.getEcuriePoints()}"> Points</span>
-                                points</p>
-                        </div>
+                    <div class="equipes-details--line">
+                        <i class="las la-wallet"></i>
+                        <p class="equipes-details--line--title">Cash-price de point: </p>
+                        <p class="equipes-details--line--data"
+                           th:text="${competition.getTournois().getCashpricepoints()}"></p>
                     </div>
                 </div>
 
             </div>
 
-            <h1 class="title">Listes des rencontres</h1>
 
-            <div class="rencontre-list">
+            <div class="competition-details-section">
+                <h1 class="title">Inscriptions</h1>
 
-                <div class="rencontre-poule-choice">
-                    <p th:each="listeRencontre : ${rencontreByPoule}" class="btn poule-toggle"
-                       th:classappend="${listeRencontre.key == 1} ? 'btn-primary'"
-                       th:data-target="${'poule-' + listeRencontre.key}">Poule <span
-                            th:text="${listeRencontre.key}"></span></p>
-                </div>
+                <div>
+                    <div class="table-crud-header">
+                        <p class="table-crud-header--title black">Équipes inscrites à la compétition de <span
+                                th:text="${competition.getJeu().getNom()}"></span></p>
 
-                <div th:each="listeRencontre : ${rencontreByPoule}" th:id="${'poule-' + listeRencontre.key}"
-                     class="rencontre-poule" th:classappend="${listeRencontre.key == 1} ? 'active' ">
-                    <div class="rencontre-line" th:each="rencontre : ${listeRencontre.value}">
-                        <!--@thymesVar id="rencontre" type="com.example.sae.models.db.Rencontre"-->
-                        <div class="rencontre-line--info">
-                            <p class="rencontre-line--date" th:text="${rencontre.getFormattedDateRencontre()}"></p>
-                        </div>
-                        <div class="rencontre-line--details">
-                            <div class="rencontre-line--team">
-                                <p th:text="${rencontre.getEquipe1().getNom()}"></p>
-                            </div>
-                            <div class="rencontre-line--score">
-                                <p>?</p>
-                                <p>:</p>
-                                <p>?</p>
-                            </div>
-                            <div class="rencontre-line--team">
-                                <p th:text="${rencontre.getEquipe2().getNom()}"></p>
-                            </div>
-                        </div>
-                        <div class="rencontre-line--action"></div>
+                        <form th:if="${!competition.isFull()}" class="table-crud-header--action"
+                              th:action="@{/ecurie/inscriptions}"
+                              th:object="${newInscriptionModel}" method="POST">
+
+                            <input type="hidden" th:value="${competition.getId()}" th:attr="name='competition'"/>
+
+                            <select th:field="*{equipe}">
+                                <!--@thymesVar id="j" type="com.example.sae.models.db.Joueur"-->
+                                <option th:each="e : ${equipesByJeuSpeID.get(competition.getJeu().getId())}"
+                                        th:value="${e.getId()}"
+                                        th:text="${e.getNom()}">
+                                </option>
+                            </select>
+
+                            <button type="submit" class="btn btn-primary col-2"> Inscrire cette équipe</button>
+                        </form>
                     </div>
+
+                    <table class="table-crud">
+                        <thead>
+                        <tr>
+                            <th style="width: 40%">Nom Équipe</th>
+                            <th>Nombre de points</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+
+                        <tr th:each="inscription : ${inscriptions}">
+                            <!--@thymesVar id="inscription" type="com.example.sae.models.db.Inscription"-->
+                            <td th:text="${inscription.getEquipe().getNom()}"></td>
+                            <td th:text="${inscription.getEcuriePoints()}"></td>
+
+                            <td style="display: flex; align-items: center; gap: 16px">
+                                <form method="post" class="form-need-confirm"
+                                      th:if="${ecurie.getId() == inscription.getEquipe().getEcurie().getId()}"
+                                      th:action="@{/ecurie/inscriptions/desinscrire}" th:object="${inscription}"
+                                      th:data-confirm-message="${'Voulez-vous désinscrire l''équipe ' + inscription.getEquipe().getNom() + ' de la compétition de ' + inscription.getCompetition().getJeu().getNom() + ' du tournoi ' + inscription.getCompetition().getTournois().getNom() + ' ?'}">
+                                    <input type="hidden" th:value="${inscription.getInscriptionId()}"
+                                           name="inscriptionId"/>
+
+                                    <input type="submit" class="btn btn-danger" value="Se désinscrire">
+                                </form>
+                            </td>
+                        </tr>
+
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="competition-details-section">
+
+                <h1 class="title">Composition des poules</h1>
+
+                <div class="composition-poules">
+                    <div class="poule-card" th:each="pouleCat : ${poules}">
+                        <p class="poule-card--title">Poules n°<span th:text="${pouleCat.key}"></span></p>
+
+                        <div class="poule-card--composition">
+                            <div class="poule-card--line" th:each="pouleLine : ${pouleCat.value}">
+                                <!--@thymesVar id="pouleLine" type="com.example.sae.models.db.Poule"-->
+                                <p class="poule-card--line--team" th:text="${pouleLine.getEquipe().getNom()}"></p>
+                                <p class="poule-card--line--points"><span
+                                        th:text="${pouleLine.getEcuriePoints()}"> Points</span>
+                                    points</p>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
+            </div>
+
+            <div class="competition-details-section">
+
+                <h1 class="title">Listes des rencontres</h1>
+
+                <div class="rencontre-list">
+
+                    <div class="rencontre-poule-choice">
+                        <p th:each="listeRencontre : ${rencontreByPoule}" class="btn poule-toggle"
+                           th:classappend="${listeRencontre.key == 1} ? 'btn-primary'"
+                           th:data-target="${'poule-' + listeRencontre.key}">Poule <span
+                                th:text="${listeRencontre.key}"></span></p>
+                    </div>
+
+                    <div th:each="listeRencontre : ${rencontreByPoule}" th:id="${'poule-' + listeRencontre.key}"
+                         class="rencontre-poule" th:classappend="${listeRencontre.key == 1} ? 'active' ">
+                        <div class="rencontre-line" th:each="rencontre : ${listeRencontre.value}">
+                            <!--@thymesVar id="rencontre" type="com.example.sae.models.db.Rencontre"-->
+                            <div class="rencontre-line--info">
+                                <p class="rencontre-line--date" th:text="${rencontre.getFormattedDateRencontre()}"></p>
+                            </div>
+                            <div class="rencontre-line--details">
+                                <div class="rencontre-line--team">
+                                    <p th:text="${rencontre.getEquipe1().getNom()}"></p>
+                                </div>
+                                <div class="rencontre-line--score">
+                                    <p>?</p>
+                                    <p>:</p>
+                                    <p>?</p>
+                                </div>
+                                <div class="rencontre-line--team">
+                                    <p th:text="${rencontre.getEquipe2().getNom()}"></p>
+                                </div>
+                            </div>
+                            <div class="rencontre-line--action"></div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
 
         </main>
