@@ -1,22 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr" xmlns xmlns:th>
 <head>
-    <meta charset="UTF-8">
-    <title>Ajouter un Joueur</title>
+    <th:block th:include="fragments/header :: head"/>
+    <title>Dashboard Écurie</title>
 </head>
 <body>
 
-<h1>Ajouter un joueur à l'écurie</h1>
+    <div th:replace="fragments/dashboard/sidebar :: sidebar">
 
-<form action="#" th:action="@{/ecurie/joueurs/ajout}" th:object="${joueur}" method="POST">
-    <input type="text" th:field="*{prenom}" placeholder="Prénom">
-    <input type="text" th:field="*{nom}" placeholder="Nom">
-    <input type="text" th:field="*{pseudo}" placeholder="Pseudo">
-    <input type="text" th:field="*{nationnalite}" placeholder="Nationnalité">
-    <input type="date" th:field="*{entree_pro}" placeholder="Entrée">
+        ok
+    </div>
 
-    <button type="submit" class="btn btn-info col-2"> Save</button>
-</form>
+    <div class="main-content">
+
+        <header th:replace="fragments/dashboard/sidebar :: header"></header>
+
+        <main>
+            <h1 class="title">Ajouter une équipe</h1>
+
+            <div class="form-crud">
+                <form  action="#" th:action="@{/ecurie/joueurs/ajout}" th:object="${joueur}" method="POST">
+                    <!--@thymesVar id="joueur" type="com.example.sae.models.db.Joueur"-->
+
+                    <div class="form-input">
+                        <label for="nom">Nom du joueur</label>
+                        <input id="nom" type="text" th:field="*{nom}" placeholder="Prénom">
+                    </div>
+
+                    <div class="form-input">
+                        <label for="prenom">Prenom du joueur</label>
+                        <input id="prenom" type="text" th:field="*{prenom}" placeholder="Prénom">
+                    </div>
+
+                    <div class="form-input">
+                        <label for="pseudo">Pseudo du joueur</label>
+                        <input id="pseudo" type="text" th:field="*{pseudo}" placeholder="Prénom">
+                    </div>
+
+                    <div class="form-input">
+                        <label for="nationnalite">Nationalité du joueur</label>
+                        <input id="nationnalite" type="text" th:field="*{nationnalite}" placeholder="Prénom">
+                    </div>
+
+                    <div class="form-input">
+                        <label for="entree_pro">Date entrée pro</label>
+                        <input id="entree_pro" type="date" th:field="*{entree_pro}" placeholder="Prénom">
+                    </div>
+
+                    <div class="form-footer">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="las la-plus"></i>
+                            Ajouter le joueur
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </main>
+    </div>
 
 </body>
 </html>
