@@ -4,7 +4,7 @@ public enum EtatCompetiton {
     INSCRIPTION(1, "Inscription"),
     QUALIFICATION(2, "Qualification"),
     FINALE(3, "Finale"),
-    FINI(4, "Compétition finie");
+    FIN(4, "Compétition finie");
 
     private final int step;
     private final String niceName;
