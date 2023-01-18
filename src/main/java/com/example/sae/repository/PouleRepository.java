@@ -20,7 +20,8 @@ public interface PouleRepository extends CrudRepository<Poule, Integer> {
             from inscription_poule
                 left join inscription i on i.inscription_id = inscription_poule.inscription_id
                 left join equipe e on i.equipe_id = e.equipe_id
-                left join ecurie e2 on e.ecurie_id = e2.ecurie_id;
+                left join ecurie e2 on e.ecurie_id = e2.ecurie_id
+                order by inscription_poule.poule_num;
                         """)
     Collection<Poule> findAll();
 
@@ -35,7 +36,8 @@ public interface PouleRepository extends CrudRepository<Poule, Integer> {
                 left join inscription i on i.inscription_id = inscription_poule.inscription_id
                 left join equipe e on i.equipe_id = e.equipe_id
                 left join ecurie e2 on e.ecurie_id = e2.ecurie_id
-            where i.competition_id = :comp_id;
+            where i.competition_id = :comp_id
+            order by inscription_poule.poule_num;
                         """)
     Collection<Poule> findAllByCompetitionId(@Param("comp_id") int competitionId);
 }

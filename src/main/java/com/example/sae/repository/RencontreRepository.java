@@ -33,7 +33,7 @@ public interface RencontreRepository extends Repository<Rencontre, Integer> {
                    LEFT OUTER JOIN `equipe` `equipe2`
                                 ON `equipe2`.`equipe_id` = `rencontre`.`equipe2`
             where `rencontre`.`competition_id` = :pcid
-            order by `rencontre`.`date_rencontre`
+            order by `rencontre`.`poule_num`, `rencontre`.`date_rencontre`
             """)
     Collection<Rencontre> findAllByCompetitonId(@Param("pcid") Integer pcid);
 

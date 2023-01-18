@@ -14,12 +14,22 @@ public class Poule {
     @Column("poule_num")
     private int pouleNum;
 
+    @Column("is_final")
+    private boolean isFinal;
+
     @Column("ecurie_points")
     private int ecuriePoints;
 
     private Equipe equipe;
 
     public Poule() {
+    }
+
+    public String getNiceName() {
+        if (this.isFinal)
+            return "Finale";
+
+        return String.valueOf((char) (this.pouleNum + 'A' - 1));
     }
 
     public int getInscriptionId() {
@@ -52,5 +62,13 @@ public class Poule {
 
     public void setEcuriePoints(int ecuriePoints) {
         this.ecuriePoints = ecuriePoints;
+    }
+
+    public boolean isFinal() {
+        return isFinal;
+    }
+
+    public void setFinal(boolean aFinal) {
+        isFinal = aFinal;
     }
 }

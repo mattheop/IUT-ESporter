@@ -41,6 +41,13 @@ public class Rencontre {
     public Rencontre() {
     }
 
+    public String getPouleNiceName() {
+        if (this.pouleNumero == 99)
+            return "Finale";
+
+        return String.valueOf((char) (this.pouleNumero + 'A' - 1));
+    }
+
     public int getId() {
         return id;
     }

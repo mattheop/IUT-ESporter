@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 @Controller
 @RequestMapping("/arbitre/competition/{id}")
@@ -37,14 +40,19 @@ public class ArbitreCompetitionDetails extends ArbitreDashboard {
 
         // On recupere une map triant les equipes selon le numero de poule
         Collection<Poule> poules = this.pouleRepository.findAllByCompetitionId(c.getId());
-        Map<Object, List<Poule>> equipesBasedOnPoule = poules.stream().
-                collect(Collectors.groupingBy(Poule::getPouleNum));
+
+        LinkedHashMap<Object, List<Poule>> equipesBasedOnPoule = poules.stream().
+                collect(Collectors.groupingBy(Poule::getPouleNum,
+                        LinkedHashMap::new,
+                        toList()));
 
         // On recupere les poules deja inscrire sur cette compétion
-        Map<Integer, List<Rencontre>> rencontreByPoule = this.rencontreRepository.findAllByCompetitonId(20)
+        LinkedHashMap<Integer, List<Rencontre>> rencontreByPoule = this.rencontreRepository.findAllByCompetitonId(20)
                 .stream()
                 .collect(Collectors.groupingBy(
-                        Rencontre::getPouleNumero
+                        Rencontre::getPouleNumero,
+                        LinkedHashMap::new,
+                        toList()
                 ));
 
         model.addAttribute("competition", c);
