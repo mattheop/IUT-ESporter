@@ -397,10 +397,6 @@ main {
     width: 35%;
 }
 
-.rencontre-line--team:last-child {
-    text-align: right;
-}
-
 .rencontre-line--score {
     display: flex;
     align-items: center;
@@ -420,6 +416,9 @@ main {
 }
 
 .rencontre-line--team {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     font-size: 1.2rem;
 }
 

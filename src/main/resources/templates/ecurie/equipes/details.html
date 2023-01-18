@@ -39,7 +39,7 @@
 
             <div class="">
                 <h1 class="title">Changer le logo de l'équipe</h1>
-                <img th:src="@{${equipe.getLogoPath()}}"  alt="Logo de l'équipe"/>
+                <img width="64" th:src="@{${equipe.getLogoPath()}}"  alt="Logo de l'équipe"/>
                 <form th:action="@{/ecurie/equipes/{id}/ajouterLogo(id=${equipe.getId()})}"
                       method="post" enctype="multipart/form-data">
                     <label>Photos: </label>

@@ -74,6 +74,7 @@
                             </div>
                             <div class="rencontre-line--details">
                                 <div class="rencontre-line--team">
+                                    <img th:src="@{${rencontre.getEquipe1().getLogoPath()}}" width="32" alt="">
                                     <p th:text="${rencontre.getEquipe1().getNom()}"></p>
                                 </div>
                                 <div class="rencontre-line--score">
@@ -83,6 +84,7 @@
                                 </div>
                                 <div class="rencontre-line--team">
                                     <p th:text="${rencontre.getEquipe2().getNom()}"></p>
+                                    <img th:src="@{${rencontre.getEquipe2().getLogoPath()}}" width="32" alt="">
                                 </div>
                             </div>
                             <div class="rencontre-line--action">
