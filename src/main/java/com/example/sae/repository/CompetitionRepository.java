@@ -85,7 +85,7 @@ public interface CompetitionRepository extends Repository<Competition, Integer> 
                    `tournois`.`tournois_id` AS `tournois_tournois_id`,
                    `tournois`.`nom` AS `tournois_nom`,
                    `tournois`.`etenduetournois` AS `tournois_etenduetournois`,
-                   `tournois`.`cashpricepoints` AS `tournois_cashpricepoints`
+                   `tournois`.`cashpricepoints` AS `tournois_cashpricepoints`,
                    is_competition_full(competition_id) as 'is_full',
                    competition_participation(competition_id) as 'np_participation'
             FROM `competition`
