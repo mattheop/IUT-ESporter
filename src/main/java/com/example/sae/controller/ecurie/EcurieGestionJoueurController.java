@@ -1,6 +1,7 @@
 package com.example.sae.controller.ecurie;
 
 import com.example.sae.models.db.Ecurie;
+import com.example.sae.models.db.Equipe;
 import com.example.sae.models.db.Joueur;
 import com.example.sae.repository.EcurieRepository;
 import com.example.sae.repository.JoueurRepository;
@@ -60,5 +61,11 @@ public class EcurieGestionJoueurController extends EcurieDashboard {
 
 
         return "ecurie/joueurs/ajout";
+    }
+
+    @PostMapping("/{id}/supprimer")
+    public String saveEquipe(@PathVariable("id") Integer id) {
+        this.joueurRepository.deleteById(id);
+        return "redirect:/ecurie/joueurs";
     }
 }

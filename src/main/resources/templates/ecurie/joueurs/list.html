@@ -41,7 +41,7 @@
                     <td style="display: flex; align-items: center; gap: 16px">
                         <a class="btn" th:href="@{/ecurie/joueurs/{id}(id=${j.getId()})}">Détails</a>
 
-                        <form method="post" th:action="@{/ecurie/joueur/{id}/supprimer/(id=${j.getId()})}"
+                        <form method="post" th:action="@{/ecurie/joueurs/{id}/supprimer/(id=${j.getId()})}"
                               class="form-need-confirm"
                               th:data-confirm-message="${'Voulez vous vraiment supprimer le joueur ' + j.getPseudo() + ' ?'}">
                             <input type="submit" class="btn btn-danger" value="Supprimé">
