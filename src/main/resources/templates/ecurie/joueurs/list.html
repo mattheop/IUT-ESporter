@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns xmlns:th>
 <head>
-    <th:block th:include="fragments/header :: head" />
+    <th:block th:include="fragments/header :: head"/>
     <title>Dashboard Écurie</title>
 </head>
 <body>
@@ -17,7 +17,8 @@
 
         <main>
             <div class="table-crud-header">
-                <a class="btn btn-primary" th:href="@{/ecurie/joueurs/ajout}"><i class="las la-plus"></i>Ajouter un joueur à mon écurie</a>
+                <a class="btn btn-primary" th:href="@{/ecurie/joueurs/ajout}"><i class="las la-plus"></i>Ajouter un
+                    joueur à mon écurie</a>
             </div>
             <table class="table-crud">
                 <thead>
@@ -26,16 +27,26 @@
                     <th>Prénom</th>
                     <th>Pseudo</th>
                     <th>Nationalité</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
 
                 <tbody>
                 <tr th:each="j : ${joueurs}">
-                    <!--@thymesVar id="j" type="com.example.sae.models.Joueur:"-->
+                    <!--@thymesVar id="j" type="com.example.sae.models.db.Joueur"-->
                     <td th:text="${j.getNom()}"></td>
                     <td th:text="${j.getPrenom()}"></td>
                     <td th:text="${j.getPseudo()}"></td>
                     <td th:text="${j.getNationnalite()}"></td>
+                    <td style="display: flex; align-items: center; gap: 16px">
+                        <a class="btn" th:href="@{/ecurie/joueurs/{id}(id=${j.getId()})}">Détails</a>
+
+                        <form method="post" th:action="@{/ecurie/joueur/{id}/supprimer/(id=${j.getId()})}"
+                              class="form-need-confirm"
+                              th:data-confirm-message="${'Voulez vous vraiment supprimer le joueur ' + j.getPseudo() + ' ?'}">
+                            <input type="submit" class="btn btn-danger" value="Supprimé">
+                        </form>
+                    </td>
                 </tr>
                 </tbody>
             </table>

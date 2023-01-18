@@ -8,12 +8,11 @@ import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.util.Collection;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("ecurie/joueurs")
@@ -40,7 +39,7 @@ public class EcurieGestionJoueurController extends EcurieDashboard {
         Joueur j = new Joueur();
         model.addAttribute("joueur", j);
 
-        return "ecurie/joueurs/ajout.html";
+        return "ecurie/joueurs/ajout";
     }
 
     @PostMapping("/ajout")
@@ -50,5 +49,16 @@ public class EcurieGestionJoueurController extends EcurieDashboard {
 
         this.joueurRepository.save(joueur);
         return "redirect:/ecurie/joueurs";
+    }
+
+    @GetMapping("/{id}")
+    public String editPlayer(@PathVariable("id") int id, Model model) {
+        Optional<Joueur> j = this.joueurRepository.findById(id);
+        assert j.isPresent();
+
+        model.addAttribute("joueur", j.get());
+
+
+        return "ecurie/joueurs/ajout";
     }
 }

@@ -16,13 +16,13 @@
         <header th:replace="fragments/dashboard/sidebar :: header"></header>
 
         <main>
-            <h1 class="title">Ajouter un joueur</h1>
+            <h1 class="title">Modifier un joueur</h1>
 
             <div class="form-crud">
                 <form  action="#" th:action="@{/ecurie/joueurs/ajout}" th:object="${joueur}" method="POST">
                     <!--@thymesVar id="joueur" type="com.example.sae.models.db.Joueur"-->
 
-                    <input th:if="${joueur.getId() != null}" type="hidden" th:field="*{id}" />
+                    <input type="hidden" th:field="*{id}" />
 
                     <div class="form-input">
                         <label for="nom">Nom du joueur</label>
@@ -52,7 +52,7 @@
                     <div class="form-footer">
                         <button class="btn btn-primary" type="submit">
                             <i class="las la-plus"></i>
-                            <span th:text="${joueur.getId() != null} ? 'Modifier': 'Ajouter'"></span> un joueur
+                            Ajouter le joueur
                         </button>
                     </div>
                 </form>
