@@ -109,7 +109,7 @@
                                 <span th:if="${competition.isFini() && inscription.getNombrePointsGagne() != null}"> points</span>
                             </td>
 
-                            <td style="display: flex; align-items: center; gap: 16px">
+                            <td style="display: flex; align-items: center; gap: 16px" th:if="${!competition.isPlaying() && !competition.fini}">
                                 <form method="post" class="form-need-confirm"
                                       th:if="${ecurie.getId() == inscription.getEquipe().getEcurie().getId()}"
                                       th:action="@{/ecurie/inscriptions/desinscrire}" th:object="${inscription}"
