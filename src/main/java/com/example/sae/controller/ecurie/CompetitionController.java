@@ -56,9 +56,7 @@ public class CompetitionController extends EcurieDashboard {
 
         Map<Integer, List<Rencontre>> rencontreByPoule = this.rencontreRepository.findAllByCompetitonId(c.getId())
                 .stream()
-                .collect(Collectors.groupingBy(
-                        Rencontre::getPouleNumero
-                ));
+                .collect(Collectors.groupingBy(Rencontre::getPouleNumero));
 
         // On crée un model vierge pour une eventulle inscription
         Inscription newInscription = new Inscription();
