@@ -1,5 +1,6 @@
 package com.example.sae.controller.ecurie;
 
+import com.example.sae.models.db.Ecurie;
 import com.example.sae.models.db.Notification;
 import com.example.sae.repository.NotificationRepository;
 import org.springframework.security.core.Authentication;
@@ -22,10 +23,13 @@ public class EcurieNotificationController extends EcurieDashboard {
 
     @GetMapping("")
     public String index(Authentication authentication, Model model) {
+        Ecurie managedEcurie = getManagedEcurie(getAppUser(authentication));
 
-        Collection<Notification> notifications = this.notificationRepository.findTop15ByEcurieIdOrderByDateDesc(getManagedEcurie(getAppUser(authentication)).getId());
+        Collection<Notification> notifications = this.notificationRepository.findTop15ByEcurieIdOrderByDateDesc(managedEcurie.getId());
 
         model.addAttribute("messages", notifications);
+
+        this.notificationRepository.markAllNotificationReadedByEcurieId(managedEcurie.getId());
 
         return "ecurie/notification";
     }
