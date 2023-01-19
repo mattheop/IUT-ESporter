@@ -26,6 +26,11 @@
     width: 100%;
 }
 
+.table-crud .notread {
+    border-left: 4px solid var(--main-color);
+    box-sizing: border-box;
+}
+
 .table-crud th, td {
     padding: 0.8rem 0.4rem;
 }

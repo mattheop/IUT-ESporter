@@ -10,7 +10,7 @@ import java.util.Collection;
 
 public interface NotificationRepository extends Repository<Notification, Long> {
 
-    Collection<Notification> findAllByEcurieId(int ecurie_id);
+    Collection<Notification> findTop15ByEcurieIdOrderByDateDesc(int ecurie_id);
 
     int countByEcurieId(int ecurieId);
 

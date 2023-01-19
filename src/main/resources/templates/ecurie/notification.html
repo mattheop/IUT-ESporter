@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <th:block th:include="fragments/header :: head"/>
+    <title>Notifications</title>
+    <link rel="stylesheet" href="../../../static/css/dashboard.css">
+</head>
+<body>
+
+<div th:replace="fragments/dashboard/sidebar :: sidebar">
+</div>
+<div class="main-content">
+    <header th:replace="fragments/dashboard/sidebar :: header"></header>
+
+    <main>
+
+        <h1 class="title">Messagerie</h1>
+
+        <div>
+            <table class="table-crud">
+                <thead>
+                <tr>
+                    <th style="width: 25%">Date</th>
+                    <th>Message</th>
+                </tr>
+                </thead>
+
+                <!--@thymesVar id="messages" type="com.example.sae.models.db.Notification[]"-->
+                <tr th:each="message : ${messages}" th:classappend="${message.isReaded()} ? '':'notread'">
+                    <td th:text="${message.getDate()}"></td>
+                    <td th:text="${message.getMessage()}">Mesage</td>
+                </tr>
+
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+</div>
+
+</body>
+</html>

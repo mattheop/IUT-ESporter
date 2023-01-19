@@ -2,6 +2,10 @@ package com.example.sae.models.db;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Notification {
 
@@ -16,6 +20,10 @@ public class Notification {
     private Ecurie ecurie;
 
     private String message;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @Column("send_date")
+    private LocalDateTime date;
 
     private boolean readed;
 
@@ -61,4 +69,17 @@ public class Notification {
     public void setEcurie(Ecurie ecurie) {
         this.ecurie = ecurie;
     }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
+    public String getFormattedDate() {
+        return this.date.format(DateTimeFormatter.ofPattern("hh:mm le dd/dd/yyyy "));
+    }
+
 }
