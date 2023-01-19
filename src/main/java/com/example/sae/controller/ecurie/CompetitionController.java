@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
+
 @Controller
 @RequestMapping("/ecurie/competition")
 public class CompetitionController extends EcurieDashboard {
@@ -41,22 +43,24 @@ public class CompetitionController extends EcurieDashboard {
 
         // On recupere une map triant les equipes selon le numero de poule
         Collection<Poule> poules = this.pouleRepository.findAllByCompetitionId(c.getId());
-        Map<Object, List<Poule>> equipesBasedOnPoule = poules.stream().
-                collect(Collectors.groupingBy(Poule::getPouleNum));
+        TreeMap<Object, List<Poule>> equipesBasedOnPoule = poules.stream().
+                collect(Collectors.groupingBy(Poule::getPouleNum, TreeMap::new, toList()));
 
         // On recuprer les equipes qui pevent s'insrire a cette compétition
-        Map<Integer, List<Equipe>> equipesByJeuSpeID = this.equipeRepository.findAll().stream()
+        TreeMap<Integer, List<Equipe>> equipesByJeuSpeID = this.equipeRepository.findAll().stream()
                 .collect(Collectors.groupingBy(
                         Equipe::getJeuSpe,
-                        Collectors.toList()
+                        TreeMap::new,
+                        toList()
                 ));
 
         // On recupere les poules deja inscrire sur cette compétion
         List<Inscription> inscriptionList = this.inscriptionRepository.findAllByCompetitionId(c.getId());
 
-        Map<Integer, List<Rencontre>> rencontreByPoule = this.rencontreRepository.findAllByCompetitonId(c.getId())
+        TreeMap<Integer, List<Rencontre>> rencontreByPoule = this.rencontreRepository.findAllByCompetitonId(c.getId())
                 .stream()
-                .collect(Collectors.groupingBy(Rencontre::getPouleNumero));
+                .collect(Collectors.groupingBy(Rencontre::getPouleNumero, TreeMap::new,
+                        toList()));
 
         // On crée un model vierge pour une eventulle inscription
         Inscription newInscription = new Inscription();
