@@ -10,7 +10,13 @@
                 <!--@thymesVar id="f" type="com.example.sae.models.DashboardFunction"-->
                 <a th:href="${f.getRoute()}"
                    th:classappend="${#httpServletRequest.getRequestURI() == f.getRoute() ? 'active':''}"><span
-                        class="las" th:classappend="${f.getIcon()}"></span><span th:text="${f.getNom()}"></span></a>
+                        class="las" th:classappend="${f.getIcon()}"></span><span th:text="${f.getNom()}"></span>
+
+                    <span class="notification-bubble"
+                          th:if="${f.getRoute() == '/ecurie/notifications' && notificationCount >= 1}"
+                          th:text="${notificationCount}"></span>
+
+                </a>
             </li>
         </ul>
     </div>

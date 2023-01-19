@@ -29,7 +29,8 @@ public class DashboardFunctionService {
                 new DashboardFunction("Vue générale", "/ecurie", "la-eye"),
                 new DashboardFunction("Joueurs", "/ecurie/joueurs", "la-user"),
                 new DashboardFunction("Equipes", "/ecurie/equipes", "la-users"),
-                new DashboardFunction("Mes inscriptions", "/ecurie/inscriptions", "la-medal")
+                new DashboardFunction("Mes inscriptions", "/ecurie/inscriptions", "la-medal"),
+                new DashboardFunction("Mes messages", "/ecurie/notifications", "la-envelope")
         ));
     }
 

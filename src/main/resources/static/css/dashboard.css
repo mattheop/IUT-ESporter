@@ -448,6 +448,16 @@ main {
     margin-top: 1rem;
 }
 
+.notification-bubble {
+    background-color: #f84646;
+    color: white;
+    font-size: 16px;
+    padding: 5px 9px;
+    border-radius: 50%;
+    margin-left: .5rem;
+
+}
+
 @media only screen and (max-width: 768px) {
     .cards {
         grid-template-columns: repeat(1, 1fr);

@@ -23,11 +23,13 @@ public class Sand {
     }
 
     @GetMapping("/sand")
-    public Collection<Notification> index() {
+    public int index() {
 
         notificationRepository.markAllNotificationReadedByEcurieId(1);
         Collection<Notification> allByEcurieId = notificationRepository.findAllByEcurieId(1);
 
-        return allByEcurieId;
+        int nb = notificationRepository.countByReadedFalseAndEcurieId(1);
+
+        return nb;
     }
 }
