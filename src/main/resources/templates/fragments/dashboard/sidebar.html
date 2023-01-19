@@ -13,7 +13,7 @@
                         class="las" th:classappend="${f.getIcon()}"></span><span th:text="${f.getNom()}"></span>
 
                     <span class="notification-bubble"
-                          th:if="${f.getRoute() == '/ecurie/notifications' && notificationCount >= 1}"
+                          th:if="${f.getRoute() == '/ecurie/messages' && notificationCount >= 1}"
                           th:text="${notificationCount}"></span>
 
                 </a>
