@@ -92,6 +92,7 @@
                         <tr>
                             <th style="width: 40%">Nom Équipe</th>
                             <th>Nombre de points</th>
+                            <th>Rang Finale</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
@@ -100,6 +101,13 @@
                             <!--@thymesVar id="inscription" type="com.example.sae.models.db.Inscription"-->
                             <td th:text="${inscription.getEquipe().getNom()}"></td>
                             <td th:text="${inscription.getEcuriePoints()}"></td>
+
+                            <td>
+                                <span th:text="${inscription.getRangFinale()}"></span>
+                                <span th:if="${competition.isFini() && inscription.getNombrePointsGagne() != null}"> +</span>
+                                <span th:text="${inscription.getNombrePointsGagne()}"></span>
+                                <span th:if="${competition.isFini() && inscription.getNombrePointsGagne() != null}"> points</span>
+                            </td>
 
                             <td style="display: flex; align-items: center; gap: 16px">
                                 <form method="post" class="form-need-confirm"

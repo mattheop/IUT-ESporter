@@ -134,6 +134,14 @@ public class Competition {
         return etatCompetiton;
     }
 
+    public boolean isPlaying() {
+        return etatCompetiton == EtatCompetiton.QUALIFICATION || etatCompetiton == EtatCompetiton.FINALE;
+    }
+
+    public boolean isFini() {
+        return etatCompetiton == EtatCompetiton.FIN;
+    }
+
     public void setEtatCompetiton(EtatCompetiton etatCompetiton) {
         this.etatCompetiton = etatCompetiton;
     }

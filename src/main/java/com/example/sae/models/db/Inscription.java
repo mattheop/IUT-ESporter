@@ -1,5 +1,6 @@
 package com.example.sae.models.db;
 
+import com.example.sae.models.enums.EtatCompetiton;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.Column;
@@ -20,6 +21,9 @@ public class Inscription {
 
     @Column("ecurie_points")
     private int ecuriePoints;
+
+    @Column("rang_finale")
+    private Long rangFinale;
 
     public int getInscriptionId() {
         return inscriptionId;
@@ -64,5 +68,22 @@ public class Inscription {
 
     public int getEcuriePoints() {
         return ecuriePoints;
+    }
+
+    public Long getRangFinale() {
+        return rangFinale;
+    }
+
+    public Long getNombrePointsGagne() {
+        if (!competition.isFini())
+            return null;
+
+        if(rangFinale == null) return null;
+
+        if (rangFinale == 1) {
+            return (long) (competition.getTournois().getCashpricepoints() * 0.5);
+        }
+
+        return (long) (competition.getTournois().getCashpricepoints() * 0.25);
     }
 }
