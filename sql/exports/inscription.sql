@@ -1,0 +1,17 @@
+INSERT INTO iut_sae.inscription (inscription_id, competition_id, equipe_id, rang_finale) VALUES (41, 20, 16, null);
+INSERT INTO iut_sae.inscription (inscription_id, competition_id, equipe_id, rang_finale) VALUES (42, 20, 17, null);
+INSERT INTO iut_sae.inscription (inscription_id, competition_id, equipe_id, rang_finale) VALUES (43, 20, 18, null);
+INSERT INTO iut_sae.inscription (inscription_id, competition_id, equipe_id, rang_finale) VALUES (44, 20, 19, null);
+INSERT INTO iut_sae.inscription (inscription_id, competition_id, equipe_id, rang_finale) VALUES (45, 20, 20, null);
+INSERT INTO iut_sae.inscription (inscription_id, competition_id, equipe_id, rang_finale) VALUES (46, 20, 21, null);
+INSERT INTO iut_sae.inscription (inscription_id, competition_id, equipe_id, rang_finale) VALUES (47, 20, 22, null);
+INSERT INTO iut_sae.inscription (inscription_id, competition_id, equipe_id, rang_finale) VALUES (48, 20, 23, null);
+INSERT INTO iut_sae.inscription (inscription_id, competition_id, equipe_id, rang_finale) VALUES (49, 20, 24, null);
+INSERT INTO iut_sae.inscription (inscription_id, competition_id, equipe_id, rang_finale) VALUES (50, 20, 25, null);
+INSERT INTO iut_sae.inscription (inscription_id, competition_id, equipe_id, rang_finale) VALUES (51, 20, 26, null);
+INSERT INTO iut_sae.inscription (inscription_id, competition_id, equipe_id, rang_finale) VALUES (52, 20, 27, null);
+INSERT INTO iut_sae.inscription (inscription_id, competition_id, equipe_id, rang_finale) VALUES (53, 20, 28, null);
+INSERT INTO iut_sae.inscription (inscription_id, competition_id, equipe_id, rang_finale) VALUES (54, 20, 29, null);
+INSERT INTO iut_sae.inscription (inscription_id, competition_id, equipe_id, rang_finale) VALUES (55, 20, 30, null);
+INSERT INTO iut_sae.inscription (inscription_id, competition_id, equipe_id, rang_finale) VALUES (62, 20, 31, null);
+INSERT INTO iut_sae.inscription (inscription_id, competition_id, equipe_id, rang_finale) VALUES (66, 18, 10, null);
