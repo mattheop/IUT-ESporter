@@ -22,12 +22,14 @@
     </div>
 </div>
 
+<!--@thymesVar id="appuser" type="com.example.sae.models.db.AppUser"-->
+<!--@thymesVar id="ecurie" type="com.example.sae.models.db.Ecurie"-->
 <header th:fragment="header">
-    <h2 th:if="${ecurie != null}">Vous gérez l'écurie <span th:text="${ecurie.getNom()}"></span></h2>
-    <h2 th:if="${ecurie == null}">Compte Organisateur</h2>
+    <h2 th:if="${appuser.getRolePrincipal() == 'ROLE_ECURIE'}">Vous gérez l'écurie <span th:text="${ecurie.getNom()}"></span></h2>
+    <h2 th:if="${appuser.getRolePrincipal() == 'ROLE_ORGANISATEUR'}">Compte Organisateur</h2>
+    <h2 th:if="${appuser.getRolePrincipal() == 'ROLE_ARBITRE'}">Compte Arbitre</h2>
     <div class="user-wrapper">
         <div>
-            <!--@thymesVar id="appuser" type="com.example.sae.models.db.AppUser"-->
             <h4>Bonjour <span th:text="${appuser.getFullName()}"></span><a
                     style="text-decoration: none; color: gray; font-size: .80rem" th:href="@{/logout}">, Se
                 déconnecter</a></h4>
