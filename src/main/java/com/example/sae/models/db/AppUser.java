@@ -69,6 +69,10 @@ public class AppUser implements UserDetails {
         return this.prenom + " " + this.nom;
     }
 
+    public String getRolePrincipal() {
+        return this.role.name();
+    }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;
