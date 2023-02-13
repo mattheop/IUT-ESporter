@@ -39,9 +39,7 @@ public class Tournois {
         this.nom = nom;
     }
 
-    public Integer getCashpricepoints() {
-        return cashpricepoints;
-    }
+    public Integer getCashpricepoints() {return cashpricepoints;}
 
     public void setCashpricepoints(Integer cashpricepoints) {
         this.cashpricepoints = cashpricepoints;
