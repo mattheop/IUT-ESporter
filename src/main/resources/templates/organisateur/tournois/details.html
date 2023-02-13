@@ -52,8 +52,8 @@
                 <tr th:each="c : ${competitions}">
                     <!--@thymesVar id="c" type="com.example.sae.models.db.Competition"-->
                     <td th:text="${c.getJeu().getNom()}"></td>
-                    <td th:text="${c.getDateFinInscription()}"></td>
-                    <td th:text="${c.getDateDebutCompetition()}"></td>
+                    <td th:text="${c.getFormattedDateFinInscription()}"></td>
+                    <td th:text="${c.getFormattedDateDebutCompetition()}"></td>
                 </tr>
                 </tbody>
             </table>

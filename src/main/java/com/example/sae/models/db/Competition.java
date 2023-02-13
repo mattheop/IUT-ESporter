@@ -54,7 +54,7 @@ public class Competition {
     }
 
     public String getFormattedDateFinInscription() {
-        return dateFinInscription.format(DateTimeFormatter.ofPattern("dd/dd/yyyy"));
+        return dateFinInscription.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
     public void setDateFinInscription(LocalDateTime dateFinInscription) {
@@ -66,7 +66,7 @@ public class Competition {
     }
 
     public String getFormattedDateDebutCompetition() {
-        return dateDebutCompetition.format(DateTimeFormatter.ofPattern("dd/dd/yyyy"));
+        return dateDebutCompetition.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
 
