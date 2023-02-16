@@ -3,6 +3,9 @@ package com.example.sae.models.db;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 public class Tournois {
@@ -10,8 +13,12 @@ public class Tournois {
     @Id
     @Column("tournois_id")
     private Integer id;
+    @NotBlank(message = "{feedback.emptyfield}")
     private String nom;
+    @Min(value = 0L, message = "{feedback.crashpricemustpositive}")
+    @NotNull(message = "{feedback.emptyfield}")
     private Integer cashpricepoints;
+    @NotBlank(message = "{feedback.emptyfield}")
     private String etenduetournois;
 
     public Tournois() {
@@ -39,7 +46,9 @@ public class Tournois {
         this.nom = nom;
     }
 
-    public Integer getCashpricepoints() {return cashpricepoints;}
+    public Integer getCashpricepoints() {
+        return cashpricepoints;
+    }
 
     public void setCashpricepoints(Integer cashpricepoints) {
         this.cashpricepoints = cashpricepoints;

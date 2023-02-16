@@ -12,13 +12,18 @@ import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -126,9 +131,19 @@ public class EcurieGestionEquipeController extends EcurieDashboard {
     }
 
     @PostMapping("/ajout")
-    public String saveEquipe(@ModelAttribute("equipe") Equipe equipe, @ModelAttribute("ecurie") Ecurie ecurie, Authentication authentication) {
-        equipe.setEcurie(AggregateReference.to(ecurie.getId()));
+    public String saveEquipe(@ModelAttribute("equipe") @Valid Equipe equipe,
+                             BindingResult equipeBindingResult,
+                             @ModelAttribute("ecurie") Ecurie ecurie,
+                             Model model) {
 
+        if (equipeBindingResult.hasErrors()) {
+
+            List<Jeu> jeux = this.jeuRepository.findAll();
+            model.addAttribute("jeux", jeux);
+            return "ecurie/equipes/ajout";
+        }
+
+        equipe.setEcurie(AggregateReference.to(ecurie.getId()));
         this.equipeRepository.save(equipe);
         return "redirect:/ecurie";
     }

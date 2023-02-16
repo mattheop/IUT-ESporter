@@ -5,11 +5,12 @@ import com.example.sae.models.db.Ecurie;
 import com.example.sae.models.db.Inscription;
 import com.example.sae.models.db.Tournois;
 import com.example.sae.repository.*;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Collection;
 
 @Controller
@@ -78,9 +79,12 @@ public class OrganisateurGestionTournoisController extends OrganisateurDashboard
     }
 
     @PostMapping("/create")
-    public String savePlayer(@ModelAttribute("tournois") Tournois tournois, Authentication authentication) {
+    public String savePlayer(@ModelAttribute("tournois") @Valid Tournois tournoi, BindingResult tournoiBindingResult) {
+        if (tournoiBindingResult.hasErrors()) {
+            return "organisateur/tournois/create";
+        }
 
-        this.tournoisRepository.save(tournois);
+        this.tournoisRepository.save(tournoi);
         return "redirect:/organisateur/tournois";
     }
 
@@ -91,14 +95,28 @@ public class OrganisateurGestionTournoisController extends OrganisateurDashboard
 
         model.addAttribute("tournois", tournois);
         model.addAttribute("competition", competition);
-        model.addAttribute("competition", competition);
         model.addAttribute("jeux", this.jeuRepository.findAll());
 
         return "organisateur/tournois/addCompetition";
     }
 
     @PostMapping("/{id}/ajouterCompetition")
-    public String addCompetition(@PathVariable int id, @ModelAttribute("competition") Competition competition) {
+    public String addCompetition(@PathVariable int id,
+                                 @ModelAttribute("competition") @Valid Competition competition,
+                                 BindingResult competitionBindingResult,
+                                 Model model) {
+
+        System.out.println(competition);
+        System.out.println(competitionBindingResult.getAllErrors());
+        if (competitionBindingResult.hasErrors()) {
+            model.addAttribute("tournois", tournoisRepository.getTournoisById(id));
+            model.addAttribute("competition", competition);
+            model.addAttribute("jeux", this.jeuRepository.findAll());
+
+            return "organisateur/tournois/addCompetition";
+        }
+
+
         competitionRepository.insertDirect(competition.getDateDebutCompetition(),
                 competition.getDateFinInscription(),
                 competition.getJeu().getId(),

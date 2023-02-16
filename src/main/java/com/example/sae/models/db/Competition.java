@@ -1,14 +1,16 @@
 package com.example.sae.models.db;
 
 import com.example.sae.models.enums.EtatCompetiton;
+import com.example.sae.validation.DateInline.ValidCompetitionDateIsInline;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.FutureOrPresent;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
-
+@ValidCompetitionDateIsInline(message = "{feedback.competitondatemustinlined}")
 public class Competition {
 
     @Id
@@ -16,10 +18,12 @@ public class Competition {
     private int id;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @FutureOrPresent(message = "{feedback.futurorpresentdate}")
     @Column("date_debut")
     private LocalDateTime dateFinInscription;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @FutureOrPresent(message = "{feedback.futurorpresentdate}")
     @Column("date_fin_inscription")
     private LocalDateTime dateDebutCompetition;
 

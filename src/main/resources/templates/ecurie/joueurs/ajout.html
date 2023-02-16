@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" xmlns xmlns:th>
+<html lang="fr" xmlns xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:include="fragments/header :: head"/>
     <title>Dashboard Écurie</title>
@@ -26,27 +26,32 @@
 
                     <div class="form-input">
                         <label for="nom">Nom du joueur</label>
-                        <input id="nom" type="text" th:field="*{nom}" placeholder="Nom">
+                        <input id="nom" type="text" th:field="*{nom}" placeholder="Nom" th:errorclass="form-input-error">
+                        <span class="form-feedback-error" th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></span>
                     </div>
 
                     <div class="form-input">
                         <label for="prenom">Prenom du joueur</label>
-                        <input id="prenom" type="text" th:field="*{prenom}" placeholder="Prénom">
+                        <input id="prenom" type="text" th:field="*{prenom}" placeholder="Prénom" th:errorclass="form-input-error">
+                        <span class="form-feedback-error" th:if="${#fields.hasErrors('prenom')}" th:errors="*{prenom}"></span>
                     </div>
 
                     <div class="form-input">
                         <label for="pseudo">Pseudo du joueur</label>
-                        <input id="pseudo" type="text" th:field="*{pseudo}" placeholder="Pseudonyme">
+                        <input id="pseudo" type="text" th:field="*{pseudo}" placeholder="Pseudonyme" th:errorclass="form-input-error">
+                        <span class="form-feedback-error" th:if="${#fields.hasErrors('pseudo')}" th:errors="*{pseudo}"></span>
                     </div>
 
                     <div class="form-input">
                         <label for="nationnalite">Nationalité du joueur</label>
-                        <input id="nationnalite" type="text" th:field="*{nationnalite}" placeholder="Nationalité">
+                        <input id="nationnalite" type="text" th:field="*{nationnalite}" placeholder="Nationalité" th:errorclass="form-input-error">
+                        <span class="form-feedback-error" th:if="${#fields.hasErrors('nationnalite')}" th:errors="*{nationnalite}"></span>
                     </div>
 
                     <div class="form-input">
                         <label for="entree_pro">Date entrée pro</label>
-                        <input id="entree_pro" type="date" th:field="*{entree_pro}">
+                        <input id="entree_pro" type="date" th:field="*{entree_pro}"  th:errorclass="form-input-error">
+                        <span class="form-feedback-error" th:if="${#fields.hasErrors('entree_pro')}" th:errors="*{entree_pro}"></span>
                     </div>
 
                     <div class="form-footer">

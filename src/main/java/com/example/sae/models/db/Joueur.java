@@ -4,17 +4,28 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDate;
 
 public class Joueur {
 
     @Id
     private Integer id;
+    @NotBlank(message = "{feedback.emptyfield}")
     private String prenom;
+
+    @NotBlank(message = "{feedback.emptyfield}")
     private String nom;
+
+    @NotBlank(message = "{feedback.emptyfield}")
     private String pseudo;
+    @NotBlank(message = "{feedback.emptyfield}")
     private String nationnalite;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @PastOrPresent(message = "{feedback.pastorpresentdate}")
+    @NotNull(message = "{feedback.emptydate}")
     private LocalDate entree_pro;
 
     private AggregateReference<Ecurie, Integer> ecurie;

@@ -6,48 +6,53 @@
 </head>
 <body>
 
-    <div th:replace="fragments/dashboard/sidebar :: sidebar">
+<div th:replace="fragments/dashboard/sidebar :: sidebar">
 
-        ok
-    </div>
+    ok
+</div>
 
-    <div class="main-content">
+<div class="main-content">
 
-        <header th:replace="fragments/dashboard/sidebar :: header"></header>
+    <header th:replace="fragments/dashboard/sidebar :: header"></header>
 
-        <main>
-            <h1 class="title">Ajouter un tournoi</h1>
+    <main>
+        <h1 class="title">Ajouter un tournoi</h1>
 
-            <div class="form-crud">
+        <div class="form-crud">
 
-                <form action="#" th:action="@{/organisateur/tournois/create}" th:object="${tournois}" method="POST">
+            <form action="#" th:action="@{/organisateur/tournois/create}" th:object="${tournois}" method="POST">
 
-                    <div class="form-input">
-                        <label for="nom">Nom du tournoi</label>
-                        <input required type="text" id="nom" th:field="*{nom}" placeholder="Nom du tournoi">
-                    </div>
+                <div class="form-input">
+                    <label for="nom">Nom du tournoi</label>
+                    <input type="text" id="nom" th:field="*{nom}" placeholder="Nom du tournoi"
+                           th:errorclass="form-input-error">
+                    <span class="form-feedback-error" th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></span>
+                </div>
 
-                    <div class="form-input">
-                        <label for="cashpricepoints">Cashprize Point</label>
-                        <input required type="number" id="cashpricepoints" th:field="*{cashpricepoints}"  min="0">
-                    </div>
+                <div class="form-input">
+                    <label for="cashpricepoints">Cashprize Point</label>
+                    <input type="number" id="cashpricepoints" th:field="*{cashpricepoints}" min="0"
+                           th:errorclass="form-input-error">
+                    <span class="form-feedback-error" th:if="${#fields.hasErrors('cashpricepoints')}"
+                          th:errors="*{cashpricepoints}"></span>
+                </div>
 
-                    <div class="form-input">
-                        <label for="etenduetournois">Notoriété</label>
-                        <select required id="etenduetournois" th:field="*{etenduetournois}">
-                            <!--@thymesVar id="j" type="com.example.sae.models.db.Jeu"-->
+                <div class="form-input">
+                    <label for="etenduetournois">Notoriété</label>
+                    <select required id="etenduetournois" th:field="*{etenduetournois}">
+                        <!--@thymesVar id="j" type="com.example.sae.models.db.Jeu"-->
 
-                            <option value="Regional">Régional</option>
-                            <option value="National">National</option>
-                            <option value="Mondial">Mondial</option>
-                        </select>
-                    </div>
+                        <option value="Regional">Régional</option>
+                        <option value="National">National</option>
+                        <option value="Mondial">Mondial</option>
+                    </select>
+                </div>
 
-                    <button type="submit" class="btn btn-info col-2">Sauvegarder</button>
-                </form>
-            </div>
-        </main>
-    </div>
+                <button type="submit" class="btn btn-info col-2">Sauvegarder</button>
+            </form>
+        </div>
+    </main>
+</div>
 
 </body>
 </html>
