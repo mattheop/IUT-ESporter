@@ -95,14 +95,28 @@ public class OrganisateurGestionTournoisController extends OrganisateurDashboard
 
         model.addAttribute("tournois", tournois);
         model.addAttribute("competition", competition);
-        model.addAttribute("competition", competition);
         model.addAttribute("jeux", this.jeuRepository.findAll());
 
         return "organisateur/tournois/addCompetition";
     }
 
     @PostMapping("/{id}/ajouterCompetition")
-    public String addCompetition(@PathVariable int id, @ModelAttribute("competition") Competition competition) {
+    public String addCompetition(@PathVariable int id,
+                                 @ModelAttribute("competition") @Valid Competition competition,
+                                 BindingResult competitionBindingResult,
+                                 Model model) {
+
+        System.out.println(competition);
+        System.out.println(competitionBindingResult.getAllErrors());
+        if (competitionBindingResult.hasErrors()) {
+            model.addAttribute("tournois", tournoisRepository.getTournoisById(id));
+            model.addAttribute("competition", competition);
+            model.addAttribute("jeux", this.jeuRepository.findAll());
+
+            return "organisateur/tournois/addCompetition";
+        }
+
+
         competitionRepository.insertDirect(competition.getDateDebutCompetition(),
                 competition.getDateFinInscription(),
                 competition.getJeu().getId(),

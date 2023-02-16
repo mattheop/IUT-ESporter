@@ -19,7 +19,13 @@
         <h1 class="title">Ajouter une compétition</h1>
 
         <div class="form-crud">
-            <form method="post" th:action="@{/organisateur/tournois/{id}/ajouterCompetition/(id=${tournois.getId()})}" th:object="${competition}">
+            <form method="post" th:action="@{/organisateur/tournois/{id}/ajouterCompetition/(id=${tournois.getId()})}"
+                  th:object="${competition}">
+
+                <div class="error-form" th:if="${#fields.hasErrors('global')}">
+                        <p th:each="err : ${#fields.errors('global')}" th:text="${err}"></p>
+                </div>
+
                 <div class="form-input">
                     <label for="jeu">Jeu joué lors de cette compétition</label>
                     <select required id="jeu" th:field="*{jeu}">
@@ -31,12 +37,18 @@
 
                 <div class="form-input">
                     <label for="dateDebutCompetition">Date fin des inscriptions</label>
-                    <input required type="datetime-local" id="dateFinInscription" th:field="*{dateFinInscription}">
+                    <input required type="datetime-local" id="dateFinInscription" th:field="*{dateFinInscription}"
+                           th:errorclass="form-input-error">
+                    <span class="form-feedback-error" th:if="${#fields.hasErrors('dateFinInscription')}"
+                          th:errors="*{dateFinInscription}"></span>
                 </div>
 
                 <div class="form-input">
                     <label for="dateDebutCompetition">Date début des premiers matchs</label>
-                    <input required type="datetime-local" id="dateDebutCompetition" th:field="*{dateDebutCompetition}">
+                    <input required type="datetime-local" id="dateDebutCompetition" th:field="*{dateDebutCompetition}"
+                           th:errorclass="form-input-error">
+                    <span class="form-feedback-error" th:if="${#fields.hasErrors('dateDebutCompetition')}"
+                          th:errors="*{dateDebutCompetition}"></span>
                 </div>
                 <div class="form-footer">
                     <button class="btn btn-primary" type="submit">
