@@ -7,6 +7,8 @@ import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -15,12 +17,14 @@ public class Equipe {
     @Id
     @Column("equipe_id")
     private int id;
+    @NotBlank(message = "{feedback.emptyfield}")
     private String nom;
 
     @Column("logo_file_name")
     private String logoFileName;
 
     @Column("jeu_spe")
+    @NotNull(message = "{feedback.emptyfield}")
     private int jeuSpe;
 
     @Transient
