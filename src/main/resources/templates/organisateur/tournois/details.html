@@ -76,7 +76,7 @@
                     </tr>
                     </thead>
 
-                    <tr th:each="i : ${inscriptions}">
+                    <tr th:each="i : ${inscriptions}" th:if="${i.getCompetition().getId() == c.getId()}">
                         <!--@thymesVar id="i" type="com.example.sae.models.db.Inscription"-->
                         <td th:text="${i.getLazyEcurie()?.getNom()}"></td>
                         <td th:text="${i.getEquipe().getNom()}"></td>
