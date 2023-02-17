@@ -39,7 +39,7 @@
                     <td th:text="${j.getPseudo()}"></td>
                     <td th:text="${j.getNationnalite()}"></td>
                     <td style="display: flex; align-items: center; gap: 16px">
-                        <a class="btn" th:href="@{/ecurie/joueurs/{id}(id=${j.getId()})}">Détails</a>
+                        <a class="btn" th:href="@{/ecurie/joueurs/{id}(id=${j.getId()})}">Modifier joueur</a>
 
                         <form method="post" th:action="@{/ecurie/joueurs/{id}/supprimer/(id=${j.getId()})}"
                               class="form-need-confirm"

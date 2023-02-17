@@ -62,7 +62,7 @@ public class Competition {
     }
 
     public LocalDateTime getDateDebutCompetition() {
-        return dateDebutCompetition;
+            return dateDebutCompetition;
     }
 
     public String getFormattedDateDebutCompetition() {
