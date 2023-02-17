@@ -89,19 +89,19 @@ public class OrganisateurGestionTournoisController extends OrganisateurDashboard
     }
 
     @GetMapping("/{id}/ajouterCompetition")
-    public String addCompetitionForm(@PathVariable int id, Model model) {
+    public String addCompetitionForm(@PathVariable("id") Integer id, Model model) {
         Tournois tournois = tournoisRepository.getTournoisById(id);
         Competition competition = new Competition();
 
         model.addAttribute("tournois", tournois);
         model.addAttribute("competition", competition);
-        model.addAttribute("jeux", this.jeuRepository.findAll());
+        model.addAttribute("jeux", this.jeuRepository.findJeuNotInTournois(id));
 
         return "organisateur/tournois/addCompetition";
     }
 
     @PostMapping("/{id}/ajouterCompetition")
-    public String addCompetition(@PathVariable int id,
+    public String addCompetition(@PathVariable("id") Integer id,
                                  @ModelAttribute("competition") @Valid Competition competition,
                                  BindingResult competitionBindingResult,
                                  Model model) {
@@ -111,7 +111,7 @@ public class OrganisateurGestionTournoisController extends OrganisateurDashboard
         if (competitionBindingResult.hasErrors()) {
             model.addAttribute("tournois", tournoisRepository.getTournoisById(id));
             model.addAttribute("competition", competition);
-            model.addAttribute("jeux", this.jeuRepository.findAll());
+            model.addAttribute("jeux", this.jeuRepository.findJeuNotInTournois(id));
 
             return "organisateur/tournois/addCompetition";
         }
