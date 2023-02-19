@@ -19,11 +19,13 @@
         <h1 class="title">Ajouter une compétition</h1>
 
         <div class="form-crud">
-            <form method="post" th:action="@{/organisateur/tournois/{id}/ajouterCompetition/(id=${tournois.getId()})}"
+            <p th:if="${jeux.size() <= 0}">Vous ne pouvez pas ajouter de nouvelles compétitions : aucun jeu disponible qui n'a pas encore été utilisé.</p>
+
+            <form th:if="${jeux.size() > 0}" method="post" th:action="@{/organisateur/tournois/{id}/ajouterCompetition/(id=${tournois.getId()})}"
                   th:object="${competition}">
 
                 <div class="error-form" th:if="${#fields.hasErrors('global')}">
-                        <p th:each="err : ${#fields.errors('global')}" th:text="${err}"></p>
+                    <p th:each="err : ${#fields.errors('global')}" th:text="${err}"></p>
                 </div>
 
                 <div class="form-input">
@@ -56,7 +58,6 @@
                         Ajouter la compétition
                     </button>
                 </div>
-
             </form>
         </div>
     </main>
