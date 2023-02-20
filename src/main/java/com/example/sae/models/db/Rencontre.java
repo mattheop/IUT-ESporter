@@ -122,4 +122,8 @@ public class Rencontre {
     public void setPouleNumero(int pouleNumero) {
         this.pouleNumero = pouleNumero;
     }
+
+    public boolean isArbitred() {
+        return this.scoreEquipe1 != null && this.scoreEquipe2 != null;
+    }
 }
