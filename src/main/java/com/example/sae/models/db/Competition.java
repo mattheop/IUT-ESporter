@@ -146,6 +146,10 @@ public class Competition {
         return etatCompetiton == EtatCompetiton.FIN;
     }
 
+    public boolean isFinal() {
+        return etatCompetiton == EtatCompetiton.FINALE;
+    }
+
     public void setEtatCompetiton(EtatCompetiton etatCompetiton) {
         this.etatCompetiton = etatCompetiton;
     }

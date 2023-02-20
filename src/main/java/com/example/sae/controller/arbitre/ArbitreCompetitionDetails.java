@@ -59,6 +59,7 @@ public class ArbitreCompetitionDetails extends ArbitreDashboard {
         model.addAttribute("poules", equipesBasedOnPoule);
         model.addAttribute("rencontreByPoule", rencontreByPoule);
 
+
         return "arbitre/competitionDetails";
     }
 

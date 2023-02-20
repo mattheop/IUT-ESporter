@@ -362,6 +362,10 @@ main {
     transition: background-color 150ms ease-in-out;
 }
 
+.rencontre-line.arbitre-mode .rencontre-line--score {
+    background: var(--color-warning);
+}
+
 .rencontre-line.arbitre-mode:hover {
     background-color: var(--main-color);
     color: white;
