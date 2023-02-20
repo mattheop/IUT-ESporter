@@ -5,7 +5,6 @@ import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 
@@ -49,4 +48,7 @@ public interface RencontreRepository extends Repository<Rencontre, Integer> {
     @Query("call generate_rencontre_from_competition_and_poule(:pCompetitonId, :pPouleId);")
     @Modifying
     void generateRencontres(@Param("pCompetitonId") int competitionId, @Param("pPouleId") int pouleId);
+
+    @Query("SELECT count(*) FROM rencontre WHERE score_equipe1 is null OR score_equipe2 is null")
+    int countRencontreByCompetition();
 }

@@ -14,7 +14,35 @@
         <header th:replace="fragments/dashboard/sidebar :: header"></header>
 
         <main>
-
+            <div class="welcome-card">
+                <p class="welcome-icon"><i class="las la-info-circle"></i></p>
+                <div class="welcome-txt">
+                    <p class="welcome-title">Bienvenue sur votre panneau organisateur !</p>
+                    <p class="welcome-desc">Ici est affiché une liste de données concernant le nombre de tournoi total et le nombre de tournoi par étendue !</p>
+                </div>
+            </div>
+            <div class="card-stat-container">
+                <div class="card-stat">
+                    <p class="card-icon"><i class="las la-user"></i></p>
+                    <p class="card-data" th:text="${nb_tournoi}"></p>
+                    <p class="card-title">Nombre de tournoi</p>
+                </div>
+                <div class="card-stat">
+                    <p class="card-icon"><i class="las la-user"></i></p>
+                    <p class="card-data" th:text="${nb_mondial}"></p>
+                    <p class="card-title">Nombre tournoi Mondial</p>
+                </div>
+                <div class="card-stat">
+                <p class="card-icon"><i class="las la-user"></i></p>
+                <p class="card-data" th:text="${nb_regional}"></p>
+                <p class="card-title">Nombre tournoi Régional</p>
+                </div>
+                <div class="card-stat">
+                    <p class="card-icon"><i class="las la-user"></i></p>
+                    <p class="card-data" th:text="${nb_national}"></p>
+                    <p class="card-title">Nombre tournoi National</p>
+                </div>
+            </div>
         </main>
     </div>
 
