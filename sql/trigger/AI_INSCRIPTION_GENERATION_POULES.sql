@@ -15,10 +15,19 @@ begin
 
     call sendNotificationToEquipe(NEW.equipe_id,
                                   concat('Vous venez de vous inscrire à la compétition de ',
-                                      competition_name,'.'));
+                                         competition_name, '.'));
 
     if is_competition_full(NEW.competition_id) then
         call generate_poules_qualif(NEW.competition_id);
+
+        update competition
+        set etat_competition = 'QUALIFICATION'
+        where competition.competition_id = NEW.competition_id;
+
+        call generate_rencontre_from_competition_and_poule(NEW.competition_id, 1);
+        call generate_rencontre_from_competition_and_poule(NEW.competition_id, 2);
+        call generate_rencontre_from_competition_and_poule(NEW.competition_id, 3);
+        call generate_rencontre_from_competition_and_poule(NEW.competition_id, 4);
     end if;
 end;
 

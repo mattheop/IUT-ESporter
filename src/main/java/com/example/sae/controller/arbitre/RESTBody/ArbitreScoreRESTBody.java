@@ -6,6 +6,9 @@ public class ArbitreScoreRESTBody {
 
     @JsonProperty("rencontreId")
     private Integer rencontreID;
+
+    @JsonProperty("competitionId")
+    private Integer competitionID;
     @JsonProperty("equipe1")
     private Integer equipe1;
     @JsonProperty("equipe2")
@@ -14,7 +17,8 @@ public class ArbitreScoreRESTBody {
     public ArbitreScoreRESTBody() {
     }
 
-    public ArbitreScoreRESTBody(Integer rencontreID, Integer equipe1, Integer equipe2) {
+    public ArbitreScoreRESTBody(Integer competitionID, Integer rencontreID, Integer equipe1, Integer equipe2) {
+        this.competitionID = competitionID;
         this.rencontreID = rencontreID;
         this.equipe1 = equipe1;
         this.equipe2 = equipe2;
@@ -42,5 +46,13 @@ public class ArbitreScoreRESTBody {
 
     public void setEquipe2(Integer equipe2) {
         this.equipe2 = equipe2;
+    }
+
+    public Integer getCompetitionID() {
+        return competitionID;
+    }
+
+    public void setCompetitionID(Integer competitionID) {
+        this.competitionID = competitionID;
     }
 }

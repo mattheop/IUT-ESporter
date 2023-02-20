@@ -67,7 +67,8 @@
                              th:each="rencontre : ${listeRencontre.value}"
                              th:data-equipe1="${rencontre.getEquipe1().getNom()}"
                              th:data-equipe2="${rencontre.getEquipe2().getNom()}"
-                             th:data-rencontre-id="${rencontre.getId()}">
+                             th:data-rencontre-id="${rencontre.getId()}"
+                             th:data-competition-id="${competition.getId()}">
                             <!--@thymesVar id="rencontre" type="com.example.sae.models.db.Rencontre"-->
                             <div class="rencontre-line--info">
                                 <p class="rencontre-line--date" th:text="${rencontre.getFormattedDateRencontre()}"></p>
