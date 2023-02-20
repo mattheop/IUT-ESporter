@@ -47,7 +47,7 @@ public class CompetitionController extends EcurieDashboard {
                 collect(Collectors.groupingBy(Poule::getPouleNum, TreeMap::new, toList()));
 
         // On recuprer les equipes qui pevent s'insrire a cette compétition
-        TreeMap<Integer, List<Equipe>> equipesByJeuSpeID = this.equipeRepository.findAll().stream()
+        TreeMap<Integer, List<Equipe>> equipesByJeuSpeID = this.equipeRepository.findNotInEquipe(id).stream()
                 .collect(Collectors.groupingBy(
                         Equipe::getJeuSpe,
                         TreeMap::new,

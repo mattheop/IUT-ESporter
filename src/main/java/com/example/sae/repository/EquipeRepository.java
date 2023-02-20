@@ -8,4 +8,13 @@ import java.util.List;
 
 public interface EquipeRepository extends CrudRepository<Equipe, Integer> {
     List<Equipe> findAll();
+
+    @Query("""
+            SELECT *
+            FROM equipe
+            WHERE equipe_id NOT IN (
+                SELECT equipe_id FROM inscription WHERE competition_id = :id
+            );
+    """)
+    List<Equipe> findNotInEquipe(int id);
 }
