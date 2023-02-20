@@ -46,6 +46,7 @@ $(".rencontre-line.arbitre-mode").click((e) => {
     const equipe1Name = e.currentTarget.getAttribute("data-equipe1")
     const equipe2Name = e.currentTarget.getAttribute("data-equipe2")
     const rencontreId = e.currentTarget.getAttribute("data-rencontre-id")
+    const competitionId = e.currentTarget.getAttribute("data-competition-id")
 
     const scoreForm = Swal.fire({
         ...defaultSwal,
@@ -70,7 +71,7 @@ $(".rencontre-line.arbitre-mode").click((e) => {
             type: 'PUT',
             contentType: 'application/json',
             dataType: 'json',
-            data: JSON.stringify({rencontreId, 'equipe1': result.value.equipe1, 'equipe2': result.value.equipe2}),
+            data: JSON.stringify({rencontreId,competitionId, 'equipe1': result.value.equipe1, 'equipe2': result.value.equipe2}),
             statusCode: {
                 200: (response) => {
                     Swal.fire({

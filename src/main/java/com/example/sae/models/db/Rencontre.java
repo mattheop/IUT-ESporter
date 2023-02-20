@@ -9,6 +9,9 @@ import java.time.format.DateTimeFormatter;
 
 public class Rencontre {
 
+    public static final long TOTAL_RENCONTRE_PER_POULE = 6;
+    public static final long TOTAL_RENCONTRE = 24;
+
     @Id
     @Column("rencontre_id")
     private int id;
