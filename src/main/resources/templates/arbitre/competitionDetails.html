@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <th:block th:include="fragments/header :: head"/>
     <title>Dashboard Arbitre</title>
@@ -63,12 +63,13 @@
 
                     <div th:each="listeRencontre : ${rencontreByPoule}" th:id="${'poule-' + listeRencontre.key}"
                          class="rencontre-poule" th:classappend="${listeRencontre.key == 1} ? 'active'">
-                        <div class="rencontre-line arbitre-mode"
-                             th:each="rencontre : ${listeRencontre.value}"
+                        <div th:each="rencontre : ${listeRencontre.value}"
                              th:data-equipe1="${rencontre.getEquipe1().getNom()}"
                              th:data-equipe2="${rencontre.getEquipe2().getNom()}"
                              th:data-rencontre-id="${rencontre.getId()}"
-                             th:data-competition-id="${competition.getId()}">
+                             th:data-competition-id="${competition.getId()}"
+                             th:classappend="${rencontre.isArbitred()} ?  'rencontre-line' : 'rencontre-line arbitre-mode'"
+                        >
                             <!--@thymesVar id="rencontre" type="com.example.sae.models.db.Rencontre"-->
                             <div class="rencontre-line--info">
                                 <p class="rencontre-line--date" th:text="${rencontre.getFormattedDateRencontre()}"></p>
@@ -88,9 +89,7 @@
                                     <img th:src="@{${rencontre.getEquipe2().getLogoPath()}}" width="32" alt="">
                                 </div>
                             </div>
-                            <div class="rencontre-line--action">
-                                <i class="las la-gavel"></i>
-                            </div>
+                            <div class="rencontre-line--action"></div>
                         </div>
                     </div>
 
