@@ -16,4 +16,7 @@ public interface JoueurRepository extends CrudRepository<Joueur, Integer> {
     @Query("delete from joueur where id = :pid")
     @Modifying
     void deleteById(@Param("pid") Integer id);
+
+    @Query("select count(*) from joueur where ecurie = :e_id")
+    int countJoueurByEcurie_Id(@Param("e_id") int ecurieId);
 }

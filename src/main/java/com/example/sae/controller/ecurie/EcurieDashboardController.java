@@ -1,6 +1,7 @@
 package com.example.sae.controller.ecurie;
 
 import com.example.sae.models.*;
+import com.example.sae.models.db.Ecurie;
 import com.example.sae.repository.EcurieRepository;
 import com.example.sae.repository.EquipeRepository;
 import com.example.sae.repository.JeuRepository;
@@ -21,13 +22,20 @@ import java.util.Set;
 @Controller
 @RequestMapping("ecurie")
 public class EcurieDashboardController extends EcurieDashboard {
+    private JoueurRepository joueurRepository;
+    private EquipeRepository equipeRepository;
 
-    @GetMapping()
-    public String home() {
-        return "ecurie/home";
+    public EcurieDashboardController(JoueurRepository joueurRepository, EquipeRepository equipeRepository) {
+        this.joueurRepository = joueurRepository;
+        this.equipeRepository = equipeRepository;
     }
 
-
+    @GetMapping()
+    public String home(@ModelAttribute("ecurie") Ecurie ecurie, Model model) {
+        model.addAttribute("nb_joueur", this.joueurRepository.countJoueurByEcurie_Id(ecurie.getId()));
+        model.addAttribute("nb_equipe", this.equipeRepository.countEquipeByEcurie_Id(ecurie.getId()));
+        return "ecurie/home";
+    }
 
 
 }

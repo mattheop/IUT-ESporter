@@ -45,4 +45,6 @@ public interface RencontreRepository extends Repository<Rencontre, Integer> {
                     @Param("pEquipe1") int equipe1,
                     @Param("pEquipe2") int equipe2);
 
+    @Query("SELECT count(*) FROM rencontre WHERE score_equipe1 is null OR score_equipe2 is null")
+    int countRencontreByCompetition();
 }

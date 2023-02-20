@@ -15,4 +15,12 @@ public interface TournoisRepository extends CrudRepository<Tournois, Integer> {
     @Query("SELECT * FROM tournois")
     Collection<Tournois> getAllTournois();
 
+    @Query("SELECT count(*) FROM tournois WHERE etendueTournois = :et")
+    int getTournoisByEtenduetournoisMondial(@Param("et") String et);
+
+    @Query("SELECT count(*) FROM tournois WHERE etendueTournois = :et")
+    int getTournoisByEtenduetournoisRegional(@Param("et") String et);
+
+    @Query("SELECT count(*) FROM tournois WHERE etendueTournois = :et")
+    int getTournoisByEtenduetournoisNational(@Param("et") String et);
 }
