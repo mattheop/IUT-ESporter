@@ -40,7 +40,7 @@
                 <div class="form-input">
                     <label for="dateDebutCompetition">Date fin des inscriptions</label>
                     <input required type="datetime-local" id="dateFinInscription" th:field="*{dateFinInscription}"
-                           th:errorclass="form-input-error">
+                           th:errorclass="form-input-error" max ="dateDebutCompetition">
                     <span class="form-feedback-error" th:if="${#fields.hasErrors('dateFinInscription')}"
                           th:errors="*{dateFinInscription}"></span>
                 </div>
