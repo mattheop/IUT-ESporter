@@ -8,6 +8,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Joueur {
 
@@ -95,6 +96,23 @@ public class Joueur {
 
     public void setEcurie(AggregateReference<Ecurie, Integer> ecurie) {
         this.ecurie = ecurie;
+    }
+
+    public AggregateReference<Ecurie, Integer> getEcurie() {
+        return ecurie;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Joueur joueur = (Joueur) o;
+        return Objects.equals(id, joueur.id) && Objects.equals(prenom, joueur.prenom) && Objects.equals(nom, joueur.nom) && Objects.equals(pseudo, joueur.pseudo) && Objects.equals(nationnalite, joueur.nationnalite) && Objects.equals(entree_pro, joueur.entree_pro) && Objects.equals(ecurie.getId(), joueur.ecurie.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, prenom, nom, pseudo, nationnalite, entree_pro, ecurie);
     }
 
     public String toString() {
