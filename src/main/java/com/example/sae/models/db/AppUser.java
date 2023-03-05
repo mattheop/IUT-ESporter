@@ -1,5 +1,6 @@
 package com.example.sae.models.db;
 
+import com.example.sae.exceptions.UserNotEcurieException;
 import com.example.sae.models.enums.AppUserRole;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
@@ -22,6 +23,7 @@ public class AppUser implements UserDetails {
     private Boolean locked;
 
     private AggregateReference<Ecurie, Integer> managed_ecurie;
+
     public AppUser() {
     }
 
@@ -93,7 +95,11 @@ public class AppUser implements UserDetails {
         return true;
     }
 
-    public int getManagedEcurieId() {
+    public int getManagedEcurieId() throws UserNotEcurieException {
+        if (managed_ecurie == null) {
+            throw new UserNotEcurieException();
+        }
+
         return this.managed_ecurie.getId();
     }
 
