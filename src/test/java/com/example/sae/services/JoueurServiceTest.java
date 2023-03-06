@@ -56,6 +56,19 @@ public class JoueurServiceTest {
 
     @Test
     @WithUserDetails(value = "testing_ecurie", userDetailsServiceBeanName = "appUserService")
+    public void Save_WithJoueurNotOurEcurie_ShouldRaiseJoueurNotOwned() {
+        assertNull(this.joueurFixture.getId());
+
+        this.joueurFixture.setEcurie(AggregateReference.to(2));
+
+        assertAll(() -> {
+            assertThrows(JoueurNotOwnedException.class, () ->  this.joueurService.save(this.joueurFixture));
+            assertNull(this.joueurFixture.getId());
+        });
+    }
+
+    @Test
+    @WithUserDetails(value = "testing_ecurie", userDetailsServiceBeanName = "appUserService")
     public void Save_ShouldAddToEcurie() {
         assertNull(this.joueurFixture.getId());
 

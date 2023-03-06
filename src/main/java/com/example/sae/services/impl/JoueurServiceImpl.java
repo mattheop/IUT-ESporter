@@ -52,20 +52,9 @@ public class JoueurServiceImpl implements JoueurService {
     }
 
     @Override
-    public void save(Joueur joueur, int ecurieId) {
-        joueur.setEcurie(AggregateReference.to(ecurieId));
-        save(joueur);
-    }
-
-    @Override
     public void delete(int id) throws JoueurNotOwnedException, JoueurNotFoundException {
-        Joueur joueur = find(id);
-
-        if (joueur.getEcurie().getId() != appUserService.getManagedEcurie().getId()) {
-            throw new JoueurNotOwnedException();
-        }
-
-        joueurRepository.deleteById(id);
+        Joueur search = find(id);
+        joueurRepository.deleteById(search.getId());
     }
 
     @Override
