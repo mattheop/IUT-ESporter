@@ -1,9 +1,10 @@
 package com.example.sae.services;
 
-import com.example.sae.exceptions.JoueurNotFoundException;
-import com.example.sae.exceptions.JoueurNotOwnedException;
-import com.example.sae.exceptions.JoueurShouldBeAttachedToEcurie;
+import com.example.sae.exceptions.joueur.JoueurNotFoundException;
+import com.example.sae.exceptions.joueur.JoueurNotOwnedException;
+import com.example.sae.exceptions.joueur.JoueurShouldBeAttachedToEcurie;
 import com.example.sae.models.db.Joueur;
+import com.example.sae.repository.JoueurRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,8 +28,7 @@ public class JoueurServiceTest {
     private JoueurService joueurService;
 
     @Autowired
-    private AppUserService appUserService;
-
+    private JoueurRepository joueurRepository;
     private Joueur joueurFixture;
 
     @BeforeEach
@@ -116,7 +116,7 @@ public class JoueurServiceTest {
     @Test
     @WithUserDetails(value = "testing_ecurie2", userDetailsServiceBeanName = "appUserService")
     public void Find_WhenNotOwnedJoueur_ShouldRaiseJouerNotOwned() {
-        this.joueurService.save(this.joueurFixture);
+        this.joueurRepository.save(this.joueurFixture);
         int createdId = joueurFixture.getId();
 
         assertThrows(JoueurNotOwnedException.class, () -> this.joueurService.find(createdId));
@@ -125,7 +125,7 @@ public class JoueurServiceTest {
     @Test
     @WithUserDetails(value = "testing_ecurie2", userDetailsServiceBeanName = "appUserService")
     public void Delete_WhenNotOwnedJoueur_ShouldRaiseJouerNotOwned() {
-        this.joueurService.save(this.joueurFixture);
+        this.joueurRepository.save(this.joueurFixture);
         int createdId = joueurFixture.getId();
 
         assertThrows(JoueurNotOwnedException.class, () -> this.joueurService.delete(createdId));
@@ -146,7 +146,7 @@ public class JoueurServiceTest {
     @WithUserDetails(value = "testing_ecurie", userDetailsServiceBeanName = "appUserService")
     public void FindAll_ShouldReturnCollectionOfAllJoueurs() {
         this.joueurService.save(this.joueurFixture);
-        Collection joueurs = this.joueurService.findAll();
+        Collection<Joueur> joueurs = this.joueurService.findAll();
         assertFalse(joueurs.isEmpty());
 
         this.joueurFixture.setNom("Pierro");
@@ -154,7 +154,6 @@ public class JoueurServiceTest {
         this.joueurService.save(this.joueurFixture);
 
         assertEquals(joueurs.size() + 1, this.joueurService.findAll().size());
-
     }
 
 }

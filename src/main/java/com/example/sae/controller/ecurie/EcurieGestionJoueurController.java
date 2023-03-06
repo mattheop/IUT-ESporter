@@ -1,29 +1,24 @@
 package com.example.sae.controller.ecurie;
 
-import com.example.sae.exceptions.JoueurNotFoundException;
-import com.example.sae.exceptions.JoueurNotOwnedException;
+import com.example.sae.exceptions.joueur.JoueurNotFoundException;
+import com.example.sae.exceptions.joueur.JoueurNotOwnedException;
 import com.example.sae.exceptions.UserNotEcurieException;
 import com.example.sae.models.db.Ecurie;
-import com.example.sae.models.db.Equipe;
 import com.example.sae.models.db.Joueur;
 import com.example.sae.repository.EcurieRepository;
 import com.example.sae.repository.JoueurRepository;
-import com.example.sae.services.AppUserService;
 import com.example.sae.services.JoueurService;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
 import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.Collection;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("ecurie/joueurs")

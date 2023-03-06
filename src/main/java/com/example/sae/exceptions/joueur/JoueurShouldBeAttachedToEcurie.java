@@ -1,4 +1,4 @@
-package com.example.sae.exceptions;
+package com.example.sae.exceptions.joueur;
 
 public class JoueurShouldBeAttachedToEcurie extends RuntimeException {
 

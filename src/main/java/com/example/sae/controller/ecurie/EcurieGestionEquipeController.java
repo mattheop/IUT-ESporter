@@ -1,14 +1,22 @@
 package com.example.sae.controller.ecurie;
 
+import com.example.sae.exceptions.UserNotEcurieException;
+import com.example.sae.exceptions.equipe.EquipeNotFoundException;
+import com.example.sae.exceptions.equipe.EquipeNotOwnedException;
+import com.example.sae.exceptions.equipe.EquipeUploadLogoException;
+import com.example.sae.exceptions.joueur.JoueurNotFoundException;
+import com.example.sae.exceptions.joueur.JoueurNotOwnedException;
 import com.example.sae.models.db.Ecurie;
 import com.example.sae.models.db.Equipe;
 import com.example.sae.models.db.Jeu;
 import com.example.sae.models.db.Joueur;
 import com.example.sae.models.ref.JoueurRef;
-import com.example.sae.repository.EquipeRepository;
 import com.example.sae.repository.JeuRepository;
 import com.example.sae.repository.JoueurRepository;
+import com.example.sae.services.EquipeService;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,12 +25,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -30,15 +35,12 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("ecurie/equipes")
 public class EcurieGestionEquipeController extends EcurieDashboard {
-
-    private static final String UPLOAD_EQUIPE_LOGO_FOLDER = System.getProperty("user.dir") + "/uploads/equipes_logo/";
-
-    private EquipeRepository equipeRepository;
+    private EquipeService equipeServie;
     private JeuRepository jeuRepository;
     private JoueurRepository joueurRepository;
 
-    public EcurieGestionEquipeController(EquipeRepository equipeRepository, JeuRepository jeuRepository, JoueurRepository joueurRepository) {
-        this.equipeRepository = equipeRepository;
+    public EcurieGestionEquipeController(EquipeService equipeServie, JeuRepository jeuRepository, JoueurRepository joueurRepository) {
+        this.equipeServie = equipeServie;
         this.jeuRepository = jeuRepository;
         this.joueurRepository = joueurRepository;
     }
@@ -62,10 +64,7 @@ public class EcurieGestionEquipeController extends EcurieDashboard {
 
     @GetMapping("/{id}/details")
     public String detailsEquipe(@PathVariable Integer id, Model model, Authentication authentication) {
-        Equipe e = equipeRepository.findById(id).orElse(null);
-
-        if (e == null)
-            return "redirect:/ecurie";
+        Equipe e = equipeServie.find(id);
 
         Jeu jeuspe = jeuRepository.findById(Integer.valueOf(e.getJeuSpe())).orElse(null);
         Iterable<Joueur> joueurs = joueurRepository.findAllById(e.getJoueursIds().stream().map(JoueurRef::getJoueurId).collect(Collectors.toList()));
@@ -80,42 +79,27 @@ public class EcurieGestionEquipeController extends EcurieDashboard {
     }
 
     @PostMapping("/{id}/ajouterJoueur")
-    public String ajouterJoueur(@PathVariable Integer id, @RequestParam(value = "id_joueur") Integer id_joueur) {
+    public String ajouterJoueur(@PathVariable Integer id, @RequestParam(value = "id_joueur") Integer idJoueur) {
+        Equipe e = equipeServie.find(id);
+        equipeServie.addJoueur(e, idJoueur);
 
-        Equipe e = equipeRepository.findById(id).orElse(null);
-        assert e != null;
-        e.addJoueur(new JoueurRef(id_joueur));
-
-        this.equipeRepository.save(e);
         return "redirect:/ecurie/equipes/" + e.getId() + "/details";
     }
 
     @PostMapping("/{id}/supprimerJoueur")
-    public String supprimerJoueur(@PathVariable Integer id, @RequestParam(value = "id_joueur") Integer id_joueur) {
+    public String supprimerJoueur(@PathVariable Integer id, @RequestParam(value = "id_joueur") Integer idJoueur) {
+        Equipe e = equipeServie.find(id);
+        equipeServie.removeJoueur(e, idJoueur);
 
-        Equipe e = equipeRepository.findById(id).orElse(null);
-        assert e != null;
-        e.removeJoueur(id_joueur);
-
-        this.equipeRepository.save(e);
         return "redirect:/ecurie/equipes/" + e.getId() + "/details";
     }
 
     @PostMapping("/{id}/ajouterLogo")
-    public String ajouterLogo(@PathVariable Integer id, @RequestParam("image") MultipartFile multipartFile) throws IOException {
-        Equipe e = equipeRepository.findById(id).orElse(null);
-        assert e != null;
+    public String ajouterLogo(@PathVariable Integer id, @RequestParam("image") MultipartFile multipartFile) {
+        Equipe equipe = equipeServie.find(id);
+        equipeServie.saveLogo(equipe, multipartFile);
 
-        String fileName = e.getId() + "-eid@" + e.getEcurie().getId() + "_" + e.getNom() + "." + Objects.requireNonNull(multipartFile.getOriginalFilename()).substring(multipartFile.getOriginalFilename().lastIndexOf(".") + 1);
-
-        e.setLogoFileName(fileName);
-
-        byte[] bytes = new byte[0];
-        bytes = multipartFile.getBytes();
-        Files.write(Paths.get(UPLOAD_EQUIPE_LOGO_FOLDER + fileName), bytes);
-
-        this.equipeRepository.save(e);
-        return "redirect:/ecurie/equipes/" + e.getId() + "/details";
+        return "redirect:/ecurie/equipes/" + equipe.getId() + "/details";
     }
 
     @GetMapping("/ajout")
@@ -137,20 +121,43 @@ public class EcurieGestionEquipeController extends EcurieDashboard {
                              Model model) {
 
         if (equipeBindingResult.hasErrors()) {
-
             List<Jeu> jeux = this.jeuRepository.findAll();
             model.addAttribute("jeux", jeux);
             return "ecurie/equipes/ajout";
         }
 
         equipe.setEcurie(AggregateReference.to(ecurie.getId()));
-        this.equipeRepository.save(equipe);
+        this.equipeServie.save(equipe);
         return "redirect:/ecurie";
     }
 
     @PostMapping("/{id}/supprimer")
     public String saveEquipe(@PathVariable("id") Integer id) {
-        this.equipeRepository.deleteById(id);
+        this.equipeServie.delete(id);
         return "redirect:/ecurie/equipes";
+    }
+
+    @ExceptionHandler(EquipeNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<String> handleEquipeNotFound(EquipeNotFoundException exception) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(exception.getMessage());
+    }
+
+    @ExceptionHandler(EquipeUploadLogoException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<String> handleEquipeLogoFailUpload(EquipeUploadLogoException exception) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(exception.getMessage());
+    }
+
+    /**
+     * Si l'exception UserNotEcurieException est levée, alors on renvoie une 404 avec le message d'erreur
+     */
+    @ExceptionHandler({UserPrincipalNotFoundException.class, EquipeNotOwnedException.class})
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ResponseEntity<String> handlePermissionIssue(RuntimeException exception) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(exception.getMessage());
     }
 }

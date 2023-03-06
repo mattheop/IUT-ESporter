@@ -1,8 +1,8 @@
 package com.example.sae.services.impl;
 
-import com.example.sae.exceptions.JoueurNotFoundException;
-import com.example.sae.exceptions.JoueurNotOwnedException;
-import com.example.sae.exceptions.JoueurShouldBeAttachedToEcurie;
+import com.example.sae.exceptions.joueur.JoueurNotFoundException;
+import com.example.sae.exceptions.joueur.JoueurNotOwnedException;
+import com.example.sae.exceptions.joueur.JoueurShouldBeAttachedToEcurie;
 import com.example.sae.exceptions.UserNotEcurieException;
 import com.example.sae.models.db.Joueur;
 import com.example.sae.repository.JoueurRepository;
@@ -31,14 +31,17 @@ public class JoueurServiceImpl implements JoueurService {
             throw new JoueurNotOwnedException();
         }
 
-        return joueurRepository.findById(id).orElseThrow(JoueurNotFoundException::new);
+        return joueur;
     }
 
     @Override
     public Joueur save(Joueur joueur) {
-
         if (joueur.getEcurie() == null) {
             throw new JoueurShouldBeAttachedToEcurie();
+        }
+
+        if(joueur.getEcurie().getId() != this.appUserService.getManagedEcurie().getId()){
+            throw new JoueurNotOwnedException();
         }
 
         // Formatting Nom et prenom des joueurs
