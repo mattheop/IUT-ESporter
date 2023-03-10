@@ -1,11 +1,8 @@
 package com.example.sae.controller.ecurie;
 
-import com.example.sae.exceptions.UserNotEcurieException;
 import com.example.sae.exceptions.equipe.EquipeNotFoundException;
 import com.example.sae.exceptions.equipe.EquipeNotOwnedException;
 import com.example.sae.exceptions.equipe.EquipeUploadLogoException;
-import com.example.sae.exceptions.joueur.JoueurNotFoundException;
-import com.example.sae.exceptions.joueur.JoueurNotOwnedException;
 import com.example.sae.models.db.Ecurie;
 import com.example.sae.models.db.Equipe;
 import com.example.sae.models.db.Jeu;
@@ -35,12 +32,12 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("ecurie/equipes")
 public class EcurieGestionEquipeController extends EcurieDashboard {
-    private EquipeService equipeServie;
+    private EquipeService equipeService;
     private JeuRepository jeuRepository;
     private JoueurRepository joueurRepository;
 
-    public EcurieGestionEquipeController(EquipeService equipeServie, JeuRepository jeuRepository, JoueurRepository joueurRepository) {
-        this.equipeServie = equipeServie;
+    public EcurieGestionEquipeController(EquipeService equipeService, JeuRepository jeuRepository, JoueurRepository joueurRepository) {
+        this.equipeService = equipeService;
         this.jeuRepository = jeuRepository;
         this.joueurRepository = joueurRepository;
     }
@@ -64,7 +61,7 @@ public class EcurieGestionEquipeController extends EcurieDashboard {
 
     @GetMapping("/{id}/details")
     public String detailsEquipe(@PathVariable Integer id, Model model, Authentication authentication) {
-        Equipe e = equipeServie.find(id);
+        Equipe e = equipeService.find(id);
 
         Jeu jeuspe = jeuRepository.findById(Integer.valueOf(e.getJeuSpe())).orElse(null);
         Iterable<Joueur> joueurs = joueurRepository.findAllById(e.getJoueursIds().stream().map(JoueurRef::getJoueurId).collect(Collectors.toList()));
@@ -80,24 +77,24 @@ public class EcurieGestionEquipeController extends EcurieDashboard {
 
     @PostMapping("/{id}/ajouterJoueur")
     public String ajouterJoueur(@PathVariable Integer id, @RequestParam(value = "id_joueur") Integer idJoueur) {
-        Equipe e = equipeServie.find(id);
-        equipeServie.addJoueur(e, idJoueur);
+        Equipe e = equipeService.find(id);
+        equipeService.addJoueur(e, idJoueur);
 
         return "redirect:/ecurie/equipes/" + e.getId() + "/details";
     }
 
     @PostMapping("/{id}/supprimerJoueur")
     public String supprimerJoueur(@PathVariable Integer id, @RequestParam(value = "id_joueur") Integer idJoueur) {
-        Equipe e = equipeServie.find(id);
-        equipeServie.removeJoueur(e, idJoueur);
+        Equipe e = equipeService.find(id);
+        equipeService.removeJoueur(e, idJoueur);
 
         return "redirect:/ecurie/equipes/" + e.getId() + "/details";
     }
 
     @PostMapping("/{id}/ajouterLogo")
     public String ajouterLogo(@PathVariable Integer id, @RequestParam("image") MultipartFile multipartFile) {
-        Equipe equipe = equipeServie.find(id);
-        equipeServie.saveLogo(equipe, multipartFile);
+        Equipe equipe = equipeService.find(id);
+        equipeService.saveLogo(equipe, multipartFile);
 
         return "redirect:/ecurie/equipes/" + equipe.getId() + "/details";
     }
@@ -127,13 +124,13 @@ public class EcurieGestionEquipeController extends EcurieDashboard {
         }
 
         equipe.setEcurie(AggregateReference.to(ecurie.getId()));
-        this.equipeServie.save(equipe);
+        this.equipeService.save(equipe);
         return "redirect:/ecurie";
     }
 
     @PostMapping("/{id}/supprimer")
     public String saveEquipe(@PathVariable("id") Integer id) {
-        this.equipeServie.delete(id);
+        this.equipeService.delete(id);
         return "redirect:/ecurie/equipes";
     }
 
