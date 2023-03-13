@@ -23,7 +23,7 @@ $('.form-need-confirm').on("submit", (e) => {
         Swal.fire({
             ...defaultSwal,
             type: 'question',
-            title: "Êtes-vous sûrs ?",
+            title: "Êtes-vous sûr(e) ?",
             text: confirmText,
             showCancelButton: true
         }).then((result) => {
@@ -90,7 +90,7 @@ $(".rencontre-line.arbitre-mode").click((e) => {
                         ...defaultSwal,
                         type: 'error',
                         title: "Modification rencontre",
-                        text: "Une erreur est survenue veuillez réessayer ultérieurement ou contacter un administrateur.",
+                        text: "Une erreur est survenue, veuillez réessayer ultérieurement ou contacter un administrateur.",
                         showCancelButton: false,
                     })
                 }

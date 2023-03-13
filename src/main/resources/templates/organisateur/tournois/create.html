@@ -24,7 +24,7 @@
 
                 <div class="form-input">
                     <label for="nom">Nom du tournoi</label>
-                    <input type="text" id="nom" th:field="*{nom}" placeholder="Nom du tournoi"
+                    <input type="text" id="nom" th:field="*{nom}" placeholder="Nom"
                            th:errorclass="form-input-error">
                     <span class="form-feedback-error" th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></span>
                 </div>

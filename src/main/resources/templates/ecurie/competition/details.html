@@ -15,7 +15,7 @@
         <main>
 
             <div class="competition-details-section">
-                <h1 class="title">Details de la compétition <span th:text="${competition.getJeu().getNom()}"></span>
+                <h1 class="title">Détails de la compétition <span th:text="${competition.getJeu().getNom()}"></span>
                 </h1>
 
                 <div class="stepper-wrapper">
@@ -62,7 +62,7 @@
 
 
             <div class="competition-details-section">
-                <h1 class="title">Inscriptions</h1>
+                <h1 class="title">Inscription</h1>
 
                 <div>
                     <div class="table-crud-header">
@@ -93,7 +93,7 @@
                             <th style="width: 40%">Nom Équipe</th>
                             <th>Nombre de points</th>
                             <th>Rang Finale</th>
-                            <th>Actions</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
 
@@ -134,7 +134,7 @@
 
                 <div class="composition-poules">
                     <div class="poule-card" th:each="pouleCat : ${poules}">
-                        <p class="poule-card--title">Poules <span th:text="${pouleCat.value[0].getNiceName()}"></span></p>
+                        <p class="poule-card--title">Poule <span th:text="${pouleCat.value[0].getNiceName()}"></span></p>
 
 
                         <div class="poule-card--composition">

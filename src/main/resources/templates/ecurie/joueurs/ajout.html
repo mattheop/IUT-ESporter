@@ -31,7 +31,7 @@
                     </div>
 
                     <div class="form-input">
-                        <label for="prenom">Prenom du joueur</label>
+                        <label for="prenom">Prénom du joueur</label>
                         <input id="prenom" type="text" th:field="*{prenom}" placeholder="Prénom" th:errorclass="form-input-error">
                         <span class="form-feedback-error" th:if="${#fields.hasErrors('prenom')}" th:errors="*{prenom}"></span>
                     </div>
