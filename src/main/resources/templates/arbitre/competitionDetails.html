@@ -31,7 +31,7 @@
 
                 <div class="composition-poules">
                     <div class="poule-card" th:each="pouleCat : ${poules}">
-                        <p class="poule-card--title">Poules <span th:text="${pouleCat.value[0].getNiceName()}"></span></p>
+                        <p class="poule-card--title">Poule <span th:text="${pouleCat.value[0].getNiceName()}"></span></p>
 
                         <div class="poule-card--composition">
                             <div class="poule-card--line" th:each="pouleLine : ${pouleCat.value}">
@@ -50,7 +50,7 @@
 
             <div class="competition-details-section">
 
-                <h1 class="title">Listes des rencontres</h1>
+                <h1 class="title">Liste des rencontres</h1>
 
                 <div class="rencontre-list ">
 

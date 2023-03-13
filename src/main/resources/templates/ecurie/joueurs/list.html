@@ -44,7 +44,7 @@
                         <form method="post" th:action="@{/ecurie/joueurs/{id}/supprimer/(id=${j.getId()})}"
                               class="form-need-confirm"
                               th:data-confirm-message="${'Voulez vous vraiment supprimer le joueur ' + j.getPseudo() + ' ?'}">
-                            <input type="submit" class="btn btn-danger" value="Supprimé">
+                            <input type="submit" class="btn btn-danger" value="Supprimer">
                         </form>
                     </td>
                 </tr>

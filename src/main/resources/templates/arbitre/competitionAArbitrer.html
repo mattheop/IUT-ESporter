@@ -17,7 +17,7 @@
             <div class="competition-card" th:each="competition : ${competitions}" style="margin-bottom: 2rem">
                 <!--@thymesVar id="competition" type="com.example.sae.models.db.Competition"-->
                 <div class="competition-card--unrolled">
-                    <p class="competition-card--title">Nombre d'équipe</p>
+                    <p class="competition-card--title">Nombre d'équipes</p>
                     <p class="competition-card--count"><span
                             th:text="${competition.getNbParticipation()}"></span><span class="over">/16</span></p>
                 </div>
