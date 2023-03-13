@@ -21,12 +21,9 @@ public class EcurieGestionInscriptions extends EcurieDashboard {
 
     private CompetitionRepository competitionRepository;
     private InscriptionRepository inscriptionRepository;
-    private EquipeRepository equipeRepository;
-
-    public EcurieGestionInscriptions(CompetitionRepository competitionRepository, InscriptionRepository inscriptionRepository, EquipeRepository equipeRepository) {
+    public EcurieGestionInscriptions(CompetitionRepository competitionRepository, InscriptionRepository inscriptionRepository) {
         this.competitionRepository = competitionRepository;
         this.inscriptionRepository = inscriptionRepository;
-        this.equipeRepository = equipeRepository;
     }
 
     @GetMapping()

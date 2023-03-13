@@ -10,6 +10,7 @@ import org.springframework.data.relational.core.mapping.MappedCollection;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -84,8 +85,8 @@ public class Equipe {
         return joueurs;
     }
 
-    public void removeJoueur(Integer joueurId) {
-        this.joueurs = this.joueurs.stream().filter(joueurRef -> joueurRef.getJoueurId() != joueurId).collect(Collectors.toSet());
+    public void setJoueursIds(Set<JoueurRef> joueurs){
+        this.joueurs = joueurs;
     }
 
     public Integer getNbJoueurs() {
@@ -111,6 +112,19 @@ public class Equipe {
 
     public void setJeuSpeModel(Jeu jeuSpeModel) {
         this.jeuSpeModel = jeuSpeModel;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Equipe equipe = (Equipe) o;
+        return id == equipe.id && jeuSpe == equipe.jeuSpe && Objects.equals(nom, equipe.nom) && Objects.equals(logoFileName, equipe.logoFileName) && Objects.equals(jeuSpeModel, equipe.jeuSpeModel) && Objects.equals(ecurie.getId(), equipe.ecurie.getId()) && Objects.equals(joueurs, equipe.joueurs);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nom, logoFileName, jeuSpe, jeuSpeModel, ecurie, joueurs);
     }
 }
 
