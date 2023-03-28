@@ -67,7 +67,7 @@ public interface InscriptionRepository extends CrudRepository<Inscription, Integ
                 WHERE competition.tournois_id = :searched_id
             order by -rang_finale DESC;
             """)
-    List<Inscription> findAllByTournoisId(@Param("searched_id") Integer searched_id);
+    List<Inscription> findAllByTournoisId(@Param("searched_id") Integer searchedId);
 
     @Query("""
             SELECT
@@ -98,7 +98,7 @@ public interface InscriptionRepository extends CrudRepository<Inscription, Integ
                 WHERE competition.competition_id = :searched_id
                             order by -rang_finale DESC;
             """)
-    List<Inscription> findAllByCompetitionId(@Param("searched_id") Integer searched_id);
+    List<Inscription> findAllByCompetitionId(@Param("searched_id") Integer searchedId);
 
     @Modifying
     @Query("insert into inscription (competition_id, equipe_id) values (:cid, :eid);")

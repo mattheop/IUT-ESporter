@@ -11,7 +11,6 @@ import com.example.sae.repository.JoueurRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
@@ -29,7 +28,6 @@ import java.time.LocalDate;
 import java.util.Collection;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.hamcrest.Matchers.any;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doThrow;
@@ -37,7 +35,7 @@ import static org.mockito.Mockito.doThrow;
 @SpringBootTest
 @ActiveProfiles("testing")
 @Transactional
-public class EquipeServiceTest {
+class EquipeServiceTest {
     @Autowired
     private EquipeService equipeService;
 
@@ -94,7 +92,7 @@ public class EquipeServiceTest {
 
     @Test
     @WithUserDetails(value = "testing_ecurie", userDetailsServiceBeanName = "appUserService")
-    public void Find_WhenIDIsValid_ShouldReturnEquipe() {
+    void Find_WhenIDIsValid_ShouldReturnEquipe() {
         this.equipeService.save(this.equipeFixture);
         int createdId = this.equipeFixture.getId();
 
@@ -104,14 +102,14 @@ public class EquipeServiceTest {
 
     @Test
     @WithUserDetails(value = "testing_ecurie", userDetailsServiceBeanName = "appUserService")
-    public void Find_WhenIDNotValid_ShouldRaiseEquipeNotFound() {
+    void Find_WhenIDNotValid_ShouldRaiseEquipeNotFound() {
         assertThrows(EquipeNotFoundException.class, () -> this.equipeService.find(-1));
         assertThrows(EquipeNotFoundException.class, () -> this.equipeService.find(999999999));
     }
 
     @Test
     @WithUserDetails(value = "testing_ecurie2", userDetailsServiceBeanName = "appUserService")
-    public void Delete_WhenNotOwnedEquipe_ShouldRaiseEquipeNotOwned() {
+    void Delete_WhenNotOwnedEquipe_ShouldRaiseEquipeNotOwned() {
         this.equipeRepository.save(this.equipeFixture);
         int createdId = this.equipeFixture.getId();
 
@@ -120,7 +118,7 @@ public class EquipeServiceTest {
 
     @Test
     @WithUserDetails(value = "testing_ecurie", userDetailsServiceBeanName = "appUserService")
-    public void Delete_WhenValid_ShouldNotExistAnymore() {
+    void Delete_WhenValid_ShouldNotExistAnymore() {
         this.equipeService.save(this.equipeFixture);
         int createdId = this.equipeFixture.getId();
 
@@ -133,7 +131,7 @@ public class EquipeServiceTest {
 
     @Test
     @WithUserDetails(value = "testing_ecurie", userDetailsServiceBeanName = "appUserService")
-    public void FindAll_ShouldReturnCollectionOfAllEquipes() {
+    void FindAll_ShouldReturnCollectionOfAllEquipes() {
         this.equipeService.save(this.equipeFixture);
         Collection<Equipe> equipes = this.equipeService.findAll();
         assertFalse(equipes.isEmpty());
@@ -149,7 +147,7 @@ public class EquipeServiceTest {
 
     @Test
     @WithUserDetails(value = "testing_ecurie", userDetailsServiceBeanName = "appUserService")
-    public void SaveLogo_WithValidImage_ShouldUploadFile() throws IOException {
+    void SaveLogo_WithValidImage_ShouldUploadFile() throws IOException {
         equipeService.save(equipeFixture);
 
         byte[] fileContent = {1, 2, 3, 4, 5};
@@ -170,7 +168,7 @@ public class EquipeServiceTest {
 
     @Test
     @WithUserDetails(value = "testing_ecurie", userDetailsServiceBeanName = "appUserService")
-    public void SaveLogo_WithInvalidImage_ShouldRaiseEquipeUploadLogoException() throws IOException {
+    void SaveLogo_WithInvalidImage_ShouldRaiseEquipeUploadLogoException() throws IOException {
         equipeService.save(equipeFixture);
 
         byte[] fileContent = "{[broken".getBytes(UTF_8);
@@ -188,14 +186,14 @@ public class EquipeServiceTest {
     }
     @Test
     @WithUserDetails(value = "testing_ecurie", userDetailsServiceBeanName = "appUserService")
-    public void AddJoueur_WithValidId_ShouldAddJoueur() {
+    void AddJoueur_WithValidId_ShouldAddJoueur() {
         Joueur fake = new Joueur();
         fake.setEcurie(AggregateReference.to(1));
         fake.setPrenom("Jean");
         fake.setNom("PIERRE");
         fake.setPseudo("Fake");
         fake.setNationnalite("Francaise");
-        fake.setEntree_pro(LocalDate.now());
+        fake.setEntreePro(LocalDate.now());
 
         joueurRepository.save(fake);
         equipeService.save(equipeFixture);
@@ -208,21 +206,21 @@ public class EquipeServiceTest {
     }
     @Test
     @WithUserDetails(value = "testing_ecurie", userDetailsServiceBeanName = "appUserService")
-    public void AddJoueur_WithInvalidId_ShouldRaiseJoueurNotFound() {
+    void AddJoueur_WithInvalidId_ShouldRaiseJoueurNotFound() {
         equipeService.save(equipeFixture);
         assertThrows(JoueurNotFoundException.class, () ->  this.equipeService.addJoueur(equipeFixture, 99999));
     }
 
     @Test
     @WithUserDetails(value = "testing_ecurie", userDetailsServiceBeanName = "appUserService")
-    public void RemoveJoueur_WithValidId_ShouldDeleteFromEquipe() {
+    void RemoveJoueur_WithValidId_ShouldDeleteFromEquipe() {
         Joueur fake = new Joueur();
         fake.setEcurie(AggregateReference.to(1));
         fake.setPrenom("Jean");
         fake.setNom("PIERRE");
         fake.setPseudo("Fake");
         fake.setNationnalite("Francaise");
-        fake.setEntree_pro(LocalDate.now());
+        fake.setEntreePro(LocalDate.now());
 
         Joueur fake2 = new Joueur();
         fake2.setEcurie(AggregateReference.to(1));
@@ -230,7 +228,7 @@ public class EquipeServiceTest {
         fake2.setNom("PIERRE2");
         fake2.setPseudo("Fake2");
         fake2.setNationnalite("Francaise");
-        fake2.setEntree_pro(LocalDate.now());
+        fake2.setEntreePro(LocalDate.now());
 
         joueurRepository.save(fake);
         joueurRepository.save(fake2);

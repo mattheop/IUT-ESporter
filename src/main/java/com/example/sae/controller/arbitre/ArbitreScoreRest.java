@@ -1,6 +1,6 @@
 package com.example.sae.controller.arbitre;
 
-import com.example.sae.controller.arbitre.RESTBody.ArbitreScoreRESTBody;
+import com.example.sae.controller.arbitre.restbody.ArbitreScoreRESTBody;
 import com.example.sae.models.db.Rencontre;
 import com.example.sae.repository.CompetitionRepository;
 import com.example.sae.repository.RencontreRepository;
@@ -15,11 +15,9 @@ import java.util.Collection;
 public class ArbitreScoreRest {
 
     private RencontreRepository rencontreRepository;
-    private CompetitionRepository competitionRepository;
 
-    public ArbitreScoreRest(RencontreRepository rencontreRepository, CompetitionRepository competitionRepository) {
+    public ArbitreScoreRest(RencontreRepository rencontreRepository) {
         this.rencontreRepository = rencontreRepository;
-        this.competitionRepository = competitionRepository;
     }
 
     @GetMapping()

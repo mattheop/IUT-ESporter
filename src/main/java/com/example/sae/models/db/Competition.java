@@ -1,7 +1,7 @@
 package com.example.sae.models.db;
 
 import com.example.sae.models.enums.EtatCompetiton;
-import com.example.sae.validation.DateInline.ValidCompetitionDateIsInline;
+import com.example.sae.validation.dateinline.ValidCompetitionDateIsInline;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -43,6 +43,7 @@ public class Competition {
     private Tournois tournois;
 
     public Competition() {
+        // Empt
     }
 
     public Integer getId() {

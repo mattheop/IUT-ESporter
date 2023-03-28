@@ -58,10 +58,6 @@ public class OrganisateurGestionTournoisController extends OrganisateurDashboard
                         .orElse(null)
         ));
 
-
-        System.out.println(ecuries);
-
-
         model.addAttribute("tournois", tournois);
         model.addAttribute("competitions", competitions);
         model.addAttribute("inscriptions", inscriptions);
@@ -106,8 +102,6 @@ public class OrganisateurGestionTournoisController extends OrganisateurDashboard
                                  BindingResult competitionBindingResult,
                                  Model model) {
 
-        System.out.println(competition);
-        System.out.println(competitionBindingResult.getAllErrors());
         if (competitionBindingResult.hasErrors()) {
             model.addAttribute("tournois", tournoisRepository.getTournoisById(id));
             model.addAttribute("competition", competition);

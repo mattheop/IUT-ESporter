@@ -10,7 +10,7 @@ import java.util.Collection;
 
 public interface NotificationRepository extends Repository<Notification, Long> {
 
-    Collection<Notification> findTop15ByEcurieIdOrderByDateDesc(int ecurie_id);
+    Collection<Notification> findTop15ByEcurieIdOrderByDateDesc(int ecurieId);
 
     int countByEcurieId(int ecurieId);
 
@@ -18,5 +18,5 @@ public interface NotificationRepository extends Repository<Notification, Long> {
 
     @Modifying
     @Query("UPDATE notification SET readed = 1 WHERE ecurie_id = :pid")
-    void markAllNotificationReadedByEcurieId(@Param("pid") int ecurie_id);
+    void markAllNotificationReadedByEcurieId(@Param("pid") int ecurieId);
 }

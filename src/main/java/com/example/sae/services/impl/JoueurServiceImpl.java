@@ -8,7 +8,6 @@ import com.example.sae.models.db.Joueur;
 import com.example.sae.repository.JoueurRepository;
 import com.example.sae.services.AppUserService;
 import com.example.sae.services.JoueurService;
-import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;

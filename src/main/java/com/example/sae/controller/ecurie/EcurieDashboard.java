@@ -3,7 +3,6 @@ package com.example.sae.controller.ecurie;
 import com.example.sae.controller.ESporterDashboard;
 import com.example.sae.models.db.AppUser;
 import com.example.sae.models.db.Ecurie;
-import com.example.sae.models.db.Notification;
 import com.example.sae.repository.EcurieRepository;
 import com.example.sae.repository.NotificationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +23,7 @@ public class EcurieDashboard extends ESporterDashboard {
     @ModelAttribute("appuser")
     public AppUser getAppUser(Authentication authentication) {
         assert authentication != null;
-        AppUser appUser = (AppUser) authentication.getPrincipal();
-
-        return appUser;
+        return (AppUser) authentication.getPrincipal();
     }
 
     @ModelAttribute("notificationCount")

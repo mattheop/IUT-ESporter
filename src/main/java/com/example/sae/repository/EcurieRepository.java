@@ -14,5 +14,5 @@ public interface EcurieRepository extends CrudRepository<Ecurie, Integer> {
     Collection<Ecurie> findAll();
 
     @Query("select * from joueur where ecurie = :id")
-    Collection<Joueur> getJoueurs(@Param("id") Integer ecurie_id);
+    Collection<Joueur> getJoueurs(@Param("id") Integer ecurieId);
 }

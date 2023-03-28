@@ -25,7 +25,7 @@ import java.util.Collection;
 public class EcurieGestionJoueurController extends EcurieDashboard {
     private EcurieRepository ecurieRepository;
     private JoueurService joueurService;
-    public EcurieGestionJoueurController(JoueurRepository joueurRepository, EcurieRepository ecurieRepository, JoueurService joueurService) {
+    public EcurieGestionJoueurController(EcurieRepository ecurieRepository, JoueurService joueurService) {
         this.ecurieRepository = ecurieRepository;
         this.joueurService = joueurService;
     }

@@ -1,4 +1,4 @@
-package com.example.sae.validation.DateInline;
+package com.example.sae.validation.dateinline;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

@@ -4,7 +4,6 @@ import com.example.sae.models.db.Competition;
 import com.example.sae.models.db.Inscription;
 import com.example.sae.models.db.Tournois;
 import com.example.sae.repository.CompetitionRepository;
-import com.example.sae.repository.EquipeRepository;
 import com.example.sae.repository.InscriptionRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

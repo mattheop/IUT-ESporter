@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @ActiveProfiles("testing")
 @Transactional
-public class JoueurServiceTest {
+class JoueurServiceTest {
     @Autowired
     private JoueurService joueurService;
 
@@ -39,7 +39,7 @@ public class JoueurServiceTest {
         this.joueurFixture.setPseudo("Jojo");
         this.joueurFixture.setNationnalite("Francaise");
         this.joueurFixture.setEcurie(AggregateReference.to(1));
-        this.joueurFixture.setEntree_pro(LocalDate.now());
+        this.joueurFixture.setEntreePro(LocalDate.now());
     }
 
     @AfterEach
@@ -49,14 +49,14 @@ public class JoueurServiceTest {
 
     @Test
     @WithUserDetails(value = "testing_ecurie", userDetailsServiceBeanName = "appUserService")
-    public void Save_WithNoEcurie_ShouldRaiseJoueurShouldBeAttachedToEcurie() {
+    void Save_WithNoEcurie_ShouldRaiseJoueurShouldBeAttachedToEcurie() {
         this.joueurFixture.setEcurie(null);
         assertThrows(JoueurShouldBeAttachedToEcurie.class, () -> joueurService.save(this.joueurFixture));
     }
 
     @Test
     @WithUserDetails(value = "testing_ecurie", userDetailsServiceBeanName = "appUserService")
-    public void Save_WithJoueurNotOurEcurie_ShouldRaiseJoueurNotOwned() {
+    void Save_WithJoueurNotOurEcurie_ShouldRaiseJoueurNotOwned() {
         assertNull(this.joueurFixture.getId());
 
         this.joueurFixture.setEcurie(AggregateReference.to(2));
@@ -69,7 +69,7 @@ public class JoueurServiceTest {
 
     @Test
     @WithUserDetails(value = "testing_ecurie", userDetailsServiceBeanName = "appUserService")
-    public void Save_ShouldAddToEcurie() {
+    void Save_ShouldAddToEcurie() {
         assertNull(this.joueurFixture.getId());
 
         this.joueurService.save(this.joueurFixture);
@@ -79,7 +79,7 @@ public class JoueurServiceTest {
 
     @Test
     @WithUserDetails(value = "testing_ecurie", userDetailsServiceBeanName = "appUserService")
-    public void Save_ShouldUpdateToDatabase() {
+    void Save_ShouldUpdateToDatabase() {
         this.joueurService.save(this.joueurFixture);
 
         assertAll(() -> {
@@ -102,7 +102,7 @@ public class JoueurServiceTest {
 
     @Test
     @WithUserDetails(value = "testing_ecurie", userDetailsServiceBeanName = "appUserService")
-    public void Save_NotFormattedNames_ShouldBeFormattedWhenSaved() {
+    void Save_NotFormattedNames_ShouldBeFormattedWhenSaved() {
         this.joueurService.save(this.joueurFixture);
 
         assertEquals("DOE", this.joueurFixture.getNom());
@@ -111,7 +111,7 @@ public class JoueurServiceTest {
 
     @Test
     @WithUserDetails(value = "testing_ecurie", userDetailsServiceBeanName = "appUserService")
-    public void Find_WhenIDIsValid_ShouldReturnJoueur() {
+    void Find_WhenIDIsValid_ShouldReturnJoueur() {
         this.joueurService.save(this.joueurFixture);
         int createdId = joueurFixture.getId();
 
@@ -121,14 +121,14 @@ public class JoueurServiceTest {
 
     @Test
     @WithUserDetails(value = "testing_ecurie", userDetailsServiceBeanName = "appUserService")
-    public void Find_WhenIDNotValid_ShouldRaiseJoueurNotFound() {
+    void Find_WhenIDNotValid_ShouldRaiseJoueurNotFound() {
         assertThrows(JoueurNotFoundException.class, () -> this.joueurService.find(-1));
         assertThrows(JoueurNotFoundException.class, () -> this.joueurService.find(999999999));
     }
 
     @Test
     @WithUserDetails(value = "testing_ecurie2", userDetailsServiceBeanName = "appUserService")
-    public void Find_WhenNotOwnedJoueur_ShouldRaiseJouerNotOwned() {
+    void Find_WhenNotOwnedJoueur_ShouldRaiseJouerNotOwned() {
         this.joueurRepository.save(this.joueurFixture);
         int createdId = joueurFixture.getId();
 
@@ -137,7 +137,7 @@ public class JoueurServiceTest {
 
     @Test
     @WithUserDetails(value = "testing_ecurie2", userDetailsServiceBeanName = "appUserService")
-    public void Delete_WhenNotOwnedJoueur_ShouldRaiseJouerNotOwned() {
+    void Delete_WhenNotOwnedJoueur_ShouldRaiseJouerNotOwned() {
         this.joueurRepository.save(this.joueurFixture);
         int createdId = joueurFixture.getId();
 
@@ -146,7 +146,7 @@ public class JoueurServiceTest {
 
     @Test
     @WithUserDetails(value = "testing_ecurie", userDetailsServiceBeanName = "appUserService")
-    public void Delete_WhenValid_ShouldNotExistAnymore() {
+    void Delete_WhenValid_ShouldNotExistAnymore() {
         this.joueurService.save(this.joueurFixture);
         int createdId = joueurFixture.getId();
 
@@ -157,7 +157,7 @@ public class JoueurServiceTest {
 
     @Test
     @WithUserDetails(value = "testing_ecurie", userDetailsServiceBeanName = "appUserService")
-    public void FindAll_ShouldReturnCollectionOfAllJoueurs() {
+    void FindAll_ShouldReturnCollectionOfAllJoueurs() {
         this.joueurService.save(this.joueurFixture);
         Collection<Joueur> joueurs = this.joueurService.findAll();
         assertFalse(joueurs.isEmpty());

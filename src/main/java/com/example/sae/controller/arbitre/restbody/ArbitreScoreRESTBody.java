@@ -1,4 +1,4 @@
-package com.example.sae.controller.arbitre.RESTBody;
+package com.example.sae.controller.arbitre.restbody;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

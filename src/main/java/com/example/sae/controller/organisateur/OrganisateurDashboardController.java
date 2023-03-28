@@ -1,7 +1,5 @@
 package com.example.sae.controller.organisateur;
 
-import com.example.sae.controller.ecurie.EcurieDashboard;
-import com.example.sae.repository.CompetitionRepository;
 import com.example.sae.repository.TournoisRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

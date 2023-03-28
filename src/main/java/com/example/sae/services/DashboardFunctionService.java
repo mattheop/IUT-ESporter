@@ -10,27 +10,45 @@ import java.util.List;
 @Service
 public class DashboardFunctionService {
 
+    private enum DashbboardIcon {
+        LA_EYE("la-eye"),
+        LA_MEDAL("la-medal"),
+        LA_USER("la-user"),
+        LA_USERS("la-users"),
+        LA_ENVELOPE("la-envelope");
+
+        private final String icon;
+
+        DashbboardIcon(String icon) {
+            this.icon = icon;
+        }
+
+        public String getIcon() {
+            return icon;
+        }
+    }
+
     private List<DashboardFunction> getOrganisateurDashboardFunc() {
         return new ArrayList<>(List.of(
-                new DashboardFunction("Vue générale", "/organisateur", "la-eye"),
-                new DashboardFunction("Tournois", "/organisateur/tournois", "la-medal")
+                new DashboardFunction("Vue générale", "/organisateur", DashbboardIcon.LA_EYE.getIcon()),
+                new DashboardFunction("Tournois", "/organisateur/tournois", DashbboardIcon.LA_MEDAL.getIcon())
         ));
     }
 
     private List<DashboardFunction> getArbitreDashboardFunc() {
         return new ArrayList<>(List.of(
-                new DashboardFunction("Compétitions", "/arbitre/competitions-a-arbitrer", "la-medal")
+                new DashboardFunction("Compétitions", "/arbitre/competitions-a-arbitrer", DashbboardIcon.LA_MEDAL.getIcon())
         ));
     }
 
 
     private List<DashboardFunction> getEcurieDashboardFunc() {
         return new ArrayList<>(List.of(
-                new DashboardFunction("Vue générale", "/ecurie", "la-eye"),
-                new DashboardFunction("Joueurs", "/ecurie/joueurs", "la-user"),
-                new DashboardFunction("Equipes", "/ecurie/equipes", "la-users"),
-                new DashboardFunction("Mes inscriptions", "/ecurie/inscriptions", "la-medal"),
-                new DashboardFunction("Mes messages", "/ecurie/messages", "la-envelope")
+                new DashboardFunction("Vue générale", "/ecurie", DashbboardIcon.LA_EYE.getIcon()),
+                new DashboardFunction("Joueurs", "/ecurie/joueurs", DashbboardIcon.LA_USER.getIcon()),
+                new DashboardFunction("Equipes", "/ecurie/equipes", DashbboardIcon.LA_USERS.getIcon()),
+                new DashboardFunction("Mes inscriptions", "/ecurie/inscriptions", DashbboardIcon.LA_MEDAL.getIcon()),
+                new DashboardFunction("Mes messages", "/ecurie/messages", DashbboardIcon.LA_ENVELOPE.getIcon())
         ));
     }
 

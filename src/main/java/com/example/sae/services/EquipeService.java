@@ -1,7 +1,6 @@
 package com.example.sae.services;
 
 import com.example.sae.models.db.Equipe;
-import com.example.sae.models.db.Joueur;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Collection;

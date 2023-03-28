@@ -12,7 +12,8 @@ public class Ecurie {
     @Id
     @Column("ecurie_id")
     private int id;
-    private String nom_ecurie;
+    @Column("nom_ecurie")
+    private String nomEcurie;
 
     @MappedCollection(keyColumn = "ecurie_id", idColumn = "ecurie_id")
     private Set<Equipe> equipes = new HashSet<>();
@@ -25,7 +26,7 @@ public class Ecurie {
     }
 
     public String getNom() {
-        return nom_ecurie;
+        return nomEcurie;
     }
 
     public void addEquipe(Equipe equipe) {
@@ -38,6 +39,6 @@ public class Ecurie {
 
     @Override
     public String toString() {
-        return "Ecurie{" + "id=" + id + ", nom_ecurie='" + nom_ecurie + '\'' + ", equipes=" + equipes + '}';
+        return "Ecurie{" + "id=" + id + ", nom_ecurie='" + nomEcurie + '\'' + ", equipes=" + equipes + '}';
     }
 }

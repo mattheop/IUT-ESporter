@@ -72,7 +72,7 @@ public interface CompetitionRepository extends Repository<Competition, Integer> 
             LEFT OUTER JOIN `tournois` `tournois` ON `tournois`.`tournois_id` = `competition`.`tournois_id`
             WHERE competition_id = :searched_id;
             """)
-    Optional<Competition> findById(@Param("searched_id") Integer searched_id);
+    Optional<Competition> findById(@Param("searched_id") Integer searchedId);
 
     @Query("""
             SELECT `competition`.`competition_id` AS `competition_id`,
@@ -93,16 +93,14 @@ public interface CompetitionRepository extends Repository<Competition, Integer> 
             LEFT OUTER JOIN `tournois` `tournois` ON `tournois`.`tournois_id` = `competition`.`tournois_id`
             WHERE competition.tournois_id = :searched_id;
             """)
-    List<Competition> findByTournoisId(@Param("searched_id") Integer searched_id);
+    List<Competition> findByTournoisId(@Param("searched_id") Integer searchedId);
 
     @Modifying
     @Query("insert into competition (date_debut, date_fin_inscription, jeu_id, tournois_id) " +
             "values (:date_debut, :date_fin, :jeu_id, :tournois_id);")
-    void insertDirect(@Param("date_debut") LocalDateTime date_debut,
-                      @Param("date_fin") LocalDateTime date_fin,
-                      @Param("jeu_id") Integer jeu_id,
-                      @Param("tournois_id") Integer tournois_id);
+    void insertDirect(@Param("date_debut") LocalDateTime dateDebut,
+                      @Param("date_fin") LocalDateTime dateFin,
+                      @Param("jeu_id") Integer jeuId,
+                      @Param("tournois_id") Integer tournoisId);
 
-    //@Query("SELECT * from tournois WHERE tournois_id = :tournois_id")
-    //List<Competition> getCompetitionByTournois(@Param("tournois_id") Integer tournois_id);
 }

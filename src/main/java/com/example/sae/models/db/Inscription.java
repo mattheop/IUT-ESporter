@@ -1,6 +1,5 @@
 package com.example.sae.models.db;
 
-import com.example.sae.models.enums.EtatCompetiton;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.Column;

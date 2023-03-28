@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @ActiveProfiles("testing")
 @Transactional
-public class AppUserServiceTest {
+class AppUserServiceTest {
 
     @Autowired
     private AppUserService appUserService;
@@ -31,7 +31,7 @@ public class AppUserServiceTest {
     @Test
     @WithUserDetails(value = "testing_orgnisateur", userDetailsServiceBeanName = "appUserService")
     void getManagedEcurie_whenNotEcurieRole_ShouldRaiseUserNotEcurie() {
-        assertThrows(UserNotEcurieException.class, () -> appUserService.getManagedEcurie().getId());
+        assertThrows(UserNotEcurieException.class, () -> appUserService.getManagedEcurie());
     }
 
     @Test

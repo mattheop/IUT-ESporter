@@ -22,7 +22,7 @@ public class AppUser implements UserDetails {
     private AppUserRole role;
     private Boolean locked;
 
-    private AggregateReference<Ecurie, Integer> managed_ecurie;
+    private AggregateReference<Ecurie, Integer> managedEcurie;
 
     public AppUser() {
     }
@@ -96,11 +96,11 @@ public class AppUser implements UserDetails {
     }
 
     public int getManagedEcurieId() throws UserNotEcurieException {
-        if (managed_ecurie == null) {
+        if (managedEcurie == null) {
             throw new UserNotEcurieException();
         }
 
-        return this.managed_ecurie.getId();
+        return this.managedEcurie.getId();
     }
 
     @Override

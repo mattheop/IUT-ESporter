@@ -2,6 +2,7 @@ package com.example.sae.models.db;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;
@@ -27,7 +28,8 @@ public class Joueur {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @PastOrPresent(message = "{feedback.pastorpresentdate}")
     @NotNull(message = "{feedback.emptydate}")
-    private LocalDate entree_pro;
+    @Column("entree_pro")
+    private LocalDate entreePro;
 
     private AggregateReference<Ecurie, Integer> ecurie;
 
@@ -38,12 +40,12 @@ public class Joueur {
         this(prenom, nom, pseudo, nationnalite, LocalDate.now());
     }
 
-    public Joueur(String prenom, String nom, String pseudo, String nationnalite, LocalDate entree_pro) {
+    public Joueur(String prenom, String nom, String pseudo, String nationnalite, LocalDate entreePro) {
         this.prenom = prenom;
         this.nom = nom;
         this.pseudo = pseudo;
         this.nationnalite = nationnalite;
-        this.entree_pro = entree_pro;
+        this.entreePro = entreePro;
     }
 
     public Integer getId() {
@@ -86,12 +88,12 @@ public class Joueur {
         this.nationnalite = nationnalite;
     }
 
-    public LocalDate getEntree_pro() {
-        return entree_pro;
+    public LocalDate getEntreePro() {
+        return entreePro;
     }
 
-    public void setEntree_pro(LocalDate entree_pro) {
-        this.entree_pro = entree_pro;
+    public void setEntreePro(LocalDate entreePro) {
+        this.entreePro = entreePro;
     }
 
     public void setEcurie(AggregateReference<Ecurie, Integer> ecurie) {
@@ -107,15 +109,15 @@ public class Joueur {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Joueur joueur = (Joueur) o;
-        return Objects.equals(id, joueur.id) && Objects.equals(prenom, joueur.prenom) && Objects.equals(nom, joueur.nom) && Objects.equals(pseudo, joueur.pseudo) && Objects.equals(nationnalite, joueur.nationnalite) && Objects.equals(entree_pro, joueur.entree_pro) && Objects.equals(ecurie.getId(), joueur.ecurie.getId());
+        return Objects.equals(id, joueur.id) && Objects.equals(prenom, joueur.prenom) && Objects.equals(nom, joueur.nom) && Objects.equals(pseudo, joueur.pseudo) && Objects.equals(nationnalite, joueur.nationnalite) && Objects.equals(entreePro, joueur.entreePro) && Objects.equals(ecurie.getId(), joueur.ecurie.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, prenom, nom, pseudo, nationnalite, entree_pro, ecurie);
+        return Objects.hash(id, prenom, nom, pseudo, nationnalite, entreePro, ecurie);
     }
 
     public String toString() {
-        return "Player{" + "id=" + id + ", prenom='" + prenom + '\'' + ", nom='" + nom + '\'' + ", pseudo='" + pseudo + '\'' + ", nationnalite='" + nationnalite + '\'' + ", entree_pro=" + entree_pro + '}';
+        return "Player{" + "id=" + id + ", prenom='" + prenom + '\'' + ", nom='" + nom + '\'' + ", pseudo='" + pseudo + '\'' + ", nationnalite='" + nationnalite + '\'' + ", entree_pro=" + entreePro + '}';
     }
 }

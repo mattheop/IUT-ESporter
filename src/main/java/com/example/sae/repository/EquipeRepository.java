@@ -11,7 +11,7 @@ public interface EquipeRepository extends CrudRepository<Equipe, Integer> {
     List<Equipe> findAll();
 
     @Query("select count(*) from equipe where ecurie_id = :e_id")
-    int countEquipeByEcurie_Id(@Param("e_id") int ecurieId);
+    int countEquipeByEcurieId(@Param("e_id") int ecurieId);
 
     @Query("""
             SELECT *

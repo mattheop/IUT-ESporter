@@ -84,7 +84,7 @@ public class EquipeServiceImpl implements EquipeService {
 
     @Override
     public void saveLogo(Equipe equipe, MultipartFile multipartFile) throws EquipeUploadLogoException {
-        String fileName = equipe.getId() + "-eid@" + equipe.getEcurie().getId() + "_" + equipe.getNom().replaceAll(" ", "_") + "." + Objects.requireNonNull(multipartFile.getOriginalFilename()).substring(multipartFile.getOriginalFilename().lastIndexOf(".") + 1);
+        String fileName = equipe.getId() + "-eid@" + equipe.getEcurie().getId() + "_" + equipe.getNom().replace(" ", "_") + "." + Objects.requireNonNull(multipartFile.getOriginalFilename()).substring(Objects.requireNonNull(multipartFile.getOriginalFilename()).lastIndexOf(".") + 1);
 
         byte[] bytes;
         try {

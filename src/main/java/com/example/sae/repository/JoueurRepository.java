@@ -11,12 +11,12 @@ import java.util.Collection;
 public interface JoueurRepository extends CrudRepository<Joueur, Integer> {
 
     @Query("SELECT * FROM joueur WHERE ecurie = :e_id AND id not in (select distinct joueur_id from joueur_equipe)")
-    Collection<Joueur> getJoueursOwnedWithoutTeam(@Param("e_id") Integer ecurie_id);
+    Collection<Joueur> getJoueursOwnedWithoutTeam(@Param("e_id") Integer ecurieId);
     Collection<Joueur> findAll();
     @Query("delete from joueur where id = :pid")
     @Modifying
     void deleteById(@Param("pid") Integer id);
 
     @Query("select count(*) from joueur where ecurie = :e_id")
-    int countJoueurByEcurie_Id(@Param("e_id") int ecurieId);
+    int countJoueurByEcurieId(@Param("e_id") int ecurieId);
 }

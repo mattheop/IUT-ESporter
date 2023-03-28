@@ -1,6 +1,5 @@
 package com.example.sae;
 
-import com.example.sae.models.*;
 import com.example.sae.repository.AppUserRepository;
 import com.example.sae.repository.EcurieRepository;
 import com.example.sae.repository.EquipeRepository;

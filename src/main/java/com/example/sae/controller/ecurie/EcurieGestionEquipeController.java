@@ -46,8 +46,6 @@ public class EcurieGestionEquipeController extends EcurieDashboard {
     public String index(@ModelAttribute("ecurie") Ecurie ecurie, Model model, Authentication authentication) {
         Set<Equipe> managedEquipes = ecurie.getEquipes();
 
-        System.out.println(this.jeuRepository.findAll());
-
         Map<Integer, Jeu> all = jeuRepository.findAll().stream().collect(Collectors.toMap(
                 Jeu::getId,
                 Function.identity()
@@ -64,7 +62,7 @@ public class EcurieGestionEquipeController extends EcurieDashboard {
         Equipe e = equipeService.find(id);
 
         Jeu jeuspe = jeuRepository.findById(Integer.valueOf(e.getJeuSpe())).orElse(null);
-        Iterable<Joueur> joueurs = joueurRepository.findAllById(e.getJoueursIds().stream().map(JoueurRef::getJoueurId).collect(Collectors.toList()));
+        Iterable<Joueur> joueurs = joueurRepository.findAllById(e.getJoueursIds().stream().map(JoueurRef::getJoueurId).toList());
         Iterable<Joueur> allAvailableJoueurs = joueurRepository.getJoueursOwnedWithoutTeam(e.getEcurie().getId());
 
         model.addAttribute("equipe", e);

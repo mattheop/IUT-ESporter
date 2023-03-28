@@ -10,8 +10,7 @@ public class OrganisateurDashboard extends ESporterDashboard {
     @ModelAttribute("appuser")
     public AppUser getAppUser(Authentication authentication) {
         assert authentication != null;
-        AppUser appUser = (AppUser) authentication.getPrincipal();
 
-        return appUser;
+        return (AppUser) authentication.getPrincipal();
     }
 }
